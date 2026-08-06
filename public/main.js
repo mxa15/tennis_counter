@@ -22,6 +22,12 @@ function check_user() {
     });
 }
 
+if (confirm("test?")) {
+  console.log("jaaaa");
+} else {
+  console.log("neeein");
+}
+
 check_user();
 
 function login_user(userdata) {
