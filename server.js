@@ -120,6 +120,9 @@ app.post("/api/login", async (req, res) => {
 
       res.cookie("sessionID", sessionid, {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
+        httpOnly: true,
+        sameSite: "lax",
+        secure: true,
       });
 
       res.json({
@@ -180,6 +183,9 @@ app.post("/api/signin", async (req, res) => {
 
   res.cookie("sessionID", sessionId, {
     maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
+    httpOnly: true,
+    sameSite: "lax",
+    secure: true,
   });
 
   res.json({
