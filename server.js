@@ -209,6 +209,29 @@ app.delete("/api/delete_user", async (req, res) => {
     });
   }
 
+  const user = await db.query(
+    `
+    SELECT * 
+    FROM users
+    WHERE id = (
+        SELECT user_id
+        FROM sessionIDs
+        WHERE session_id = $1
+    )`,
+    [sessionid],
+  );
+
+  const password_correct = await bcrypt.compare(
+    req.body.password,
+    user.rows[0].password,
+  );
+
+  if (!password_correct) {
+    return res.json({
+      status: "incorect password",
+    });
+  }
+
   await db.query(
     `
     DELETE FROM matches

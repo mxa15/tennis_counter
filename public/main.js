@@ -22,9 +22,6 @@ function check_user() {
     });
 }
 
-const test = prompt("password");
-console.log(test);
-
 check_user();
 
 function login_user(userdata) {
@@ -90,8 +87,19 @@ function logout() {
 }
 
 function delete_user() {
+  const password = prompt("zum löschen passwort eingeben");
+
+  if (!password) {
+    return console.log("abbruch");
+  }
   fetch("/api/delete_user", {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      password: password,
+    }),
   })
     .then((response) => response.json())
     .then((data) => {
