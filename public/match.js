@@ -102,9 +102,8 @@ function addpoint(winner, loser) {
 
   if (points.championstiebrake) {
     points.tiebrake[winner] += 1;
-    if (points.tiebrake[1] + (points.tiebrake[2] % 2) !== 0) {
+    if (points.tiebrake[1] + (points.tiebrake[0] % 2) !== 0) {
       points.server = points.server == "player1" ? "player2" : "player1";
-      console.log("gg");
     }
     if (
       (points.tiebrake[winner] >= 10 &&
@@ -127,6 +126,9 @@ function addpoint(winner, loser) {
   ) {
     points.tiebrake[winner] += 1;
 
+    if (points.tiebrake[1] + (points.tiebrake[0] % 2) !== 0) {
+      points.server = points.server == "player1" ? "player2" : "player1";
+    }
     if (
       points.tiebrake[winner] >= 7 &&
       points.tiebrake[winner] - points.tiebrake[loser] >= 2
@@ -134,6 +136,7 @@ function addpoint(winner, loser) {
       points.sets[points.sets.length - 1][winner] += 1;
       finish_set();
       points.tiebrake = [0, 0];
+      points.server = points.server == "player1" ? "player2" : "player1";
     }
     update_tabelle(true);
     return;
@@ -150,6 +153,7 @@ function addpoint(winner, loser) {
   ) {
     points.sets[points.sets.length - 1][winner] += 1;
     points.points = [0, 0];
+    points.server = points.server == "player1" ? "player2" : "player1";
   }
   if (
     (points.sets[points.sets.length - 1][winner] == 6 &&
@@ -164,7 +168,6 @@ function addpoint(winner, loser) {
   }
   function finish_set() {
     points.set_win[winner] += 1;
-    points.server = points.server == "player1" ? "player2" : "player1";
     if (
       (points.set_win[winner] == 2 && max_sets == 3) ||
       (points.set_win[winner] == 3 && max_sets == 5)
