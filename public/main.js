@@ -22,11 +22,8 @@ function check_user() {
     });
 }
 
-if (confirm("test?")) {
-  console.log("jaaaa");
-} else {
-  console.log("neeein");
-}
+const test = prompt("password");
+console.log(test);
 
 check_user();
 
