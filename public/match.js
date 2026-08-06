@@ -81,6 +81,7 @@ function addpoint(winner, loser) {
   const max_sets = matchsettings.data.max_sets;
   const third_set = matchsettings.data.third_set;
   const winnergame = tabele.game[winner];
+  const points = matchsettings.points;
 
   matchsettings.course.push({
     points: structuredClone(matchsettings.points),
@@ -97,129 +98,81 @@ function addpoint(winner, loser) {
     matchsettings.status = "live";
   }
 
-  if (matchsettings.points.championstiebrake) {
+  if (points.championstiebrake) {
+    points.tiebrake[winner] += 1;
     if (
-      (matchsettings.points.tiebrake[winner] +
-        matchsettings.points.tiebrake[loser]) %
-        2 ==
-      0
+      (points.tiebrake[winner] >= 10 &&
+        points.tiebrake[winner] - points.tiebrake[loser] >= 2) ||
+      (points.tiebrake[winner] >= 7 &&
+        points.tiebrake[winner] - points.tiebrake[loser] >= 2 &&
+        third_set == 7)
     ) {
-      matchsettings.points.server =
-        matchsettings.points.server == "player1" ? "player2" : "player1";
-    }
-    matchsettings.points.tiebrake[winner] += 1;
-
-    if (
-      (matchsettings.points.tiebrake[winner] >= 7 &&
-        matchsettings.points.tiebrake[winner] - 1 >
-          matchsettings.points.tiebrake[loser] &&
-        third_set == 7) ||
-      (matchsettings.points.tiebrake[winner] >= 10 &&
-        matchsettings.points.tiebrake[winner] - 1 >
-          matchsettings.points.tiebrake[loser] &&
-        third_set == 10)
-    ) {
-      matchsettings.points.sets.push([
-        matchsettings.points.tiebrake[0],
-        matchsettings.points.tiebrake[1],
-      ]);
       finish_match();
     }
     update_tabelle(true);
     return;
   }
-
   if (
-    matchsettings.points.points[winner] == 4 ||
-    (matchsettings.points.points[winner] == 3 &&
-      matchsettings.points.points[loser] < 3) ||
-    (matchsettings.points.points[winner] == 3 && !advantage)
+    (points.sets[points.sets.length - 1][0] == 6 &&
+      points.sets[points.sets.length - 1][1] == 6) ||
+    (points.sets[points.sets.length - 1][0] == 4 &&
+      points.sets[points.sets.length - 1][1] == 4 &&
+      set == 4)
   ) {
-    matchsettings.points.points[0] = 0;
-    matchsettings.points.points[1] = 0;
-    matchsettings.points.tiebrake[0] = 0;
-    matchsettings.points.tiebrake[1] = 0;
-    matchsettings.points.sets[matchsettings.points.sets.length - 1][winner] +=
-      1;
-    matchsettings.points.server =
-      matchsettings.points.server == "player1" ? "player2" : "player1";
+    points.tiebrake[winner] += 1;
 
     if (
-      (matchsettings.points.sets[matchsettings.points.sets.length - 1][
-        winner
-      ] == 6 &&
-        set == 6 &&
-        matchsettings.points.sets[matchsettings.points.sets.length - 1][loser] <
-          5) ||
-      (matchsettings.points.sets[matchsettings.points.sets.length - 1][
-        winner
-      ] == 4 &&
-        set == 4 &&
-        matchsettings.points.sets[matchsettings.points.sets.length - 1][loser] <
-          3) ||
-      (matchsettings.points.sets[matchsettings.points.sets.length - 1][
-        winner
-      ] == 5 &&
-        set == 4) ||
-      matchsettings.points.sets[matchsettings.points.sets.length - 1][winner] ==
-        7
+      points.tiebrake[winner] >= 7 &&
+      points.tiebrake[winner] - points.tiebrake[loser] >= 2
     ) {
+      points.sets[points.sets.length - 1][winner] += 1;
       finish_set();
+      points.tiebrake = [0, 0];
     }
-  } else if (matchsettings.points.points[loser] == 4) {
-    matchsettings.points.points[loser] = 3;
-  } else if (
-    matchsettings.points.sets[matchsettings.points.sets.length - 1][winner] ==
-      6 &&
-    matchsettings.points.sets[matchsettings.points.sets.length - 1][loser] == 6
-  ) {
-    matchsettings.points.tiebrake[winner] += 1;
-    if (
-      matchsettings.points.tiebrake[winner] >= 7 &&
-      matchsettings.points.tiebrake[winner] - 1 >
-        matchsettings.points.tiebrake[loser]
-    ) {
-      matchsettings.points.sets[matchsettings.points.sets.length - 1][winner] +=
-        1;
-      matchsettings.points.server =
-        matchsettings.points.server == "player1" ? "player2" : "player1";
-      finish_set();
-      matchsettings.points.tiebrake[0] = 0;
-      matchsettings.points.tiebrake[1] = 0;
-    } else if (
-      (matchsettings.points.tiebrake[winner] +
-        matchsettings.points.tiebrake[loser]) %
-        2 !==
-      0
-    ) {
-      matchsettings.points.server =
-        matchsettings.points.server == "player1" ? "player2" : "player1";
-    }
+    update_tabelle(true);
+    return;
+  }
+  if (points.points[loser] == 4) {
+    points.points[loser] = 3;
   } else {
-    matchsettings.points.points[winner] += 1;
+    points.points[winner] += 1;
   }
 
+  if (
+    (points.points[winner] == 4 && (points.points[loser] <= 2 || !advantage)) ||
+    points.points[winner] == 5
+  ) {
+    points.sets[points.sets.length - 1][winner] += 1;
+    points.points = [0, 0];
+  }
+  if (
+    (points.sets[points.sets.length - 1][winner] == 6 &&
+      points.sets[points.sets.length - 1][loser] <= 4) ||
+    points.sets[points.sets.length - 1][winner] == 7 ||
+    (set == 4 &&
+      ((points.sets[points.sets.length - 1][winner] == 4 &&
+        points.sets[points.sets.length - 1][loser] <= 2) ||
+        points.sets[points.sets.length - 1][winner] == 5))
+  ) {
+    finish_set();
+  }
   function finish_set() {
-    matchsettings.points.set_win[winner] += 1;
+    points.set_win[winner] += 1;
     if (
-      (matchsettings.points.set_win[winner] == 2 && max_sets == 3) ||
-      (matchsettings.points.set_win[winner] == 3 && max_sets == 5)
+      (points.set_win[winner] == 2 && max_sets == 3) ||
+      (points.set_win[winner] == 3 && max_sets == 5)
     ) {
       finish_match();
     } else if (
-      (matchsettings.points.sets.length == 2 &&
-        ["7", "10"].includes(third_set) &&
-        max_sets == 3) ||
-      (matchsettings.points.sets.length == 4 &&
-        ["7", "10"].includes(third_set) &&
-        max_sets == 5)
+      ["7", "10"].includes(third_set) &&
+      ((points.set_win[0] == 1 && points.set_win[1] == 1 && max_sets == 3) ||
+        (points.set_win[0] == 2 && points.set_win[1] == 2 && max_sets == 5))
     ) {
-      matchsettings.points.championstiebrake = true;
+      points.championstiebrake = true;
     } else {
-      matchsettings.points.sets.push([0, 0]);
+      points.sets.push([0, 0]);
     }
   }
-
   update_tabelle(true);
 }
 
