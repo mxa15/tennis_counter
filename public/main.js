@@ -7,18 +7,22 @@ const profilebutton = document.getElementById("profilebutton");
 const profilename = document.getElementById("profilename");
 const logoutbtn = document.getElementById("logout");
 const deletebtn = document.getElementById("delete_user");
+const loadin_screen = document.getElementById("loading");
 
 let user = null;
 
 function check_user() {
+  loadin_screen.style.display = "flex";
   fetch("/api/check_user")
     .then((response) => response.json())
     .then((data) => {
       if (data.failed) {
         loginbutton.style.display = "block";
+        loadin_screen.style.display = "none";
         return;
       }
       login_user(data);
+      loadin_screen.style.display = "none";
     });
 }
 
