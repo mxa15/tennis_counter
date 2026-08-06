@@ -100,6 +100,9 @@ function addpoint(winner, loser) {
 
   if (points.championstiebrake) {
     points.tiebrake[winner] += 1;
+    if (points.tiebrake[1] + (points.tiebrake[2] % 2) !== 0) {
+      points.server = points.server == "player1" ? "player2" : "player1";
+    }
     if (
       (points.tiebrake[winner] >= 10 &&
         points.tiebrake[winner] - points.tiebrake[loser] >= 2) ||
@@ -158,6 +161,7 @@ function addpoint(winner, loser) {
   }
   function finish_set() {
     points.set_win[winner] += 1;
+    points.server = points.server == "player1" ? "player2" : "player1";
     if (
       (points.set_win[winner] == 2 && max_sets == 3) ||
       (points.set_win[winner] == 3 && max_sets == 5)
