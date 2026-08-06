@@ -113,6 +113,7 @@ function addpoint(winner, loser) {
         points.tiebrake[winner] - points.tiebrake[loser] >= 2 &&
         third_set == 7)
     ) {
+      points.sets.push([points.tiebrake[0], points.tiebrake[1]]);
       finish_match();
     }
     update_tabelle(true);
