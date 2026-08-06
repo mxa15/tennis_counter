@@ -104,6 +104,7 @@ function addpoint(winner, loser) {
     points.tiebrake[winner] += 1;
     if (points.tiebrake[1] + (points.tiebrake[2] % 2) !== 0) {
       points.server = points.server == "player1" ? "player2" : "player1";
+      console.log("gg");
     }
     if (
       (points.tiebrake[winner] >= 10 &&
