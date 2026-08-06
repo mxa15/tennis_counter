@@ -83,6 +83,8 @@ function addpoint(winner, loser) {
   const winnergame = tabele.game[winner];
   const points = matchsettings.points;
 
+  console.log(points.server);
+
   matchsettings.course.push({
     points: structuredClone(matchsettings.points),
     status: matchsettings.status,
