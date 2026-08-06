@@ -1,5 +1,6 @@
 const url = window.location.pathname.split("/");
 const code = url[2];
+const loadin_screen = document.getElementById("loading");
 let matchsettings = null;
 const tabele = {
   servers: [
@@ -43,6 +44,7 @@ pointbtn2.addEventListener("click", () => {
 const pointsystem = ["0", "15", "30", "40", "ad"];
 
 async function getdata() {
+  loadin_screen.style.display = "flex";
   const response = await fetch("/api/getmatchdata", {
     headers: {
       "X-page-URL": window.location.pathname,
@@ -50,6 +52,7 @@ async function getdata() {
   });
   const data = await response.json();
 
+  loadin_screen.style.display = "none";
   if (data.status == "no user") {
     location.href = "/login";
     return;
