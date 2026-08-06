@@ -1,0 +1,135 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  display: grid;
+  grid-template-columns: 30px 350px repeat(5, 70px) 70px 80px;
+  width: fit-content;
+  margin-left: 10px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: lightgray;
+}
+
+section div,
+button {
+  border: 0px;
+  font-size: 40px;
+  padding: 5px;
+  background-color: green;
+}
+
+.points {
+  text-align: center;
+}
+
+.player {
+  text-align: left;
+  font-weight: bold;
+}
+
+.server {
+  font-size: 20px;
+  line-height: 50px;
+}
+
+.games {
+  background-color: rgb(0, 71, 0);
+  color: white;
+}
+
+.pointbtn {
+  background: lightgray;
+  color: rgb(0, 0, 0);
+  background-color: transparent;
+  font-size: 30px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pointbtn img {
+  height: 30px;
+  transition: height 0.2s ease;
+}
+
+.pointbtn:hover img {
+  height: 40px;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.btns {
+  margin: 10px;
+  background: lightgray;
+  border: 0px;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+  transform: scale(0.8);
+  width: 70px;
+  height: 70px;
+}
+.btns:hover {
+  transform: scale(1.1);
+}
+
+#home {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+#course {
+  font-family: monospace;
+  padding-top: 150px;
+}
+
+.rotate {
+  animation: drehen 0.6s ease;
+}
+
+@keyframes drehen {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate {
+  animation: wechsel 1s ease;
+}
+
+@keyframes wechsel {
+  0% {
+    background: rgb(0, 71, 0);
+    color: white;
+  }
+  10% {
+    background: white;
+    color: black;
+  }
+  100% {
+    background: rgb(0, 71, 0);
+    color: white;
+  }
+}

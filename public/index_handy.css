@@ -1,0 +1,164 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+  font-family: "rustico";
+  src: url("/public/Rustico-Regular.otf") format("opentype");
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+  min-height: 100vh;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: green;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px -6px 16px 11px rgb(0, 0, 0);
+  z-index: 99;
+}
+#logodiv {
+  display: flex;
+  align-items: center;
+}
+#title {
+  color: black;
+  font-size: 30px;
+  font-family: "rustico";
+  text-shadow:
+    1px 1px 2px rgb(74, 74, 74),
+    2px 2px 2px rgb(121, 121, 121),
+    3px 3px 2px rgb(173, 173, 173),
+    4px 4px 2px rgb(255, 255, 255);
+}
+#logo {
+  height: 50px;
+}
+#sidebar {
+  position: fixed;
+  height: 100%;
+  width: 50%;
+  background-color: rgb(0, 71, 0);
+  z-index: 101;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+#sidebar.open {
+  transform: translateX(0);
+}
+.open_close {
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  border: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+.sidebarbutton {
+  height: 40px;
+  width: 40px;
+}
+.open_close:hover {
+  background-color: rgb(255, 255, 255);
+}
+#close_sidebar {
+  margin-top: 15px;
+}
+section {
+  padding: 20px;
+  padding-top: 80px;
+}
+.sectionselection {
+  width: 100%;
+  height: 40px;
+  border: 0px;
+  border-top: 3px solid black;
+  background-color: rgb(0, 71, 0);
+  font-size: 20px;
+  color: black;
+}
+#lastselector {
+  border-bottom: 3px solid black;
+}
+.sectionselection:hover {
+  background-color: rgb(0, 97, 0);
+}
+#under_sidebar {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+#under_sidebar.sidebar_open {
+  opacity: 1;
+}
+.profilebutton {
+  width: 40px;
+  height: 40px;
+}
+
+#profilebutton {
+  border: 0px;
+  background-color: transparent;
+  margin-right: 10px;
+}
+#loginbutton {
+  margin-right: 10px;
+}
+section h1 {
+  font-size: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+section p,
+label {
+  font-size: 25px;
+  color: gray;
+  font-weight: bold;
+}
+section input,
+select,
+#start_match {
+  font-size: 26px;
+  color: gray;
+  font-weight: bold;
+  margin-bottom: 20px;
+  width: 90%;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 7px;
+  background-color: white;
+}
+
+.logout_delete {
+  width: 150px;
+  height: 20px;
+  border: 1px solid black;
+  border-radius: 7px;
+}
+#logout {
+  background-color: rgb(171, 171, 171);
+}
+#delete_user {
+  background-color: red;
+}
+
+#start_match:hover {
+  background-color: lightgray;
+}

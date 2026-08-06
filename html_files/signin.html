@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Punktezähler-Sign in</title>
+    <link rel="icon" href="/public/image.png" type="image/x-icon" />
+    <style>
+      body {
+        margin: 10px;
+        display: grid;
+        grid-template-columns: 90%;
+        margin-left: 5%;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      section {
+        display: block;
+        width: 50%;
+      }
+      input {
+        width: 100%;
+        height: 50px;
+        font-size: 25px;
+        border: 3px solid black;
+        margin-bottom: 10px;
+        transition:
+          border-radius 0.4s ease,
+          transform 0.4s ease,
+          color 0.4s ease,
+          background 0.4s ease;
+        border-radius: 5px;
+        transform: scale(1);
+        padding: 0;
+        background: white;
+        color: black;
+        text-align: center;
+        outline: none;
+        box-shadow: none;
+      }
+      input::placeholder {
+        color: black;
+        transition: color 0.2s ease;
+      }
+      input:focus {
+        border-radius: 25px;
+        transform: scale(1.1);
+        background: black;
+        color: white;
+        outline: none;
+        box-shadow: none;
+      }
+      input:focus::placeholder {
+        color: white;
+      }
+      button {
+        width: 70%;
+        margin-left: 15%;
+        height: 30px;
+        border: 0;
+        color: white;
+        background: black;
+        border-radius: 15px;
+      }
+      h1 {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        color: bl;
+      }
+      @media (min-width: 600px) {
+        body {
+          grid-template-columns: 50%;
+          margin-left: 25%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="/login">login?</a>
+    <h1 id="subtitle">Sign in</h1>
+    <form
+      onsubmit="
+        signin();
+        return false;
+      "
+    >
+      <input id="name" type="text" required placeholder="username" /><br />
+      <input
+        id="password"
+        type="password"
+        required
+        placeholder="password"
+      /><br />
+      <button type="submit">Regristrieren</button>
+    </form>
+    <script src="/public/signin.js"></script>
+  </body>
+</html>

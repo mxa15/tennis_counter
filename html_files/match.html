@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Punktezähler-Match</title>
+    <link
+      rel="stylesheet"
+      href="/public/match.css"
+      media="screen and (min-width: 1100px)"
+    />
+    <link
+      rel="stylesheet"
+      href="/public/match_handy.css"
+      media="screen and (max-width: 1100px)"
+    />
+    <link rel="icon" href="/public/image.png" type="image/x-icon" />
+  </head>
+  <body>
+    <header>
+      <section>
+        <div class="points server" id="server1"></div>
+        <div class="player" id="name1">alex oberhofer</div>
+        <div class="points" id="_1set1">6</div>
+        <div class="points" id="_2set1">5</div>
+        <div class="points" id="_3set1">5</div>
+        <div class="points" id="_4set1">5</div>
+        <div class="points" id="_5set1">5</div>
+        <div class="points games" id="game1"></div>
+        <button class="points pointbtn" id="point1">
+          <img src="/public/add.png" alt="+" />
+        </button>
+
+        <div class="points server" id="server2">🟡</div>
+        <div class="player" id="name2">paul gurschler</div>
+        <div class="points" id="_1set2">3</div>
+        <div class="points" id="_2set2">7</div>
+        <div class="points" id="_3set2">5</div>
+        <div class="points" id="_4set2">5</div>
+        <div class="points" id="_5set2">5</div>
+        <div class="points games" id="game2"></div>
+        <button class="points pointbtn" id="point2">
+          <img src="/public/add.png" alt="+" />
+        </button>
+      </section>
+      <button id="return" class="btns">
+        <img src="/public/return.png" alt="zurück" id="returnimg" />
+      </button>
+      <button id="home" class="btns" onclick="location.href = '/startseite'">
+        <img src="/public/home.png" alt="home" id="homeimg" />
+      </button>
+    </header>
+    <p id="course"></p>
+
+    <script src="/public/match.js"></script>
+  </body>
+</html>

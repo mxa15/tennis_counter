@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Punktezähler-Startseite</title>
+    <link
+      rel="stylesheet"
+      href="/public/index.css"
+      media="screen and (min-width: 800px)"
+    />
+    <link
+      rel="stylesheet"
+      href="/public/index_handy.css"
+      media="screen and (max-width: 800px)"
+    />
+    <link rel="icon" href="/public/image.png" type="image/x-icon" />
+  </head>
+  <body>
+    <header>
+      <button id="open_sidebar" , class="open_close">
+        <img src="/public/sidebar.png" alt="" class="sidebarbutton" />
+      </button>
+      <div id="logodiv" onclick="changesection('startseite')">
+        <img src="/public/image.png" alt="logo" id="logo" />
+        <h1 id="title">Punktezähler</h1>
+      </div>
+      <a
+        href="/login"
+        class="profilebutton"
+        id="loginbutton"
+        style="display: none"
+        ><img src="/public/login.png" alt="login" class="profilebutton"
+      /></a>
+      <button
+        class="profilebutton"
+        id="profilebutton"
+        onclick="changesection('profile')"
+        style="display: none"
+      >
+        <img src="/public/profile.png" alt="login" class="profilebutton" />
+      </button>
+    </header>
+    <div id="under_sidebar"></div>
+    <div id="sidebar">
+      <button id="close_sidebar" class="open_close">
+        <img src="/public/close.png" alt="" class="sidebarbutton" />
+      </button>
+
+      <button class="sectionselection" onclick="changesection('startseite')">
+        Startseite</button
+      ><br />
+      <button class="sectionselection" onclick="changesection('neue_partie')">
+        Neue Partie</button
+      ><br />
+      <button class="sectionselection" onclick="changesection('freunde')">
+        Freunde</button
+      ><br />
+      <button class="sectionselection" onclick="changesection('partien')">
+        Partien</button
+      ><br />
+      <button
+        class="sectionselection"
+        id="lastselector"
+        onclick="changesection('einstellungen')"
+      >
+        Einstellungen</button
+      ><br />
+    </div>
+
+    <section id="startseite" class="sections">
+      <h1>Startseite</h1>
+    </section>
+    <section id="neue_partie" class="sections" style="display: none">
+      <h1>Neue Partie</h1>
+      <label for="player1">Spieler1</label><br />
+      <input type="text" id="player1" /><br />
+      <label for="player2">Spieler2</label><br />
+      <input type="text" id="player2" /><br />
+      <label for="set">Satz</label><br />
+      <select id="set">
+        <option value="6">Bis 6</option>
+        <option value="4">Bis 4</option></select
+      ><br />
+      <label for="max_sets">Sätze</label><br />
+      <select id="max_sets">
+        <option value="3">3 Sätze</option>
+        <option value="5">5 Sätze</option></select
+      ><br />
+      <label for="3rd_set">3er Satz</label><br />
+      <select id="3rd_set">
+        <option value="10">Championsthiebreak bis 10</option>
+        <option value="7">Championsthiebreak bis 7</option>
+        <option value="set">Normaler Satz</option></select
+      ><br />
+      <label for="advantage">Mit vorteil?</label><br />
+      <select id="advantage">
+        <option value="true">ja</option>
+        <option value="false">nein</option></select
+      ><br />
+      <label for="beginner">Wer fängt an?</label><br />
+      <select id="beginner">
+        <option value="player1">Spieler1</option>
+        <option value="player2">Spieler2</option></select
+      ><br />
+      <button id="start_match" onclick="start_match()">partie starten</button>
+    </section>
+    <section id="freunde" class="sections">
+      <h1>Freunde</h1>
+    </section>
+    <section id="partien" class="sections" style="display: none">
+      <h1>Partien</h1>
+      <div id="mymatches"></div>
+    </section>
+    <section id="einstellungen" class="sections" style="display: none">
+      <h1>Einstellungen</h1>
+    </section>
+    <section id="profile" class="sections" style="display: none">
+      <h1 id="profilename">Profile</h1>
+      <button id="logout" class="logout_delete">Abmelden</button>
+      <button id="delete_user" class="logout_delete">Konto löschen</button>
+    </section>
+
+    <script src="/public/main.js"></script>
+  </body>
+</html>
