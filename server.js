@@ -209,6 +209,18 @@ app.delete("/api/delete_user", async (req, res) => {
     });
   }
 
+  await db.query(
+    `
+    DELETE FROM matches
+    WHERE owner_id = (
+        SELECT user_id
+        FROM sessionIDs
+        WHERE session_id = $1
+    )
+    `,
+    [sessionid],
+  );
+
   const deleted = await db.query(
     `
     DELETE FROM users
