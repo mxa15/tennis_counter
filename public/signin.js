@@ -19,10 +19,10 @@ function signin() {
     .then((data) => {
       const status = data.status;
 
-      loadin_screen.style.display = "none";
       if (status == "ok") {
         location.href = "/startseite";
       } else if (status == "user exists") {
+        loadin_screen.style.display = "none";
         subtitle.innerHTML = "user existiert bereits";
         subtitle.style.color = "red";
         name.value = "";
