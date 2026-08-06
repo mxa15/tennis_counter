@@ -81,12 +81,15 @@ deletebtn.addEventListener("click", () => {
 });
 
 function logout() {
+  loadin_screen.style.display = "flex";
   fetch("/api/logout")
     .then((response) => response.json())
     .then((data) => {
       if (data.status == "ok") {
         location.href = "/startseite";
+        return;
       }
+      loadin_screen.style.display = "none";
     });
 }
 
@@ -96,6 +99,7 @@ function delete_user() {
   if (!password) {
     return console.log("abbruch");
   }
+  loadin_screen.style.display = "flex";
   fetch("/api/delete_user", {
     method: "DELETE",
     headers: {
@@ -108,6 +112,7 @@ function delete_user() {
     .then((response) => response.json())
     .then((data) => {
       const status = data.status;
+      loadin_screen.style.display = "none";
 
       if (status == "ok") {
         location.href = "/startseite";
