@@ -16,7 +16,7 @@ header {
   background-color: green;
   height: 100px;
   width: 100%;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
@@ -44,10 +44,10 @@ header {
   position: fixed;
   inset: 0;
   background: white;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
-  z-index: 98;
+  z-index: 300;
 }
 
 .spinner {
