@@ -102,7 +102,8 @@ function addpoint(winner, loser) {
 
   if (points.championstiebrake) {
     points.tiebrake[winner] += 1;
-    if (points.tiebrake[1] + (points.tiebrake[0] % 2) !== 0) {
+    const total = points.tiebrake[0] + points.tiebrake[1];
+    if (total % 2 !== 0) {
       points.server = points.server == "player1" ? "player2" : "player1";
     }
     if (
@@ -126,7 +127,8 @@ function addpoint(winner, loser) {
   ) {
     points.tiebrake[winner] += 1;
 
-    if (points.tiebrake[1] + (points.tiebrake[0] % 2) !== 0) {
+    const total = points.tiebrake[0] + points.tiebrake[1];
+    if (total % 2 !== 0) {
       points.server = points.server == "player1" ? "player2" : "player1";
     }
     if (
