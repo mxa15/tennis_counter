@@ -9,7 +9,13 @@
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Orbitron";
+}
+input,
+select,
+button,
+textarea {
+  font-family: inherit;
 }
 header {
   position: fixed;
@@ -30,11 +36,6 @@ header {
 #title {
   color: black;
   font-size: 50px;
-  text-shadow:
-    1px 1px 0.5px rgb(74, 74, 74),
-    2px 2px 0.5px rgb(121, 121, 121),
-    3px 3px 0.5px rgb(173, 173, 173),
-    4px 4px 0.5px rgb(255, 255, 255);
 }
 #logo {
   height: 70px;
