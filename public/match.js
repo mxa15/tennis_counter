@@ -198,6 +198,9 @@ function update_tabelle(point) {
     (matchsettings.points.sets[matchsettings.points.sets.length - 1][0] == 6 &&
       matchsettings.points.sets[matchsettings.points.sets.length - 1][1] ==
         6) ||
+    (matchsettings.points.sets[matchsettings.points.sets.length - 1][0] == 4 &&
+      matchsettings.points.sets[matchsettings.points.sets.length - 1][1] == 4 &&
+      matchsettings.data.set == 4) ||
     matchsettings.points.championstiebrake == true
   ) {
     tabele.game[0].innerHTML = matchsettings.points.tiebrake[0];
