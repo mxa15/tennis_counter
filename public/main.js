@@ -37,10 +37,6 @@ async function getmatches(id) {
   return data.matches;
 }
 
-getmatches("9").then((matches) => {
-  console.log(matches);
-});
-
 function login_user(userdata) {
   if (user) return;
 
