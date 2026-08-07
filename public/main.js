@@ -37,7 +37,7 @@ async function getmatches(id) {
   return data.matches;
 }
 
-getmatches("my_id").then((matches) => {
+getmatches("9").then((matches) => {
   console.log(matches);
 });
 
