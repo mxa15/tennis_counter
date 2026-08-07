@@ -18,6 +18,8 @@ const app = express();
 
 app.use(express.json());
 
+app.use(express.text());
+
 app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
@@ -194,7 +196,7 @@ app.post("/api/signin", async (req, res) => {
 });
 
 app.get("/api/logout", (req, res) => {
-  if (req.cookies.sessionID) {
+  if (req.cookies?.sessionID) {
     res.clearCookie("sessionID");
     res.json({
       status: "ok",
@@ -508,6 +510,50 @@ app.get("/api/match_return", async (req, res) => {
   }
 
   res.json(match.rows[0]);
+});
+
+app.get("/api/getmatches/:user_id", async (req, res) => {
+  let user_id = req.params.user_id;
+
+  if (user_id === "my_id") {
+    const sessionID = req.cookies?.sessionID;
+
+    if (!sessionID) {
+      return res.json({
+        status: "no user",
+      });
+    }
+
+    const user = await db.query(
+      `
+      SELECT user_id
+      FROM sessionIDs
+      WHERE session_id = $1`,
+      [sessionID],
+    );
+
+    if (user.rows.length == 0) {
+      return res.json({
+        status: "no user",
+      });
+    }
+
+    user_id = user.rows[0].user_id;
+  }
+
+  const result = await db.query(
+    `
+    SELECT * FROM matches
+    WHERE owner_id = $1`,
+    [user_id],
+  );
+
+  const matches = result.rows;
+
+  res.json({
+    status: "ok",
+    matches: matches,
+  });
 });
 
 const PORT = process.env.PORT || 3000;

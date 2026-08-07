@@ -28,6 +28,19 @@ function check_user() {
 
 check_user();
 
+async function getmatches(id) {
+  const response = await fetch(`/api/getmatches/${id}`);
+  const data = await response.json();
+
+  if (data.status == "no user") return "no user";
+
+  return data.matches;
+}
+
+getmatches("my_id").then((matches) => {
+  console.log(matches);
+});
+
 function login_user(userdata) {
   if (user) return;
 
