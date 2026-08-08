@@ -167,7 +167,9 @@ label {
 }
 .matches {
   flex: 0 0 auto;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 450px;
   height: 150px;
   border: 2px solid black;
