@@ -182,8 +182,6 @@ label {
 .matches p {
   font-family: monospace;
   font-size: 15px;
-  position: relative;
-  top: 10px;
 }
 section input,
 select,
