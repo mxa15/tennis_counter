@@ -2,11 +2,6 @@
   display: none;
 }
 
-::selection {
-  background: black; /* Hintergrund der Auswahl */
-  color: white; /* Textfarbe */
-}
-
 html {
   touch-action: manipulation;
 }
