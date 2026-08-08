@@ -8,7 +8,8 @@ const profilename = document.getElementById("profilename");
 const logoutbtn = document.getElementById("logout");
 const deletebtn = document.getElementById("delete_user");
 const loadin_screen = document.getElementById("loading");
-const mymatches = document.getElementById("mymatches");
+
+const pointsystem = ["0", "15", "30", "40", "ad"];
 
 let user = null;
 
@@ -38,11 +39,96 @@ async function getmatches(id) {
   return data.matches;
 }
 
-getmatches("my_id").then((matches) => {
-  const div = document.createElement("div");
-  div.classList.add("matches");
-  mymatches.appendChild(div);
-});
+function addmatches(id, tableid) {
+  const table = document.getElementById(tableid);
+  getmatches(id).then((matches) => {
+    console.log(matches);
+
+    matches.forEach((match) => {
+      const div = document.createElement("div");
+      div.classList.add("matches");
+      let r1 = "";
+      let r2 = "————————————————————";
+      let r3 = "";
+      let r4 = "";
+      r1 += `${match.status}|`;
+      console.log(r1);
+
+      const day = getDayStatus(match.created_at);
+      if (day == "anderer Tag")
+        day = new Date(match.created_at).toLocaleDateString("de-DE", {
+          day: "2-digit",
+          month: "2-digit",
+          timeZone: "Europe/Rome",
+        });
+      r1 += day + "&nbsp;";
+      r1 += new Date(match.created_at).toLocaleTimeString("de-DE", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      r3 += match.data.player1;
+      r4 += match.data.player2;
+      if (r3.length < r4.length) {
+        r3 += "&nbsp;".repeat(r4.length - r3.length);
+      } else if (r4.length < r3.length) {
+        r4 += "&nbsp;".repeat(r3.length - r4.length);
+      }
+      r3 += "&nbsp;|";
+      r4 += "&nbsp;|";
+      match.points.sets.forEach((set) => {
+        if (String(set[0]).length == 2) {
+          r3 += set[0] + "|";
+          if (String(set[1]).length == 2) {
+            r4 += set[1] + "|";
+          } else {
+            r4 += set[1] + "&nbsp;|";
+          }
+          return;
+        }
+        if (String(set[1]).length == 2) {
+          r4 += set[0] + "|";
+          if (String(set[0]).length == 2) {
+            r3 += set[1] + "|";
+          } else {
+            r3 += set[1] + "&nbsp;|";
+          }
+          return;
+        }
+        r3 += set[0] + "|";
+        r4 += set[1] + "|";
+      });
+      if (match.points.points[0] > 0 || match.points.points[1] > 0) {
+        r3 += pointsystem[match.points.points[0]];
+        r4 += pointsystem[match.points.points[1]];
+      }
+      div.innerHTML = `${r1}<br>${r2}<br>${r3}<br>${r4}`;
+      table.appendChild(div);
+    });
+  });
+}
+
+function getDayStatus(dateString) {
+  const timeZone = "Europe/Rome";
+
+  const date = new Date(dateString);
+  const today = new Date();
+
+  const dateStr = date.toLocaleDateString("en-CA", { timeZone });
+  const todayStr = today.toLocaleDateString("en-CA", { timeZone });
+
+  const dateDay = new Date(dateStr);
+  const todayDay = new Date(todayStr);
+
+  const diff = Math.round((dateDay - todayDay) / (1000 * 60 * 60 * 24));
+
+  if (diff === 0) return "heute";
+  if (diff === -1) return "gestern";
+  if (diff === -2) return "vorgestern";
+
+  return "anderer Tag";
+}
+
+addmatches("my_id", "mymatches");
 
 function login_user(userdata) {
   if (user) return;

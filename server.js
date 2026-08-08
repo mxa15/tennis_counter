@@ -544,7 +544,8 @@ app.get("/api/getmatches/:user_id", async (req, res) => {
   const result = await db.query(
     `
     SELECT * FROM matches
-    WHERE owner_id = $1`,
+    WHERE owner_id = $1
+    ORDER BY created_at DESC, id DESC`,
     [user_id],
   );
 
