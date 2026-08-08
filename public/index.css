@@ -174,8 +174,6 @@ label {
   border: 2px solid black;
   border-radius: 10px;
   background-color: lightgray;
-}
-.matches p {
   font-family: monospace;
   font-size: 30px;
 }
