@@ -159,6 +159,25 @@ label {
   color: gray;
   font-weight: bold;
 }
+.matchdiv {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto; /* horizontal scrollen */
+  overflow-y: hidden;
+
+  white-space: nowrap;
+
+  scroll-behavior: smooth;
+}
+.matches {
+  flex: 0 0 auto;
+  display: block;
+  width: 450px;
+  height: 150px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: lightgray;
+}
 section input,
 select,
 #start_match {

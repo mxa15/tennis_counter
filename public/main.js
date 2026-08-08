@@ -129,8 +129,6 @@ function delete_user() {
     });
 }
 
-changesection("neue_partie");
-
 async function start_match() {
   let p1 = document.getElementById("player1").value;
   let p2 = document.getElementById("player2").value;
