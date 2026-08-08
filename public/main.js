@@ -37,6 +37,8 @@ async function getmatches(id) {
   return data.matches;
 }
 
+getmatches("my_id").then((matches) => console.log(matches[0]));
+
 function login_user(userdata) {
   if (user) return;
 
