@@ -171,12 +171,17 @@ label {
 }
 .matches {
   flex: 0 0 auto;
-  display: block;
-  width: 250px;
-  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  height: 150px;
   border: 2px solid black;
   border-radius: 10px;
   background-color: lightgray;
+}
+.matches p {
+  font-family: monospace;
 }
 section input,
 select,
