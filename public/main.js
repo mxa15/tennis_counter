@@ -42,7 +42,7 @@ async function getmatches(id) {
 function addmatches(id, tableid) {
   const table = document.getElementById(tableid);
   getmatches(id).then((matches) => {
-    console.log(matches);
+    if (matches == "no user") return;
 
     matches.forEach((match) => {
       const div = document.createElement("div");
