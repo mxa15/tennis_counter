@@ -168,7 +168,6 @@ label {
 .matches {
   flex: 0 0 auto;
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 450px;
   height: 150px;
@@ -178,6 +177,9 @@ label {
 }
 .matches p {
   font-family: monospace;
+  font-size: 30px;
+  position: relative;
+  top: 10px;
 }
 section input,
 select,
