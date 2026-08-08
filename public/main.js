@@ -8,6 +8,7 @@ const profilename = document.getElementById("profilename");
 const logoutbtn = document.getElementById("logout");
 const deletebtn = document.getElementById("delete_user");
 const loadin_screen = document.getElementById("loading");
+const mymatches = document.getElementById("mymatches");
 
 let user = null;
 
@@ -37,7 +38,11 @@ async function getmatches(id) {
   return data.matches;
 }
 
-getmatches("my_id").then((matches) => console.log(matches[0]));
+getmatches("my_id").then((matches) => {
+  const div = document.createElement("div");
+  div.classList.add("matches");
+  mymatches.appendChild(div);
+});
 
 function login_user(userdata) {
   if (user) return;
