@@ -177,6 +177,10 @@ label {
   display: grid;
   grid-template-columns: repeat(8, max-content);
   text-align: center;
+  background-color: green;
+  width: fit-content;
+  border-radius: 7px;
+  margin-left: 5px;
 }
 .matchpoints div:not(:empty) {
   margin-right: 20px;
