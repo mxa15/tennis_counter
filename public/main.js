@@ -70,8 +70,8 @@ function addmatches(id, tableid) {
         games[0] = match.points.tiebrake[0];
         games[1] = match.points.tiebrake[1];
       } else {
-        games[0] = match.points.points[0];
-        games[1] = match.points.points[1];
+        games[0] = pointsystem[match.points.points[0]];
+        games[1] = pointsystem[match.points.points[1]];
       }
       div.innerHTML = `
         <div class="matchinfo">${match.status} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })}</div>
