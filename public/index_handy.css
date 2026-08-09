@@ -171,15 +171,32 @@ label {
 }
 .matches {
   flex: 0 0 auto;
-  display: flex;
-  align-items: center;
   width: 250px;
   height: 100px;
   border: 2px solid black;
   border-radius: 10px;
   background-color: lightgray;
-  font-family: monospace;
-  font-size: 15px;
+}
+.matchpoints {
+  display: grid;
+  grid-template-columns: repeat(8, max-content);
+  text-align: center;
+}
+.matchpoints div:not(:empty) {
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.matchpoints div {
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+}
+.matchinfo {
+  font-size: 17px;
+  margin-left: 5px;
+  height: 30px;
+  display: flex;
+  align-items: center;
 }
 section input,
 select,

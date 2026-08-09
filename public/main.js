@@ -47,67 +47,54 @@ function addmatches(id, tableid) {
     matches.forEach((match) => {
       const div = document.createElement("div");
       div.classList.add("matches");
-      let r1 = "";
-      let r2 = "————————————————————";
-      let r3 = "";
-      let r4 = "";
-      r1 += `${match.status}|`;
-      console.log(r1);
-
-      const day = getDayStatus(match.created_at);
-      if (day == "anderer Tag")
-        day = new Date(match.created_at).toLocaleDateString("de-DE", {
-          day: "2-digit",
-          month: "2-digit",
-          timeZone: "Europe/Rome",
-        });
-      r1 += day + "&nbsp;";
-      r1 += new Date(match.created_at).toLocaleTimeString("de-DE", {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-      r3 += match.data.player1;
-      r4 += match.data.player2;
-      if (r3.length < r4.length) {
-        r3 += "&nbsp;".repeat(r4.length - r3.length);
-      } else if (r4.length < r3.length) {
-        r4 += "&nbsp;".repeat(r3.length - r4.length);
+      let servers = ["", ""];
+      if (match.points.server == "player1") {
+        servers[0] = "🟡";
+      } else if (match.points.server == "player2") {
+        servers[1] = "🟡";
       }
-      r3 += "&nbsp;|";
-      r4 += "&nbsp;|";
+      let sets = [
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+      ];
+      let i = 0;
       match.points.sets.forEach((set) => {
-        if (String(set[0]).length == 2) {
-          r3 += set[0] + "|";
-          if (String(set[1]).length == 2) {
-            r4 += set[1] + "|";
-          } else {
-            r4 += set[1] + "&nbsp;|";
-          }
-          return;
-        }
-        if (String(set[1]).length == 2) {
-          r4 += set[0] + "|";
-          if (String(set[0]).length == 2) {
-            r3 += set[1] + "|";
-          } else {
-            r3 += set[1] + "&nbsp;|";
-          }
-          return;
-        }
-        r3 += set[0] + "|";
-        r4 += set[1] + "|";
+        sets[i] = set;
+        i++;
       });
-      if (match.points.points[0] > 0 || match.points.points[1] > 0) {
-        r3 += pointsystem[match.points.points[0]];
-        r4 += pointsystem[match.points.points[1]];
-      }
-      div.innerHTML = `${r1}<br>${r2}<br>${r3}<br>${r4}`;
+      div.innerHTML = `
+        <div class="matchinfo">${match.status} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })}</div>
+          <div class="matchpoints">
+            <div>${servers[0]}</div>
+            <div>${match.data.player1}</div>
+            <div>${sets[0][0]}</div>
+            <div>${sets[1][0]}</div>
+            <div>${sets[2][0]}</div>
+            <div>${sets[3][0]}</div>
+            <div>${sets[4][0]}</div>
+            <div>30</div>
+
+            <div>${servers[1]}</div>
+            <div>${match.data.player1}</div>
+            <div>${sets[0][1]}</div>
+            <div>${sets[1][1]}</div>
+            <div>${sets[2][1]}</div>
+            <div>${sets[3][1]}</div>
+            <div>${sets[4][1]}</div>
+            <div>15</div>
+          </div>
+      `;
       table.appendChild(div);
     });
   });
 }
 
-function getDayStatus(dateString) {
+addmatches("my_id", "mymatches");
+
+function getDate(dateString) {
   const timeZone = "Europe/Rome";
 
   const date = new Date(dateString);
@@ -123,12 +110,15 @@ function getDayStatus(dateString) {
 
   if (diff === 0) return "heute";
   if (diff === -1) return "gestern";
-  if (diff === -2) return "vorgestern";
+  if (diff === -2)
+    return date.toLocaleDateString("de-DE", {
+      day: "2-digit",
+      month: "2-digit",
+      timeZone: "Europe/Rome",
+    });
 
   return "anderer Tag";
 }
-
-addmatches("my_id", "mymatches");
 
 function login_user(userdata) {
   if (user) return;

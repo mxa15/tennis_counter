@@ -10,7 +10,7 @@ body {
 
 section {
   display: grid;
-  grid-template-columns: 30px 350px repeat(5, 70px) 70px 80px;
+  grid-template-columns: auto 400px repeat(5, auto) 70px 80px;
   width: fit-content;
   margin-left: 10px;
 }
