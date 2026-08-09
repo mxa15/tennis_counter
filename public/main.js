@@ -65,6 +65,14 @@ function addmatches(id, tableid) {
         sets[i] = set;
         i++;
       });
+      let games = ["", ""];
+      if (match.points.tiebrake[0] > 0 || match.points.tiebrake[1] > 0) {
+        games[0] = match.points.tiebrake[0];
+        games[1] = match.points.tiebrake[1];
+      } else {
+        games[0] = match.points.points[0];
+        games[1] = match.points.points[1];
+      }
       div.innerHTML = `
         <div class="matchinfo">${match.status} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })}</div>
           <div class="matchpoints">
@@ -75,16 +83,16 @@ function addmatches(id, tableid) {
             <div>${sets[2][0]}</div>
             <div>${sets[3][0]}</div>
             <div>${sets[4][0]}</div>
-            <div>30</div>
+            <div>${games[0]}</div>
 
             <div>${servers[1]}</div>
-            <div>${match.data.player1}</div>
+            <div>${match.data.player2}</div>
             <div>${sets[0][1]}</div>
             <div>${sets[1][1]}</div>
             <div>${sets[2][1]}</div>
             <div>${sets[3][1]}</div>
             <div>${sets[4][1]}</div>
-            <div>15</div>
+            <div>${games[1]}</div>
           </div>
       `;
       table.appendChild(div);
