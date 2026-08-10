@@ -22,6 +22,15 @@ const tabele = {
   game: [document.getElementById("game1"), document.getElementById("game2")],
 };
 
+const protocol = location.protocol === "https:" ? "wss:" : "ws:";
+
+const socket = new WebSocket(`${protocol}//${location.host}`);
+
+socket.onopen = () => {
+  console.log("WebSocket verbunden");
+  socket.send("hallo");
+};
+
 const pointsystem = ["0", "15", "30", "40", "ad"];
 
 function update_tabelle() {
