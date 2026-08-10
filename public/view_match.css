@@ -1,0 +1,130 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  font-family: "Orbitron";
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  display: grid;
+  grid-template-columns: auto 400px repeat(5, auto) 70px;
+  width: fit-content;
+  margin-left: 10px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: lightgray;
+}
+
+section div,
+button {
+  border: 0px;
+  font-size: 40px;
+  padding: 5px;
+  background-color: green;
+}
+
+.points {
+  text-align: center;
+}
+
+.player {
+  text-align: left;
+  font-weight: bold;
+}
+
+.server {
+  font-size: 20px;
+  line-height: 50px;
+}
+
+.games {
+  background-color: rgb(0, 71, 0);
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.btns {
+  margin: 10px;
+  background: lightgray;
+  border: 0px;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+  transform: scale(0.8);
+  width: 70px;
+  height: 70px;
+}
+.btns:hover {
+  transform: scale(1.1);
+}
+
+#home {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+#loading {
+  position: fixed;
+  inset: 0;
+  background: white;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 300;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #ddd;
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#course {
+  font-family: monospace;
+  padding-top: 150px;
+}
+
+.animate {
+  animation: wechsel 1s ease;
+}
+
+@keyframes wechsel {
+  0% {
+    background: rgb(0, 71, 0);
+    color: white;
+  }
+  10% {
+    background: white;
+    color: black;
+  }
+  100% {
+    background: rgb(0, 71, 0);
+    color: white;
+  }
+}

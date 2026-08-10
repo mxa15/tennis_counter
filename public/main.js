@@ -75,7 +75,7 @@ function addmatches(id, tableid) {
       }
       div.innerHTML = `
         <div class="matchinfo">${match.status} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })}</div>
-          <div class="matchpoints">
+          <div class="matchpoints" onclick="location.href = '/match/${match.code}'">
             <div>${servers[0]}</div>
             <div>${match.data.player1}</div>
             <div>${sets[0][0]}</div>

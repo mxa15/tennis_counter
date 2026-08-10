@@ -1,0 +1,209 @@
+const url = window.location.pathname.split("/");
+const code = url[2];
+const loadin_screen = document.getElementById("loading");
+let matchsettings = null;
+const tabele = {
+  servers: [
+    document.getElementById("server1"),
+    document.getElementById("server2"),
+  ],
+  names: [document.getElementById("name1"), document.getElementById("name2")],
+  set1: [document.getElementById("_1set1"), document.getElementById("_1set2")],
+  set2: [document.getElementById("_2set1"), document.getElementById("_2set2")],
+  set3: [document.getElementById("_3set1"), document.getElementById("_3set2")],
+  pastset: [
+    document.getElementById("_4set1"),
+    document.getElementById("_4set2"),
+  ],
+  thisset: [
+    document.getElementById("_5set1"),
+    document.getElementById("_5set2"),
+  ],
+  game: [document.getElementById("game1"), document.getElementById("game2")],
+};
+
+const pointsystem = ["0", "15", "30", "40", "ad"];
+
+function update_tabelle() {
+  const games = [
+    pointsystem[matchsettings.points.points[0]],
+    pointsystem[matchsettings.points.points[1]],
+  ];
+  if (
+    (matchsettings.points.sets[matchsettings.points.sets.length - 1][0] == 6 &&
+      matchsettings.points.sets[matchsettings.points.sets.length - 1][1] ==
+        6) ||
+    (matchsettings.points.sets[matchsettings.points.sets.length - 1][0] == 4 &&
+      matchsettings.points.sets[matchsettings.points.sets.length - 1][1] == 4 &&
+      matchsettings.data.set == 4) ||
+    matchsettings.points.championstiebrake == true
+  ) {
+    tabele.game[0].innerHTML = matchsettings.points.tiebrake[0];
+    tabele.game[1].innerHTML = matchsettings.points.tiebrake[1];
+  } else {
+    tabele.game[0].innerHTML = games[0];
+    tabele.game[1].innerHTML = games[1];
+  }
+
+  if (matchsettings.points.server == "player1") {
+    tabele.servers[0].innerHTML = "🟡";
+    tabele.servers[1].innerHTML = "";
+  } else {
+    tabele.servers[0].innerHTML = "";
+    tabele.servers[1].innerHTML = "🟡";
+  }
+
+  if (matchsettings.points.sets.length == 1) {
+    u_sets(
+      ["", ""],
+      ["", ""],
+      ["", ""],
+      ["", ""],
+      [matchsettings.points.sets[0][0], matchsettings.points.sets[0][1]],
+    );
+  } else if (matchsettings.points.sets.length == 2) {
+    u_sets(
+      ["", ""],
+      ["", ""],
+      ["", ""],
+      [matchsettings.points.sets[0][0], matchsettings.points.sets[0][1]],
+      [matchsettings.points.sets[1][0], matchsettings.points.sets[1][1]],
+    );
+  } else if (matchsettings.points.sets.length == 3) {
+    u_sets(
+      ["", ""],
+      ["", ""],
+      [matchsettings.points.sets[0][0], matchsettings.points.sets[0][1]],
+      [matchsettings.points.sets[1][0], matchsettings.points.sets[1][1]],
+      [matchsettings.points.sets[2][0], matchsettings.points.sets[2][1]],
+    );
+  } else if (matchsettings.points.sets.length == 4) {
+    u_sets(
+      ["", ""],
+      [matchsettings.points.sets[0][0], matchsettings.points.sets[0][1]],
+      [matchsettings.points.sets[1][0], matchsettings.points.sets[1][1]],
+      [matchsettings.points.sets[2][0], matchsettings.points.sets[2][1]],
+      [matchsettings.points.sets[3][0], matchsettings.points.sets[3][1]],
+    );
+  } else if (matchsettings.points.sets.length == 5) {
+    u_sets(
+      [matchsettings.points.sets[0][0], matchsettings.points.sets[0][1]],
+      [matchsettings.points.sets[1][0], matchsettings.points.sets[1][1]],
+      [matchsettings.points.sets[2][0], matchsettings.points.sets[2][1]],
+      [matchsettings.points.sets[3][0], matchsettings.points.sets[3][1]],
+      [matchsettings.points.sets[4][0], matchsettings.points.sets[4][1]],
+    );
+  }
+
+  function u_sets(s1, s2, s3, s4, s5) {
+    tabele.thisset[0].innerHTML = s5[0];
+    tabele.thisset[1].innerHTML = s5[1];
+    tabele.pastset[0].innerHTML = s4[0];
+    tabele.pastset[1].innerHTML = s4[1];
+    tabele.set3[0].innerHTML = s3[0];
+    tabele.set3[1].innerHTML = s3[1];
+    tabele.set2[0].innerHTML = s2[0];
+    tabele.set2[1].innerHTML = s2[1];
+    tabele.set1[0].innerHTML = s1[0];
+    tabele.set1[1].innerHTML = s1[1];
+  }
+  update_course();
+}
+
+function update_course() {
+  const course_and_now = structuredClone(matchsettings.course);
+  course_and_now.push({
+    points: matchsettings.points,
+    status: matchsettings.status,
+  });
+
+  const course_games_set = [];
+
+  let game_now = [];
+  let thie = false;
+
+  course_and_now.forEach((ausgabe) => {
+    if (ausgabe.points.tiebrake[0] > 0 || ausgabe.points.tiebrake[1] > 0) {
+      thie = true;
+      game_now.push(ausgabe.points);
+      return;
+    }
+    if (thie) {
+      course_games_set.push(game_now);
+      game_now = [];
+      thie = false;
+    }
+
+    if (ausgabe.points.points[0] == 0 && ausgabe.points.points[1] == 0) {
+      course_games_set.push(game_now);
+      game_now = [];
+    } else {
+      game_now.push(ausgabe.points);
+    }
+  });
+  course_games_set.push(game_now);
+
+  const course_games = course_games_set.filter((part) => part.length > 0);
+
+  let output = ``;
+
+  let index = 0;
+
+  course_games.forEach((cg) => {
+    index += 1;
+    let c1 = "";
+    let c2 = "";
+    if (cg[0].server == "player1") {
+      c1 += "||";
+      c2 += "&nbsp;|";
+    } else {
+      c2 += "||";
+      c1 += "&nbsp;|";
+    }
+    let games =
+      "&nbsp;&nbsp;&nbsp;" +
+      cg[0].sets[cg[0].sets.length - 1][0] +
+      " : " +
+      cg[0].sets[cg[0].sets.length - 1][1];
+    if (games == "0 : 0" && cg[0].sets.length > 1) {
+      games =
+        cg[0].sets[cg[0].sets.length - 2][0] +
+        " : " +
+        cg[0].sets[cg[0].sets.length - 2][1];
+    }
+    cg.forEach((c) => {
+      if (c.tiebrake[0] > 0 || c.tiebrake[1] > 0) {
+        if (String(c.tiebrake[0]).length <= 1) {
+          c1 += c.tiebrake[0] + "&nbsp;&nbsp;|&nbsp;";
+        } else {
+          c1 += c.tiebrake[0] + "&nbsp;|&nbsp;";
+        }
+        if (String(c.tiebrake[1]).length <= 1) {
+          c2 += c.tiebrake[1] + "&nbsp;&nbsp;|&nbsp;";
+        } else {
+          c2 += c.tiebrake[1] + "&nbsp;|&nbsp;";
+        }
+        return;
+      }
+      if (c.points[0] == 0) {
+        c1 += pointsystem[c.points[0]] + "&nbsp;|";
+      } else {
+        c1 += pointsystem[c.points[0]] + "|";
+      }
+      if (c.points[1] == 0) {
+        c2 += pointsystem[c.points[1]] + "&nbsp;|";
+      } else {
+        c2 += pointsystem[c.points[1]] + "|";
+      }
+    });
+    output += `<br>
+${games}<br><br>
+${c1}<br>
+${c2}<br>`;
+  });
+
+  const p = document.querySelector("p");
+  p.style.lineHeight = "1";
+  p.innerHTML = output;
+  window.scrollTo(0, document.body.scrollHeight);
+}

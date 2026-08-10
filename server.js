@@ -1,6 +1,8 @@
 require("dotenv").config();
 
 const express = require("express");
+const http = require("http");
+const WebSocket = require("ws");
 const { Pool } = require("pg");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -559,6 +561,24 @@ app.get("/api/getmatches/:user_id", async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+const server = http.createServer(app);
+
+const wss = new WebSocket.Server({
+  server,
+});
+
+wss.on("connection", (socket) => {
+  console.log("WebSocket verbunden");
+
+  socket.on("message", (message) => {
+    console.log("Nachricht:", message.toString());
+  });
+
+  socket.on("close", () => {
+    console.log("WebSocket getrennt");
+  });
+});
+
+server.listen(PORT, () => {
   console.log("server läuft auf port:" + PORT);
 });
