@@ -28,7 +28,6 @@ const socket = new WebSocket(`${protocol}//${location.host}`);
 
 socket.onopen = () => {
   console.log("WebSocket verbunden");
-  socket.send("hallo");
 };
 
 const pointsystem = ["0", "15", "30", "40", "ad"];

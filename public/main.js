@@ -254,3 +254,20 @@ async function start_match() {
 
   location.href = "/match/" + code.code;
 }
+
+class SearchInput extends HTMLElement {
+  connectedCallback() {
+    const placeholder = this.getAttribute("placeholder");
+
+    this.innerHTML = `
+      <div class="search_div">
+        <img src="/public/search.png" alt="" class="search_img" />
+        <input type="text" placeholder="${placeholder}" class="search" />
+      </div>
+    `;
+  }
+}
+
+customElements.define("search-input", SearchInput);
+
+changesection("freunde");

@@ -232,3 +232,42 @@ select,
 #start_match:hover {
   background-color: lightgray;
 }
+
+.search_div {
+  position: relative;
+  display: inline-block;
+}
+
+.search {
+  width: 30px;
+  height: 30px;
+  transition: all 0.4s ease;
+  color: transparent;
+  border: 2px solid black;
+  border-radius: 0px;
+}
+
+.search::placeholder {
+  color: transparent;
+}
+
+.search:focus {
+  outline: none;
+  width: 200px;
+  height: 30px;
+  padding-left: 30px;
+  color: black;
+  border: 2px solid #06b6d4;
+  border-radius: 10px;
+}
+
+.search:focus::placeholder {
+  color: black;
+}
+
+.search_img {
+  position: absolute;
+  height: 25px;
+  margin: 5px;
+  pointer-events: none;
+}
