@@ -118,10 +118,26 @@
     </section>
     <section id="freunde" class="sections" style="display: none">
       <h1>Freunde</h1>
-      <div id="frend_newfrend">
-        <h2>neuen freund hinzufügen</h2>
-        <search-input placeholder="suchen"></search-input>
+      <div class="newfriend_div" onclick="open_newfrienddiv()">
+        <h2>Neuer Freund</h2>
+        <div id="newfriend_open_div" style="display: none">
+          <br />
+          <search-input
+            placeholder="suchen"
+            id="newfriend_search"
+          ></search-input>
+          <div id="newfriend_searchoutput"></div>
+        </div>
       </div>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/watch?v=T3IAKjFp3EI"
+        title="YouTube video"
+        frameborder="0"
+        allowfullscreen
+      >
+      </iframe>
     </section>
     <section id="partien" class="sections" style="display: none">
       <h1>Partien</h1>

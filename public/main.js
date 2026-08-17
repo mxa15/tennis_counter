@@ -271,3 +271,10 @@ class SearchInput extends HTMLElement {
 customElements.define("search-input", SearchInput);
 
 changesection("freunde");
+
+const newfriend_div = document.querySelector(".newfriend_div");
+
+function open_newfrienddiv() {
+  newfriend_div.classList.add("newfriend_div_open");
+  document.getElementById("newfriend_open_div").style.display = "block";
+}
