@@ -258,11 +258,12 @@ async function start_match() {
 class SearchInput extends HTMLElement {
   connectedCallback() {
     const placeholder = this.getAttribute("placeholder");
+    const inputID = this.getAttribute("inputID");
 
     this.innerHTML = `
       <div class="search_div">
         <img src="/public/search.png" alt="" class="search_img" />
-        <input type="text" placeholder="${placeholder}" class="search" />
+        <input type="text" placeholder="${placeholder}" class="search" id="${inputID}"/>
       </div>
     `;
   }
@@ -278,3 +279,26 @@ function open_newfrienddiv() {
   newfriend_div.classList.add("newfriend_div_open");
   document.getElementById("newfriend_open_div").style.display = "block";
 }
+
+function close_newfrienddiv() {
+  event.stopPropagation();
+
+  document.getElementById("newfriend_open_div").style.display = "none";
+
+  newfriend_div.classList.remove("newfriend_div_open");
+}
+
+document.addEventListener(
+  "click",
+  function (event) {
+    if (
+      !newfriend_div.contains(event.target) &&
+      newfriend_div.classList.contains("newfriend_div_open")
+    ) {
+      close_newfrienddiv();
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  },
+  true,
+);

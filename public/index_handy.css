@@ -271,3 +271,45 @@ select,
   margin: 5px;
   pointer-events: none;
 }
+
+.newfriend_div {
+  position: fixed;
+  left: 50%;
+  top: 95%;
+  transform: translate(-50%, -100%);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 45px;
+  transition: all 0.3s ease-in-out;
+}
+
+.newfriend_div h2 {
+  position: fixed;
+}
+
+.newfriend_div_open {
+  font-size: 10px;
+  height: 400px;
+  width: 80vw;
+  background: rgba(255, 255, 255, 0.2);
+  align-items: baseline;
+}
+
+#newfriend_open_div {
+  margin-top: 60px;
+  width: 100%;
+}
+
+#newfriend_open_div search-input {
+  position: fixed;
+  margin-top: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
