@@ -289,6 +289,19 @@ function close_newfrienddiv() {
 }
 
 document.addEventListener(
+  "pointerdown",
+  function (event) {
+    if (
+      !newfriend_div.contains(event.target) &&
+      newfriend_div.classList.contains("newfriend_div_open")
+    ) {
+      event.preventDefault();
+    }
+  },
+  true,
+);
+
+document.addEventListener(
   "click",
   function (event) {
     if (
@@ -296,9 +309,19 @@ document.addEventListener(
       newfriend_div.classList.contains("newfriend_div_open")
     ) {
       close_newfrienddiv();
+
       event.stopPropagation();
       event.preventDefault();
     }
   },
   true,
 );
+
+function delete_friend(id) {
+  const friend = document.getElementById(id);
+
+  friend.classList.add("delete_friend");
+  setTimeout(() => {
+    friend.remove();
+  }, 1000);
+}

@@ -349,3 +349,25 @@ select,
   width: 100%;
   height: 100%;
 }
+
+.delete_friend {
+  animation: remove_friend 1s ease;
+}
+
+@keyframes remove_friend {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(130%);
+    height: 50px;
+    margin: 5px;
+    padding: 5px;
+  }
+  100% {
+    transform: translateX(130%);
+    height: 0px;
+    margin: 0px;
+    padding: 0px;
+  }
+}
