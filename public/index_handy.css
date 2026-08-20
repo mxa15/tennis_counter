@@ -341,10 +341,6 @@ select,
   border-radius: 7px;
 }
 
-.friend button:focus {
-  background: rgb(0, 187, 0);
-}
-
 .friend img {
   width: 100%;
   height: 100%;

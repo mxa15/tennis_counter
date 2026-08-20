@@ -318,6 +318,9 @@ document.addEventListener(
 );
 
 function delete_friend(id) {
+  if (!confirm("von freunde entfernen?")) {
+    return;
+  }
   const friend = document.getElementById(id);
 
   friend.classList.add("delete_friend");
@@ -325,3 +328,16 @@ function delete_friend(id) {
     friend.remove();
   }, 1000);
 }
+
+function add_friendelement(name, userid) {
+  const output = document.getElementById("friendoutput");
+  output.innerHTML += `
+        <div class="friend" id="${userid}">
+          <p>${name}</p>
+          <button onclick="delete_friend('${userid}')"><img src="/public/remove-user.png" alt="add"/></button>
+        </div>
+  `;
+}
+
+add_friendelement("paul", 1);
+add_friendelement("max", 2);
