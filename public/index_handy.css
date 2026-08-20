@@ -327,9 +327,12 @@ select,
   font-size: 45px;
   background: rgba(0, 0, 0, 0.2);
   height: 50px;
-  margin: 5px;
+  margin-bottom: 5px;
   padding: 5px;
   border-radius: 10px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .friend button {

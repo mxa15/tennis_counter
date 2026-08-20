@@ -326,9 +326,13 @@ select,
   font-size: 45px;
   background: rgba(0, 0, 0, 0.2);
   height: 50px;
-  margin: 5px;
+  margin-bottom: 5px;
   padding: 5px;
   border-radius: 10px;
+  max-width: 700px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .friend button {
@@ -343,4 +347,31 @@ select,
 .friend img {
   width: 100%;
   height: 100%;
+}
+
+.friend img {
+  width: 100%;
+  height: 100%;
+}
+
+.delete_friend {
+  animation: remove_friend 1s ease;
+}
+
+@keyframes remove_friend {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(130%);
+    height: 50px;
+    margin: 5px;
+    padding: 5px;
+  }
+  100% {
+    transform: translateX(130%);
+    height: 0px;
+    margin: 0px;
+    padding: 0px;
+  }
 }
