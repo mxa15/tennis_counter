@@ -39,7 +39,10 @@
       <button
         class="profilebutton"
         id="profilebutton"
-        onclick="changesection('profile')"
+        onclick="
+          changesection('profile');
+          history.pushState({}, '', '?page=profile');
+        "
         style="display: none"
       >
         <img src="/public/profile.png" alt="login" class="profilebutton" />
@@ -155,10 +158,12 @@
             inputID="newfriend_search"
           ></search-input>
           <div id="newfriend_searchoutput">
+            <h3>anfragen</h3>
             <div class="friend">
               <p>Max</p>
-              <button><img src="/public/add-user.png" alt="add" /></button>
+              <button><img src="/public/accept-user.png" alt="add" /></button>
             </div>
+            <h3>andere</h3>
           </div>
         </div>
       </div>

@@ -623,6 +623,50 @@ app.post("/api/addfriend", async (req, res) => {
   });
 });
 
+app.get("/api/getfriendreq", async (req, res) => {
+  const sessionid = req.cookies?.sessionID;
+
+  if (!sessionid) {
+    return res.json({
+      status: "no user",
+    });
+  }
+
+  const user = await db.query(
+    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
+    [sessionid],
+  );
+
+  if (user.rows.length === 0) {
+    return res.json({
+      status: "no user",
+    });
+  }
+
+  const result = await db.query(
+    `
+    SELECT u.username, u.id 
+    FROM friends f
+    JOIN users u
+    ON u.id = f.user_id
+    WHERE f.friend_id = $1 
+    AND f.status = 'pending'
+    `,
+    [user.rows[0].user_id],
+  );
+
+  if (result.rows.length == 0) {
+    return res.json({
+      status: "no friend",
+    });
+  }
+
+  res.json({
+    status: "ok",
+    requests: result.rows,
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
