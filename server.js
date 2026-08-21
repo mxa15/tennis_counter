@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static("public"));
 
 app.get("/", (req, res) => {
-  res.redirect("/startseite");
+  res.redirect("/startseite?page=startseite");
 });
 
 app.get("/startseite", (req, res) => {
@@ -518,48 +518,108 @@ app.get("/api/match_return", async (req, res) => {
   res.json(match.rows[0]);
 });
 
-app.get("/api/getmatches/:user_id", async (req, res) => {
-  let user_id = req.params.user_id;
+app.post("/api/getmatches", async (req, res) => {
+  const user_ids = req.body.user_ids;
 
-  if (user_id === "my_id") {
-    const sessionID = req.cookies?.sessionID;
-
-    if (!sessionID) {
-      return res.json({
-        status: "no user",
-      });
-    }
-
-    const user = await db.query(
-      `
-      SELECT user_id
-      FROM sessionIDs
-      WHERE session_id = $1`,
-      [sessionID],
-    );
-
-    if (user.rows.length == 0) {
-      return res.json({
-        status: "no user",
-      });
-    }
-
-    user_id = user.rows[0].user_id;
+  if (!Array.isArray(req.body.user_ids)) {
+    return res.json({
+      status: "invalid",
+    });
   }
 
-  const result = await db.query(
-    `
-    SELECT * FROM matches
-    WHERE owner_id = $1
-    ORDER BY created_at DESC, id DESC`,
-    [user_id],
+  let output_ids = [];
+  for (const id of user_ids) {
+    if (typeof id === "number") {
+      output_ids.push(id);
+    } else if (id == "my_id") {
+      const sessionid = req.cookies?.sessionID;
+      if (!sessionid) {
+        return res.json({
+          status: "no user",
+        });
+      }
+
+      const my_id = await db.query(
+        "SELECT user_id FROM sessionIDs WHERE session_id = $1",
+        [sessionid],
+      );
+
+      if (my_id.rows.length == 0) {
+        return res.json({
+          status: "no user",
+        });
+      }
+      output_ids.push(my_id.rows[0].user_id);
+    }
+  }
+  if (output_ids.length == 0) {
+    return res.json({
+      status: "no match",
+    });
+  }
+  const matches = await db.query(
+    "SELECT * FROM matches WHERE owner_id = ANY($1) ORDER BY created_at DESC",
+    [output_ids],
   );
 
-  const matches = result.rows;
+  if (matches.rows.length == 0) {
+    return res.json({
+      status: "no match",
+    });
+  }
 
   res.json({
     status: "ok",
-    matches: matches,
+    matches: matches.rows,
+  });
+});
+
+app.post("/api/addfriend", async (req, res) => {
+  const sessionid = req.cookies?.sessionID;
+  const friendid = req.body?.friendID;
+
+  if (!friendid) {
+    console.log("1");
+
+    return res.json({
+      status: "invalid",
+    });
+  }
+
+  if (!sessionid) {
+    return res.json({
+      status: "no user",
+    });
+  }
+
+  const user = await db.query(
+    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
+    [sessionid],
+  );
+
+  if (user.rows.length == 0) {
+    return res.json({
+      status: "no user",
+    });
+  }
+
+  try {
+    await db.query(
+      `
+    INSERT INTO 
+    friends(user_id, friend_id)
+    VALUES($1, $2)
+    `,
+      [user.rows[0].user_id, friendid],
+    );
+  } catch (error) {
+    console.error(error);
+    return res.json({
+      status: "invalid",
+    });
+  }
+  res.json({
+    status: "ok",
   });
 });
 

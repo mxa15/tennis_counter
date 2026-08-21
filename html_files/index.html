@@ -54,22 +54,49 @@
         <img src="/public/close.png" alt="" class="sidebarbutton" />
       </button>
 
-      <button class="sectionselection" onclick="changesection('startseite')">
+      <button
+        class="sectionselection"
+        onclick="
+          changesection('startseite');
+          history.pushState({}, '', '?page=startseite');
+        "
+      >
         Startseite</button
       ><br />
-      <button class="sectionselection" onclick="changesection('neue_partie')">
+      <button
+        class="sectionselection"
+        onclick="
+          changesection('neue_partie');
+          history.pushState({}, '', '?page=neue_partie');
+        "
+      >
         Neue Partie</button
       ><br />
-      <button class="sectionselection" onclick="changesection('freunde')">
+      <button
+        class="sectionselection"
+        onclick="
+          changesection('freunde');
+          history.pushState({}, '', '?page=freunde');
+        "
+      >
         Freunde</button
       ><br />
-      <button class="sectionselection" onclick="changesection('partien')">
+      <button
+        class="sectionselection"
+        onclick="
+          changesection('partien');
+          history.pushState({}, '', '?page=partien');
+        "
+      >
         Partien</button
       ><br />
       <button
         class="sectionselection"
         id="lastselector"
-        onclick="changesection('einstellungen')"
+        onclick="
+          changesection('einstellungen');
+          history.pushState({}, '', '?page=einstellungen');
+        "
       >
         Einstellungen</button
       ><br />

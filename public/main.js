@@ -1,3 +1,24 @@
+const params = new URLSearchParams(window.location.search);
+
+const page = params.get("page");
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (
+    [
+      "startseite",
+      "neue_partie",
+      "freunde",
+      "partien",
+      "einstellungen",
+    ].includes(page)
+  ) {
+    changesection(page);
+  } else {
+    history.pushState({}, "", "?page=startseite");
+    changesection("startseite");
+  }
+});
+
 const open_sidebarbutton = document.getElementById("open_sidebar");
 const close_sidebarbutton = document.getElementById("close_sidebar");
 const sidebar = document.getElementById("sidebar");
@@ -30,11 +51,26 @@ function check_user() {
 
 check_user();
 
-async function getmatches(id) {
-  const response = await fetch(`/api/getmatches/${id}`);
+async function getmatches(ids) {
+  const response = await fetch("/api/getmatches", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_ids: ids,
+    }),
+  });
   const data = await response.json();
 
-  if (data.status == "no user") return "no user";
+  console.log(data.status);
+
+  if (
+    data.status == "no user" ||
+    data.status == "no match" ||
+    data.status == "invalid"
+  )
+    return "failed";
 
   return data.matches;
 }
@@ -42,7 +78,9 @@ async function getmatches(id) {
 function addmatches(id, tableid) {
   const table = document.getElementById(tableid);
   getmatches(id).then((matches) => {
-    if (matches == "no user") return;
+    console.log(matches);
+
+    if (matches === "failed") return;
 
     matches.forEach((match) => {
       const div = document.createElement("div");
@@ -100,7 +138,7 @@ function addmatches(id, tableid) {
   });
 }
 
-addmatches("my_id", "mymatches");
+addmatches(["my_id"], "mymatches");
 
 function getDate(dateString) {
   const timeZone = "Europe/Rome";
@@ -341,3 +379,23 @@ function add_friendelement(name, userid) {
 
 add_friendelement("paul", 1);
 add_friendelement("max", 2);
+
+async function server_addfriend(id) {
+  const response = await fetch("/api/addfriend", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      friendID: id,
+    }),
+  });
+  const data = await response.json();
+
+  return data.status;
+}
+
+async function addfriend(id) {
+  const status = await server_addfriend(id);
+  console.log(status);
+}
