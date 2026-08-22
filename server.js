@@ -716,6 +716,54 @@ app.get("/api/getfriendreq", async (req, res) => {
   });
 });
 
+app.post("/api/confirmFriend", async (req, res) => {
+  const sessionid = req.cookies.sessionID;
+  const friendid = req.body.friend_id;
+
+  if (!friendid)
+    return res.json({
+      status: "invalid",
+    });
+
+  if (!sessionid)
+    return res.json({
+      status: "no user",
+    });
+
+  const user = await db.query(
+    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
+    [sessionid],
+  );
+
+  if (user.rows.length == 0)
+    return res.json({
+      status: "no user",
+    });
+
+  const userid = user.rows[0].user_id;
+
+  const result = await db.query(
+    `
+    UPDATE friends
+    SET status = 'accepted'
+    WHERE user_id = $1
+    AND friend_id = $2
+    AND status = 'pending'
+    RETURNING *
+    `,
+    [friendid, userid],
+  );
+
+  if (result.rows.length == 0)
+    return res.json({
+      status: "not found",
+    });
+
+  res.json({
+    status: "ok",
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);

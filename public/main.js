@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     changesection("startseite");
   }
 
-  uptdate_newfrienddiv();
-
   const newfriend_search = document.getElementById("newfriend_search");
 
   newfriend_search.addEventListener("keydown", (e) => {
@@ -51,16 +49,16 @@ async function set_newfrienddiv(search) {
       if (search) {
         if (request.username.toLowerCase().startsWith(search.toLowerCase())) {
           output.innerHTML += `
-            <div class="friend">
+            <div class="friend"  id="${request.id}">
               <p>${request.username}</p>
-              <button><img src="/public/accept-user.png" alt="add" /></button>
+              <button onclick="confirmFriend('${request.id}')><img src="/public/accept-user.png" alt="add" /></button>
             </div>`;
         }
       } else {
         output.innerHTML += `
-          <div class="friend">
+          <div class="friend"  id="${request.id}">
             <p>${request.username}</p>
-            <button><img src="/public/accept-user.png" alt="add" /></button>
+            <button onclick="confirmFriend('${request.id}')" style="z-index: 50"><img src="/public/accept-user.png" alt="add" /></button>
           </div>`;
       }
     });
@@ -75,7 +73,7 @@ async function set_newfrienddiv(search) {
     user_results.forEach((result) => {
       if (!friendrequests.some((f) => f.username == result.username)) {
         output.innerHTML += `
-        <div class="friend">
+        <div class="friend" id="${result.id}">
           <p>${result.username}</p>
           <button><img src="/public/add-user.png" alt="add" onclick="addfriend('${result.id}')"/></button>
         </div>
@@ -394,6 +392,8 @@ changesection("freunde");
 const newfriend_div = document.querySelector(".newfriend_div");
 
 function open_newfrienddiv() {
+  if (newfriend_div.classList.contains("newfriend_div_open")) return;
+  uptdate_newfrienddiv();
   newfriend_div.classList.add("newfriend_div_open");
   document.getElementById("newfriend_open_div").style.display = "block";
 }
@@ -476,6 +476,30 @@ async function server_addfriend(id) {
 }
 
 async function addfriend(id) {
+  const friendelement = document.getElementById(id);
+  setTimeout(() => {
+    friendelement.remove();
+  }, 1000);
+  friendelement.classList.add("delete_friend");
   const status = await server_addfriend(id);
   console.log(status);
+}
+
+async function confirmFriend(id) {
+  const friendelement = document.getElementById(id);
+  setTimeout(() => {
+    friendelement.remove();
+  }, 1000);
+  friendelement.classList.add("delete_friend");
+  const response = await fetch("/api/confirmFriend", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      friend_id: id,
+    }),
+  });
+  const data = await response.json();
+  console.log(data.status);
 }
