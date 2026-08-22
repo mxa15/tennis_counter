@@ -44,9 +44,8 @@ async function get_friendrequests() {
 async function set_newfrienddiv(search) {
   const output = document.getElementById("newfriend_searchoutput");
   output.innerHTML = "";
-  let i = 0;
+  output.innerHTML += "<h3>anfragen</h3>";
   if (friendrequests.length > 0) {
-    output.innerHTML += "<h3>anfragen</h3>";
     friendrequests.forEach((request) => {
       if (search) {
         if (request.username.toLowerCase().startsWith(search)) {
@@ -55,7 +54,6 @@ async function set_newfrienddiv(search) {
               <p>${request.username}</p>
               <button><img src="/public/accept-user.png" alt="add" /></button>
             </div>`;
-          i++;
         }
       } else {
         output.innerHTML += `
@@ -63,17 +61,11 @@ async function set_newfrienddiv(search) {
             <p>${request.username}</p>
             <button><img src="/public/accept-user.png" alt="add" /></button>
           </div>`;
-        i++;
       }
     });
-    if (search) {
-      output.innerHTML += "<h3>andere</h3>";
-    }
-    console.log(i);
-
-    if (i == 0) output.innerHTML = "";
   }
   if (search) {
+    output.innerHTML += "<h3>andere</h3>";
     const user_results = await getUsersByName(search);
     console.log(user_results);
 
