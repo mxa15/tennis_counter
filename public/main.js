@@ -19,6 +19,85 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+let friendrequests = [];
+
+async function get_friendrequests() {
+  const response = await fetch("/api/getfriendreq");
+  const data = await response.json();
+
+  if (data.status !== "ok") return console.log(data.status);
+
+  friendrequests = data.requests;
+}
+
+async function set_newfrienddiv(search) {
+  const output = document.getElementById("newfriend_searchoutput");
+  output.innerHTML = "";
+  let i = 0;
+  if (friendrequests.length > 0) {
+    output.innerHTML += "<h3>anfragen</h3>";
+    friendrequests.forEach((request) => {
+      if (search) {
+        if (request.username.toLowerCase().startsWith(search)) {
+          output.innerHTML += `
+            <div class="friend">
+              <p>${request.username}</p>
+              <button><img src="/public/accept-user.png" alt="add" /></button>
+            </div>`;
+          i++;
+        }
+      } else {
+        output.innerHTML += `
+          <div class="friend">
+            <p>${request.username}</p>
+            <button><img src="/public/accept-user.png" alt="add" /></button>
+          </div>`;
+        i++;
+      }
+    });
+    if (search) {
+      output.innerHTML += "<h3>andere</h3>";
+    }
+    console.log(i);
+
+    if (i == 0) output.innerHTML = "";
+  }
+  if (search) {
+    const user_results = await getUsersByName(search);
+    console.log(user_results);
+
+    if (typeof user_results == "string") return console.log(user_results);
+
+    user_results.forEach((result) => {
+      if (!friendrequests.some((f) => f.username == result.username)) {
+        output.innerHTML += `
+        <div class="friend">
+          <p>${result.username}</p>
+          <button><img src="/public/add-user.png" alt="add" /></button>
+        </div>
+        `;
+      }
+    });
+  }
+}
+
+async function getUsersByName(name) {
+  const response = await fetch("/api/getUsersByName/" + name);
+  const data = await response.json();
+  console.log(data);
+
+  if (data.status !== "ok") return data.status;
+
+  return data.users;
+}
+
+async function uptdate_newfrienddiv(search) {
+  await get_friendrequests();
+  await set_newfrienddiv(search);
+}
+
+uptdate_newfrienddiv("t");
+
 const open_sidebarbutton = document.getElementById("open_sidebar");
 const close_sidebarbutton = document.getElementById("close_sidebar");
 const sidebar = document.getElementById("sidebar");
@@ -63,8 +142,6 @@ async function getmatches(ids) {
   });
   const data = await response.json();
 
-  console.log(data.status);
-
   if (
     data.status == "no user" ||
     data.status == "no match" ||
@@ -78,8 +155,6 @@ async function getmatches(ids) {
 function addmatches(id, tableid) {
   const table = document.getElementById(tableid);
   getmatches(id).then((matches) => {
-    console.log(matches);
-
     if (matches === "failed") return;
 
     matches.forEach((match) => {
@@ -235,7 +310,7 @@ function delete_user() {
   const password = prompt("zum löschen passwort eingeben");
 
   if (!password) {
-    return console.log("abbruch");
+    return;
   }
   loadin_screen.style.display = "flex";
   fetch("/api/delete_user", {
@@ -397,5 +472,4 @@ async function server_addfriend(id) {
 
 async function addfriend(id) {
   const status = await server_addfriend(id);
-  console.log(status);
 }

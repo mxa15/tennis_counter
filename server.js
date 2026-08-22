@@ -574,13 +574,55 @@ app.post("/api/getmatches", async (req, res) => {
   });
 });
 
+app.get("/api/getUsersByName/:name", async (req, res) => {
+  const name = req.params.name;
+  const sessionid = req.cookies.sessionID;
+
+  if (!sessionid) {
+    return res.json({
+      status: "no user",
+    });
+  }
+
+  const user = await db.query(
+    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
+    [sessionid],
+  );
+
+  if (user.rows.length == 0) {
+    return res.json({
+      status: "no user",
+    });
+  }
+
+  const userid = user.rows[0].user_id;
+
+  const users = await db.query(
+    `
+    SELECT id, username FROM users
+    WHERE username ILIKE $1
+    AND id != $2
+    `,
+    [name + "%", userid],
+  );
+
+  if (users.rows.length == 0) {
+    return res.json({
+      status: "no users",
+    });
+  }
+
+  res.json({
+    status: "ok",
+    users: users.rows,
+  });
+});
+
 app.post("/api/addfriend", async (req, res) => {
   const sessionid = req.cookies?.sessionID;
   const friendid = req.body?.friendID;
 
   if (!friendid) {
-    console.log("1");
-
     return res.json({
       status: "invalid",
     });
@@ -651,6 +693,7 @@ app.get("/api/getfriendreq", async (req, res) => {
     ON u.id = f.user_id
     WHERE f.friend_id = $1 
     AND f.status = 'pending'
+    ORDER BY u.username
     `,
     [user.rows[0].user_id],
   );
@@ -678,9 +721,7 @@ const wss = new WebSocket.Server({
 wss.on("connection", (socket) => {
   console.log("WebSocket verbunden");
 
-  socket.on("message", (message) => {
-    console.log("Nachricht:", message.toString());
-  });
+  socket.on("message", (message) => {});
 
   socket.on("close", () => {
     console.log("WebSocket getrennt");
