@@ -100,6 +100,19 @@ async function uptdate_newfrienddiv(search) {
   loading_newfrienddiv.style.display = "none";
 }
 
+async function get_friends() {
+  const response = await fetch("/api/getFriends/name");
+  const data = await response.json();
+
+  if (data.status !== "ok") return console.log(data.status);
+
+  data.friends.forEach((friend) => {
+    add_friendelement(friend.username, friend.id);
+  });
+}
+
+get_friends();
+
 const open_sidebarbutton = document.getElementById("open_sidebar");
 const close_sidebarbutton = document.getElementById("close_sidebar");
 const sidebar = document.getElementById("sidebar");
@@ -234,14 +247,12 @@ function getDate(dateString) {
 
   if (diff === 0) return "heute";
   if (diff === -1) return "gestern";
-  if (diff === -2)
-    return date.toLocaleDateString("de-DE", {
-      day: "2-digit",
-      month: "2-digit",
-      timeZone: "Europe/Rome",
-    });
-
-  return "anderer Tag";
+  if (diff === -2) return "vorgestern";
+  return date.toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    timeZone: "Europe/Rome",
+  });
 }
 
 function login_user(userdata) {
@@ -456,9 +467,6 @@ function add_friendelement(name, userid) {
         </div>
   `;
 }
-
-add_friendelement("paul", 1);
-add_friendelement("max", 2);
 
 async function server_addfriend(id) {
   const response = await fetch("/api/addfriend", {

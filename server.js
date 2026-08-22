@@ -764,6 +764,72 @@ app.post("/api/confirmFriend", async (req, res) => {
   });
 });
 
+app.get("/api/getFriends/:type", async (req, res) => {
+  const sessionid = req.cookies.sessionID;
+  const type = req.params.type;
+
+  if (!sessionid)
+    return res.json({
+      status: "no user",
+    });
+
+  const user = await db.query(
+    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
+    [sessionid],
+  );
+
+  if (user.rows.length == 0)
+    return res.json({
+      status: "no user",
+    });
+
+  const result = await db.query(
+    `
+    SELECT
+    CASE
+    WHEN user_id = $1 THEN friend_id
+    ELSE user_id
+    END AS friend_id
+    FROM friends
+    WHERE (user_id = $1 OR friend_id = $1)
+    AND status = 'accepted'
+    `,
+    [user.rows[0].user_id],
+  );
+
+  if (result.rows.length == 0)
+    return res.json({
+      status: "no friend",
+    });
+
+  const friendids = result.rows.map((row) => row.friend_id);
+
+  if (type == "name") {
+    const friends = await db.query(
+      `
+      SELECT id, username
+      FROM users
+      WHERE id = ANY($1) 
+      `,
+      [friendids],
+    );
+
+    res.json({
+      status: "ok",
+      friends: friends.rows,
+    });
+  } else if (type == "id") {
+    res.json({
+      status: "ok",
+      friend_ids: friendids,
+    });
+  } else {
+    res.json({
+      status: "invalid",
+    });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
