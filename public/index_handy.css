@@ -53,6 +53,16 @@ header {
   z-index: 300;
 }
 
+#loading_newfrienddiv {
+  position: absolute;
+  inset: 0;
+  background: white;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 300;
+}
+
 .spinner {
   width: 60px;
   height: 60px;

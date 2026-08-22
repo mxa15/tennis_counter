@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   newfriend_search.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       uptdate_newfrienddiv(newfriend_search.value);
+      newfriend_search.blur();
     }
   });
 });
@@ -83,7 +84,7 @@ async function set_newfrienddiv(search) {
         output.innerHTML += `
         <div class="friend">
           <p>${result.username}</p>
-          <button><img src="/public/add-user.png" alt="add" /></button>
+          <button><img src="/public/add-user.png" alt="add" onclick="addfriend('${result.id}')"/></button>
         </div>
         `;
       }
@@ -102,8 +103,10 @@ async function getUsersByName(name) {
 }
 
 async function uptdate_newfrienddiv(search) {
+  loading_newfrienddiv.style.display = "flex";
   await get_friendrequests();
   await set_newfrienddiv(search);
+  loading_newfrienddiv.style.display = "none";
 }
 
 const open_sidebarbutton = document.getElementById("open_sidebar");
@@ -116,6 +119,7 @@ const profilename = document.getElementById("profilename");
 const logoutbtn = document.getElementById("logout");
 const deletebtn = document.getElementById("delete_user");
 const loadin_screen = document.getElementById("loading");
+const loading_newfrienddiv = document.getElementById("loading_newfrienddiv");
 
 const pointsystem = ["0", "15", "30", "40", "ad"];
 
@@ -480,4 +484,5 @@ async function server_addfriend(id) {
 
 async function addfriend(id) {
   const status = await server_addfriend(id);
+  console.log(status);
 }
