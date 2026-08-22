@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") {
       uptdate_newfrienddiv(newfriend_search.value);
       newfriend_search.blur();
+      newfriend_search.value = "";
     }
   });
 });

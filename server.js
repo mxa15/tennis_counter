@@ -602,6 +602,12 @@ app.get("/api/getUsersByName/:name", async (req, res) => {
     SELECT id, username FROM users
     WHERE username ILIKE $1
     AND id != $2
+    AND NOT EXISTS (
+      SELECT 1 
+      FROM friends
+      WHERE (user_id = $2 AND friend_id = users.id)
+      OR (user_id = users.id AND friend_id = $2)
+    )
     `,
     [name + "%", userid],
   );
