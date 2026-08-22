@@ -48,7 +48,7 @@ async function set_newfrienddiv(search) {
   if (friendrequests.length > 0) {
     friendrequests.forEach((request) => {
       if (search) {
-        if (request.username.toLowerCase().startsWith(search)) {
+        if (request.username.toLowerCase().startsWith(search.toLowerCase())) {
           output.innerHTML += `
             <div class="friend">
               <p>${request.username}</p>
