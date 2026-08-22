@@ -17,6 +17,16 @@ document.addEventListener("DOMContentLoaded", () => {
     history.pushState({}, "", "?page=startseite");
     changesection("startseite");
   }
+
+  uptdate_newfrienddiv();
+
+  const newfriend_search = document.getElementById("newfriend_search");
+
+  newfriend_search.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      uptdate_newfrienddiv(newfriend_search.value);
+    }
+  });
 });
 
 let friendrequests = [];
@@ -95,8 +105,6 @@ async function uptdate_newfrienddiv(search) {
   await get_friendrequests();
   await set_newfrienddiv(search);
 }
-
-uptdate_newfrienddiv("t");
 
 const open_sidebarbutton = document.getElementById("open_sidebar");
 const close_sidebarbutton = document.getElementById("close_sidebar");
@@ -376,7 +384,7 @@ class SearchInput extends HTMLElement {
     this.innerHTML = `
       <div class="search_div">
         <img src="/public/search.png" alt="" class="search_img" />
-        <input type="text" placeholder="${placeholder}" class="search" id="${inputID}"/>
+        <input type="text" placeholder="${placeholder}" class="search" id="${inputID}" enterkeyhint="search"/>
       </div>
     `;
   }
