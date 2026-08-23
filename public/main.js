@@ -446,10 +446,18 @@ document.addEventListener(
   true,
 );
 
-function delete_friend(id) {
+async function delete_friend(id) {
   if (!confirm("von freunde entfernen?")) {
     return;
   }
+
+  const response = await fetch("/api/deleteFriend/" + id, { method: "DELETE" });
+  const data = await response.json();
+
+  console.log(data.status);
+
+  if (data.status !== "ok") return;
+
   const friend = document.getElementById(id);
 
   friend.classList.add("delete_friend");

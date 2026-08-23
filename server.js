@@ -73,7 +73,7 @@ app.use("/api", async (req, res, next) => {
   const sessionid = req.cookies?.sessionID;
 
   if (!sessionid) {
-    req.user = null;
+    req.userid = null;
     return next();
   }
 
@@ -82,13 +82,13 @@ app.use("/api", async (req, res, next) => {
     [sessionid],
   );
 
-  req.user = result.rows[0].user_id || null;
+  req.userid = result.rows[0]?.user_id ?? null;
 
   next();
 });
 
 app.get("/api/check_user", async (req, res) => {
-  const userid = req.user;
+  const userid = req.userid;
 
   if (!userid) return res.json({ failed: true });
 
@@ -231,7 +231,7 @@ app.get("/api/logout", (req, res) => {
 });
 
 app.delete("/api/delete_user", async (req, res) => {
-  const userid = req.user;
+  const userid = req.userid;
 
   if (!userid) {
     return res.json({
@@ -289,7 +289,7 @@ app.delete("/api/delete_user", async (req, res) => {
 });
 
 app.post("/api/creatematch", async (req, res) => {
-  const ownerid = req.user;
+  const ownerid = req.userid;
   if (!ownerid) {
     return res.json({
       status: "no user",
@@ -337,7 +337,7 @@ app.post("/api/creatematch", async (req, res) => {
 });
 
 app.get("/api/getmatchdata", async (req, res) => {
-  const ownerid = req.user;
+  const ownerid = req.userid;
   const pageUrl = req.get("X-page-URL");
 
   if (!pageUrl) {
@@ -366,7 +366,7 @@ app.get("/api/getmatchdata", async (req, res) => {
 });
 
 app.post("/api/updatematch", async (req, res) => {
-  const user_id = req.user;
+  const user_id = req.userid;
   const pageUrl = req.get("X-page-URL");
 
   if (!user_id) {
@@ -407,7 +407,7 @@ app.post("/api/updatematch", async (req, res) => {
 });
 
 app.get("/api/match_return", async (req, res) => {
-  const userid = req.user;
+  const userid = req.userid;
   const pageUrl = req.get("X-page-URL");
 
   if (!pageUrl) {
@@ -490,7 +490,7 @@ app.post("/api/getmatches", async (req, res) => {
     if (typeof id === "number") {
       output_ids.push(id);
     } else if (id == "my_id") {
-      const userid = req.user;
+      const userid = req.userid;
       if (!userid) {
         return res.json({
           status: "no user",
@@ -524,7 +524,7 @@ app.post("/api/getmatches", async (req, res) => {
 
 app.get("/api/getUsersByName/:name", async (req, res) => {
   const name = req.params.name;
-  const userid = req.user;
+  const userid = req.userid;
 
   if (!userid) {
     return res.json({
@@ -560,7 +560,7 @@ app.get("/api/getUsersByName/:name", async (req, res) => {
 });
 
 app.post("/api/addfriend", async (req, res) => {
-  const userid = req.user;
+  const userid = req.userid;
   const friendid = req.body?.friendID;
 
   if (!friendid) {
@@ -596,7 +596,7 @@ app.post("/api/addfriend", async (req, res) => {
 });
 
 app.get("/api/getfriendreq", async (req, res) => {
-  const userid = req.user;
+  const userid = req.userid;
 
   if (!userid) {
     return res.json({
@@ -630,7 +630,7 @@ app.get("/api/getfriendreq", async (req, res) => {
 });
 
 app.post("/api/confirmFriend", async (req, res) => {
-  const userid = req.user;
+  const userid = req.userid;
   const friendid = req.body.friend_id;
 
   if (!friendid)
@@ -666,7 +666,7 @@ app.post("/api/confirmFriend", async (req, res) => {
 });
 
 app.get("/api/getFriends/:type", async (req, res) => {
-  const userid = req.user;
+  const userid = req.userid;
   const type = req.params.type;
 
   if (!userid)
@@ -719,6 +719,34 @@ app.get("/api/getFriends/:type", async (req, res) => {
       status: "invalid",
     });
   }
+});
+
+app.delete("/api/deleteFriend/:id", async (req, res) => {
+  const userid = req.userid;
+  const friendid = req.params.id;
+
+  if (!userid)
+    return res.json({
+      status: "no user",
+    });
+
+  const result = await db.query(
+    `
+    DELETE FROM friends
+    WHERE (user_id = $1 AND friend_id = $2)
+    OR (friend_id = $1 AND user_id = $2)
+    RETURNING *`,
+    [userid, friendid],
+  );
+
+  if (result.rows.length == 0)
+    return res.json({
+      status: "not found",
+    });
+
+  res.json({
+    status: "ok",
+  });
 });
 
 const PORT = process.env.PORT || 3000;
