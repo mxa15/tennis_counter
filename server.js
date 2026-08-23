@@ -69,20 +69,36 @@ app.get("/view_match", (req, res) => {
   res.sendFile(path.join(__dirname, "html_files", "view_match.html"));
 });
 
-app.get("/api/check_user", async (req, res) => {
+app.use("/api", async (req, res, next) => {
   const sessionid = req.cookies?.sessionID;
 
-  if (!sessionid) return res.json({ failed: true });
+  if (!sessionid) {
+    req.user = null;
+    return next();
+  }
+
+  const result = await db.query(
+    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
+    [sessionid],
+  );
+
+  req.user = result.rows[0].user_id || null;
+
+  next();
+});
+
+app.get("/api/check_user", async (req, res) => {
+  const userid = req.user;
+
+  if (!userid) return res.json({ failed: true });
 
   const user = await db.query(
     `
-    SELECT users.id, users.username
-    FROM sessionIDs
-    JOIN users
-    ON users.id = sessionIDs.user_id
-    WHERE sessionIDs.session_id = $1
+    SELECT id, username
+    FROM users
+    WHERE id = $1
     `,
-    [sessionid],
+    [userid],
   );
 
   if (user.rows.length === 0) {
@@ -215,9 +231,9 @@ app.get("/api/logout", (req, res) => {
 });
 
 app.delete("/api/delete_user", async (req, res) => {
-  const sessionid = req.cookies?.sessionID;
+  const userid = req.user;
 
-  if (!sessionid) {
+  if (!userid) {
     return res.json({
       status: "not found",
     });
@@ -227,12 +243,8 @@ app.delete("/api/delete_user", async (req, res) => {
     `
     SELECT * 
     FROM users
-    WHERE id = (
-        SELECT user_id
-        FROM sessionIDs
-        WHERE session_id = $1
-    )`,
-    [sessionid],
+    WHERE id = $1`,
+    [userid],
   );
 
   const password_correct = await bcrypt.compare(
@@ -249,26 +261,18 @@ app.delete("/api/delete_user", async (req, res) => {
   await db.query(
     `
     DELETE FROM matches
-    WHERE owner_id = (
-        SELECT user_id
-        FROM sessionIDs
-        WHERE session_id = $1
-    )
+    WHERE owner_id = $1
     `,
-    [sessionid],
+    [userid],
   );
 
   const deleted = await db.query(
     `
     DELETE FROM users
-    WHERE id = (
-        SELECT user_id
-        FROM sessionIDs
-        WHERE session_id = $1
-    )
+    WHERE id = $1
     RETURNING id
     `,
-    [sessionid],
+    [userid],
   );
 
   if (deleted.rows.length === 0) {
@@ -285,25 +289,14 @@ app.delete("/api/delete_user", async (req, res) => {
 });
 
 app.post("/api/creatematch", async (req, res) => {
-  const sessionid = req.cookies?.sessionID;
-  if (!sessionid) {
-    return res.json({
-      status: "no user",
-    });
-  }
-  const result = await db.query(
-    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
-    [sessionid],
-  );
-
-  if (result.rows.length === 0) {
+  const ownerid = req.user;
+  if (!ownerid) {
     return res.json({
       status: "no user",
     });
   }
 
   let code = null;
-  const ownerid = result.rows[0].user_id;
 
   while (true) {
     try {
@@ -344,7 +337,7 @@ app.post("/api/creatematch", async (req, res) => {
 });
 
 app.get("/api/getmatchdata", async (req, res) => {
-  const sessionid = req.cookies?.sessionID;
+  const ownerid = req.user;
   const pageUrl = req.get("X-page-URL");
 
   if (!pageUrl) {
@@ -354,23 +347,6 @@ app.get("/api/getmatchdata", async (req, res) => {
   }
 
   const matchcode = pageUrl.split("/")[2];
-  if (!sessionid) {
-    return res.json({
-      status: "no user",
-    });
-  }
-  const result = await db.query(
-    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
-    [sessionid],
-  );
-
-  if (result.rows.length === 0) {
-    return res.json({
-      status: "no user",
-    });
-  }
-
-  const ownerid = result.rows[0].user_id;
 
   const match = await db.query(
     "SELECT * FROM matches WHERE code = $1 AND owner_id = $2",
@@ -390,10 +366,10 @@ app.get("/api/getmatchdata", async (req, res) => {
 });
 
 app.post("/api/updatematch", async (req, res) => {
-  const sessionid = req.cookies?.sessionID;
+  const user_id = req.user;
   const pageUrl = req.get("X-page-URL");
 
-  if (!sessionid) {
+  if (!user_id) {
     return res.json({
       status: "no user",
     });
@@ -407,21 +383,6 @@ app.post("/api/updatematch", async (req, res) => {
 
   const matchcode = pageUrl.split("/")[2];
 
-  const result = await db.query(
-    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
-    [sessionid],
-  );
-
-  if (result.rows.length === 0) {
-    return res.json({
-      status: "no user",
-    });
-  }
-
-  const user_id = result.rows[0].user_id;
-
-  let match = null;
-
   await db.query(
     `
     UPDATE matches
@@ -430,7 +391,6 @@ app.post("/api/updatematch", async (req, res) => {
         course = $3
     WHERE code = $4
     AND owner_id = $5
-    RETURNING *
     `,
     [
       req.body.status,
@@ -447,7 +407,7 @@ app.post("/api/updatematch", async (req, res) => {
 });
 
 app.get("/api/match_return", async (req, res) => {
-  const sessionid = req.cookies?.sessionID;
+  const userid = req.user;
   const pageUrl = req.get("X-page-URL");
 
   if (!pageUrl) {
@@ -457,20 +417,18 @@ app.get("/api/match_return", async (req, res) => {
   }
 
   const matchcode = pageUrl.split("/")[2];
-  if (!sessionid) {
+  if (!userid) {
     return res.json({
       status: "no user",
     });
   }
   const result = await db.query(
     `
-    SELECT matches.*
-    FROM sessionIDs
-    JOIN matches
-    ON sessionIDs.user_id = matches.owner_id
-    WHERE sessionIDs.session_id = $1 AND matches.code = $2
+    SELECT *
+    FROM matches
+    WHERE owner_id = $1 AND matches.code = $2
     `,
-    [sessionid, matchcode],
+    [userid, matchcode],
   );
 
   if (result.rows.length === 0) {
@@ -532,24 +490,14 @@ app.post("/api/getmatches", async (req, res) => {
     if (typeof id === "number") {
       output_ids.push(id);
     } else if (id == "my_id") {
-      const sessionid = req.cookies?.sessionID;
-      if (!sessionid) {
+      const userid = req.user;
+      if (!userid) {
         return res.json({
           status: "no user",
         });
       }
 
-      const my_id = await db.query(
-        "SELECT user_id FROM sessionIDs WHERE session_id = $1",
-        [sessionid],
-      );
-
-      if (my_id.rows.length == 0) {
-        return res.json({
-          status: "no user",
-        });
-      }
-      output_ids.push(my_id.rows[0].user_id);
+      output_ids.push(userid);
     }
   }
   if (output_ids.length == 0) {
@@ -576,26 +524,13 @@ app.post("/api/getmatches", async (req, res) => {
 
 app.get("/api/getUsersByName/:name", async (req, res) => {
   const name = req.params.name;
-  const sessionid = req.cookies.sessionID;
+  const userid = req.user;
 
-  if (!sessionid) {
+  if (!userid) {
     return res.json({
       status: "no user",
     });
   }
-
-  const user = await db.query(
-    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
-    [sessionid],
-  );
-
-  if (user.rows.length == 0) {
-    return res.json({
-      status: "no user",
-    });
-  }
-
-  const userid = user.rows[0].user_id;
 
   const users = await db.query(
     `
@@ -625,7 +560,7 @@ app.get("/api/getUsersByName/:name", async (req, res) => {
 });
 
 app.post("/api/addfriend", async (req, res) => {
-  const sessionid = req.cookies?.sessionID;
+  const userid = req.user;
   const friendid = req.body?.friendID;
 
   if (!friendid) {
@@ -634,18 +569,7 @@ app.post("/api/addfriend", async (req, res) => {
     });
   }
 
-  if (!sessionid) {
-    return res.json({
-      status: "no user",
-    });
-  }
-
-  const user = await db.query(
-    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
-    [sessionid],
-  );
-
-  if (user.rows.length == 0) {
+  if (!userid) {
     return res.json({
       status: "no user",
     });
@@ -658,7 +582,7 @@ app.post("/api/addfriend", async (req, res) => {
     friends(user_id, friend_id)
     VALUES($1, $2)
     `,
-      [user.rows[0].user_id, friendid],
+      [userid, friendid],
     );
   } catch (error) {
     console.error(error);
@@ -672,20 +596,9 @@ app.post("/api/addfriend", async (req, res) => {
 });
 
 app.get("/api/getfriendreq", async (req, res) => {
-  const sessionid = req.cookies?.sessionID;
+  const userid = req.user;
 
-  if (!sessionid) {
-    return res.json({
-      status: "no user",
-    });
-  }
-
-  const user = await db.query(
-    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
-    [sessionid],
-  );
-
-  if (user.rows.length === 0) {
+  if (!userid) {
     return res.json({
       status: "no user",
     });
@@ -701,7 +614,7 @@ app.get("/api/getfriendreq", async (req, res) => {
     AND f.status = 'pending'
     ORDER BY u.username
     `,
-    [user.rows[0].user_id],
+    [userid],
   );
 
   if (result.rows.length == 0) {
@@ -717,7 +630,7 @@ app.get("/api/getfriendreq", async (req, res) => {
 });
 
 app.post("/api/confirmFriend", async (req, res) => {
-  const sessionid = req.cookies.sessionID;
+  const userid = req.user;
   const friendid = req.body.friend_id;
 
   if (!friendid)
@@ -725,22 +638,10 @@ app.post("/api/confirmFriend", async (req, res) => {
       status: "invalid",
     });
 
-  if (!sessionid)
+  if (!userid)
     return res.json({
       status: "no user",
     });
-
-  const user = await db.query(
-    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
-    [sessionid],
-  );
-
-  if (user.rows.length == 0)
-    return res.json({
-      status: "no user",
-    });
-
-  const userid = user.rows[0].user_id;
 
   const result = await db.query(
     `
@@ -765,20 +666,10 @@ app.post("/api/confirmFriend", async (req, res) => {
 });
 
 app.get("/api/getFriends/:type", async (req, res) => {
-  const sessionid = req.cookies.sessionID;
+  const userid = req.user;
   const type = req.params.type;
 
-  if (!sessionid)
-    return res.json({
-      status: "no user",
-    });
-
-  const user = await db.query(
-    "SELECT user_id FROM sessionIDs WHERE session_id = $1",
-    [sessionid],
-  );
-
-  if (user.rows.length == 0)
+  if (!userid)
     return res.json({
       status: "no user",
     });
@@ -794,7 +685,7 @@ app.get("/api/getFriends/:type", async (req, res) => {
     WHERE (user_id = $1 OR friend_id = $1)
     AND status = 'accepted'
     `,
-    [user.rows[0].user_id],
+    [userid],
   );
 
   if (result.rows.length == 0)
