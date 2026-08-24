@@ -48,6 +48,9 @@ socket.onmessage = (event) => {
     tabele.names[0].innerHTML = matchsettings.data.player1;
     tabele.names[1].innerHTML = matchsettings.data.player2;
   }
+  if (type === "updateMatch") {
+    matchsettings = data.matchsettings;
+  }
 };
 
 const pointsystem = ["0", "15", "30", "40", "ad"];
