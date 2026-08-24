@@ -778,6 +778,7 @@ wss.on("connection", (socket) => {
         matchcode: data.matchcode,
         ws: socket,
       });
+      console.log("log");
 
       const match = await db.query("SELECT * FROM matches WHERE code = $1", [
         data.matchcode,
