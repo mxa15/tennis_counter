@@ -8,9 +8,6 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
-const { type } = require("os");
-const { LOADIPHLPAPI } = require("dns");
-const { log } = require("console");
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
