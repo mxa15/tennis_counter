@@ -242,7 +242,7 @@ async function shareWebsite() {
     await navigator.share({
       title: "Meine Tennis-Website",
       text: "Schau dir meine Tennis-Website an!",
-      url: window.location.href,
+      url: window.location.search,
     });
   } catch (err) {
     console.log("Teilen abgebrochen");
