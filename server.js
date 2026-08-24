@@ -808,6 +808,8 @@ function updateViewers(matchsettings) {
   );
 
   viewers.forEach((viewer) => {
+    console.log("hallo");
+
     viewer.ws.send(
       JSON.stringify({
         type: "updateMatch",
