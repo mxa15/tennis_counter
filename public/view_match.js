@@ -41,7 +41,7 @@ socket.onopen = () => {
 
 socket.onmessage = (event) => {
   const { type, data } = JSON.parse(event.data);
-  if (type === "getmatchData" || type === "updateMatch") {
+  if (type === "getmatchData") {
     matchsettings = data.matchsettings;
     console.log(matchsettings);
     update_tabelle();
