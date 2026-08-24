@@ -762,14 +762,20 @@ let matchviewers = [];
 wss.on("connection", (socket) => {
   console.log("WebSocket verbunden");
 
-  socket.on("message", (message) => {
+  socket.on("message", async (message) => {
     const { type, data } = JSON.parse(message.toString());
     if (type === "loginViewer") {
       matchviewers.push({
         matchcode: data.matchcode,
         ws: socket,
       });
-      console.log(socket);
+
+      socket.send(JSON.stringify({
+        type: "getmatchData",
+        data: {
+          matchsettings: 
+        }
+      }))
     }
   });
 
