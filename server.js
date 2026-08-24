@@ -10,6 +10,7 @@ const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const { type } = require("os");
 const { LOADIPHLPAPI } = require("dns");
+const { log } = require("console");
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -807,7 +808,7 @@ function updateViewers(matchsettings) {
   const viewers = matchviewers.filter(
     (v) => v.matchcode === matchsettings.code,
   );
-  console.log(matchsettings.code);
+  console.log(matchviewers);
 
   viewers.forEach((viewer) => {
     console.log("hallo2");
