@@ -45,8 +45,8 @@ socket.onmessage = (event) => {
     matchsettings = data.matchsettings;
     console.log(matchsettings);
     update_tabelle();
-    tabele.names[0] = matchsettings.data.player1;
-    tabele.names[1] = matchsettings.data.player2;
+    tabele.names[0].innerHTML = matchsettings.data.player1;
+    tabele.names[1].innerHTML = matchsettings.data.player2;
   }
 };
 
