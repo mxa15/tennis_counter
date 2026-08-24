@@ -41,6 +41,9 @@ socket.onopen = () => {
 
 socket.onmessage = (message) => {
   const { type, data } = JSON.parse(message.toString());
+  if (type === "getmatchData") {
+    matchsettings = data.matchsettings;
+  }
 };
 
 const pointsystem = ["0", "15", "30", "40", "ad"];
