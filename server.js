@@ -408,6 +408,8 @@ app.post("/api/updatematch", async (req, res) => {
       status: "no match",
     });
 
+  updateViewers(match.rows[0]);
+
   res.json({
     status: "ok",
   });
