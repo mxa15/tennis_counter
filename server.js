@@ -409,6 +409,7 @@ app.post("/api/updatematch", async (req, res) => {
     });
 
   updateViewers(match.rows[0]);
+  console.log("hallo");
 
   res.json({
     status: "ok",
