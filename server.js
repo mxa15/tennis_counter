@@ -807,7 +807,7 @@ function updateViewers(matchsettings) {
   const viewers = matchviewers.filter(
     (v) => v.matchcode === matchsettings.code,
   );
-  console.log(viewers);
+  console.log(matchsettings.code);
 
   viewers.forEach((viewer) => {
     console.log("hallo2");
