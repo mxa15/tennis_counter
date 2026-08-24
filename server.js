@@ -392,6 +392,7 @@ app.post("/api/updatematch", async (req, res) => {
         course = $3
     WHERE code = $4
     AND owner_id = $5
+    RETURNING *
     `,
     [
       req.body.status,
