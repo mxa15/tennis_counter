@@ -105,6 +105,9 @@ async function get_friends() {
   const data = await response.json();
 
   if (data.status !== "ok") return console.log(data.status);
+  const output = document.getElementById("friendoutput");
+
+  output.innerHTML = "";
 
   data.friends.forEach((friend) => {
     add_friendelement(friend.username, friend.id);
@@ -518,4 +521,8 @@ async function confirmFriend(id) {
   });
   const data = await response.json();
   console.log(data.status);
+
+  if (data.status == "ok") {
+    get_friends();
+  }
 }
