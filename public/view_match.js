@@ -238,6 +238,8 @@ ${c2}<br>`;
 
 async function shareWebsite() {
   try {
+    console.log("guuut");
+
     await navigator.share({
       title: "Meine Tennis-Website",
       text: "Schau dir meine Tennis-Website an!",
