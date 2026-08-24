@@ -8,6 +8,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const { type } = require("os");
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -792,13 +793,20 @@ wss.on("connection", (socket) => {
   });
 });
 
-function updateviewers(matchsettings) {
+function updateViewers(matchsettings) {
   const viewers = matchviewers.filter(
     (v) => v.matchcode === matchsettings.code,
   );
 
   viewers.forEach((viewer) => {
-    viewer.ws.send(JSON.parse(matchsettings));
+    viewer.ws.send(
+      JSON.stringify({
+        type: "updateMatch",
+        data: {
+          matchsettings: matchsettings,
+        },
+      }),
+    );
   });
 }
 
