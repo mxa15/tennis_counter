@@ -1,7 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 
 const matchcode = params.get("code");
-const loading_screen = document.getElementById("loading");
+const loadin_screen = document.getElementById("loading");
 let matchsettings = null;
 const tabele = {
   servers: [
@@ -44,7 +44,6 @@ socket.onmessage = (event) => {
   if (type === "getmatchData") {
     matchsettings = data.matchsettings;
     console.log(matchsettings);
-    update_tabelle();
   }
 };
 
