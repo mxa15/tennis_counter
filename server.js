@@ -770,14 +770,18 @@ wss.on("connection", (socket) => {
         ws: socket,
       });
 
-      const match = await db.query("SELECT * FROM matches WHERE code = $1", [data.matchcode])
+      const match = await db.query("SELECT * FROM matches WHERE code = $1", [
+        data.matchcode,
+      ]);
 
-      socket.send(JSON.stringify({
-        type: "getmatchData",
-        data: {
-          matchsettings: 
-        }
-      }))
+      socket.send(
+        JSON.stringify({
+          type: "getmatchData",
+          data: {
+            matchsettings: match.rows[0],
+          },
+        }),
+      );
     }
   });
 
