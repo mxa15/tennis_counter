@@ -44,6 +44,7 @@ socket.onmessage = (event) => {
   if (type === "getmatchData") {
     matchsettings = data.matchsettings;
     console.log(matchsettings);
+    update_tabelle();
   }
 };
 
