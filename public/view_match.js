@@ -43,6 +43,7 @@ socket.onmessage = (message) => {
   const { type, data } = JSON.parse(message.toString());
   if (type === "getmatchData") {
     matchsettings = data.matchsettings;
+    console.log(matchsettings);
   }
 };
 
