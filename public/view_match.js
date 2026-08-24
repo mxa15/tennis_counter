@@ -39,8 +39,8 @@ socket.onopen = () => {
   );
 };
 
-socket.onmessage = (message) => {
-  const { type, data } = JSON.parse(message.toString());
+socket.onmessage = (event) => {
+  const { type, data } = JSON.parse(event.data);
   if (type === "getmatchData") {
     matchsettings = data.matchsettings;
     console.log(matchsettings);
