@@ -238,13 +238,13 @@ ${c2}<br>`;
 
 async function shareWebsite() {
   console.log("guuut");
-  try {
+  if (navigation.share) {
     await navigator.share({
       title: "Meine Tennis-Website",
       text: "Schau dir meine Tennis-Website an!",
       url: window.location.href,
     });
-  } catch (err) {
-    console.log("Teilen abgebrochen");
+  } else {
+    alert("Teilen abgebrochen");
   }
 }
