@@ -408,7 +408,6 @@ app.post("/api/updatematch", async (req, res) => {
     });
 
   updateViewers(match.rows[0]);
-  console.log("hallo");
 
   res.json({
     status: "ok",
@@ -778,7 +777,6 @@ wss.on("connection", (socket) => {
         matchcode: data.matchcode,
         ws: socket,
       });
-      console.log("log");
 
       const match = await db.query("SELECT * FROM matches WHERE code = $1", [
         data.matchcode,
@@ -806,11 +804,8 @@ function updateViewers(matchsettings) {
   const viewers = matchviewers.filter(
     (v) => v.matchcode === matchsettings.code,
   );
-  console.log(matchviewers);
 
   viewers.forEach((viewer) => {
-    console.log("hallo2");
-
     viewer.ws.send(
       JSON.stringify({
         type: "updateMatch",
