@@ -383,7 +383,7 @@ app.post("/api/updatematch", async (req, res) => {
 
   const matchcode = pageUrl.split("/")[2];
 
-  const result = await db.query(
+  await db.query(
     `
     UPDATE matches
     SET status = $1,
@@ -391,7 +391,6 @@ app.post("/api/updatematch", async (req, res) => {
         course = $3
     WHERE code = $4
     AND owner_id = $5
-    RETURNING *
     `,
     [
       req.body.status,
@@ -401,10 +400,6 @@ app.post("/api/updatematch", async (req, res) => {
       user_id,
     ],
   );
-
-  if (result.rows.length > 0) {
-    updateviewers(result.rows[0]);
-  }
 
   res.json({
     status: "ok",
@@ -803,12 +798,7 @@ function updateviewers(matchsettings) {
   );
 
   viewers.forEach((viewer) => {
-    viewer.ws.send(JSON.stringify({
-      type: "getmatchData",
-      data: {
-        matchsettings: matchsettings,
-      },
-    }));
+    viewer.ws.send(JSON.parse(matchsettings));
   });
 }
 
