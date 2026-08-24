@@ -1,5 +1,6 @@
-const url = window.location.pathname.split("/");
-const code = url[2];
+const params = new URLSearchParams(window.location.search);
+
+const matchcode = params.get("code");
 const loadin_screen = document.getElementById("loading");
 let matchsettings = null;
 const tabele = {
@@ -28,6 +29,14 @@ const socket = new WebSocket(`${protocol}//${location.host}`);
 
 socket.onopen = () => {
   console.log("WebSocket verbunden");
+  socket.send(
+    JSON.stringify({
+      type: "loginViewer",
+      data: {
+        matchcode: matchcode,
+      },
+    }),
+  );
 };
 
 const pointsystem = ["0", "15", "30", "40", "ad"];
