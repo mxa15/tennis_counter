@@ -39,6 +39,10 @@ socket.onopen = () => {
   );
 };
 
+socket.onmessage = (message) => {
+  const { type, data } = JSON.parse(message.toString());
+};
+
 const pointsystem = ["0", "15", "30", "40", "ad"];
 
 function update_tabelle() {
