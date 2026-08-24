@@ -384,7 +384,7 @@ app.post("/api/updatematch", async (req, res) => {
 
   const matchcode = pageUrl.split("/")[2];
 
-  await db.query(
+  const match = await db.query(
     `
     UPDATE matches
     SET status = $1,
@@ -402,6 +402,11 @@ app.post("/api/updatematch", async (req, res) => {
       user_id,
     ],
   );
+
+  if (match.rows.length == 0)
+    return res.json({
+      status: "no match",
+    });
 
   res.json({
     status: "ok",
