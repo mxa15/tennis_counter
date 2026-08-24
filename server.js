@@ -792,6 +792,8 @@ wss.on("connection", (socket) => {
   });
 });
 
+function updateviewers
+
 server.listen(PORT, () => {
   console.log("server läuft auf port:" + PORT);
 });
