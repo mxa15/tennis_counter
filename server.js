@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const { type } = require("os");
+const { LOADIPHLPAPI } = require("dns");
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -806,9 +807,10 @@ function updateViewers(matchsettings) {
   const viewers = matchviewers.filter(
     (v) => v.matchcode === matchsettings.code,
   );
+  console.log("hh");
 
   viewers.forEach((viewer) => {
-    console.log("hallo");
+    console.log("hallo2");
 
     viewer.ws.send(
       JSON.stringify({
