@@ -792,7 +792,15 @@ wss.on("connection", (socket) => {
   });
 });
 
-function updateviewers(matchsettings) {}
+function updateviewers(matchsettings) {
+  const viewers = matchviewers.filter(
+    (v) => v.matchcode === matchsettings.code,
+  );
+
+  viewers.forEach((viewer) => {
+    viewer.ws.send(JSON.parse(matchsettings));
+  });
+}
 
 server.listen(PORT, () => {
   console.log("server läuft auf port:" + PORT);
