@@ -50,6 +50,8 @@ socket.onmessage = (event) => {
   }
   if (type === "updateMatch") {
     matchsettings = data.matchsettings;
+    update_tabelle();
+    console.log("update");
   }
 };
 
