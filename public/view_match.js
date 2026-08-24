@@ -39,6 +39,8 @@ socket.onopen = () => {
   );
 };
 
+const git = "hallo";
+
 const pointsystem = ["0", "15", "30", "40", "ad"];
 
 function update_tabelle() {
