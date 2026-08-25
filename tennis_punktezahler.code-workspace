@@ -14,4 +14,11 @@
       ],
     },
   },
+  "keybindings": [
+    {
+      "key": "ctrl+shift+u",
+      "command": "workbench.action.tasks.runTask",
+      "args": "npm push",
+    },
+  ],
 }
