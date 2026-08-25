@@ -445,7 +445,7 @@ async function shareMatch() {
     await navigator.share({
       title: "Meine Tennis-Website",
       text: "Schau dir meine Tennis-Website an!",
-      url: "",
+      url: viewURL,
     });
   } catch (err) {
     console.log("Teilen abgebrochen");
