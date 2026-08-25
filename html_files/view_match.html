@@ -44,6 +44,28 @@
       <button id="home" class="btns" onclick="location.href = '/startseite'">
         <img src="/public/home.png" alt="home" id="homeimg" />
       </button>
+      <button
+        class="tabButton"
+        onclick="
+          document.querySelector('.border-bottom').classList.remove('_2');
+          document.getElementById('courseTab').style.display = 'block';
+          document.getElementById('infoTab').style.display = 'none';
+        "
+      >
+        spielverlauf
+      </button>
+      <button
+        class="tabButton"
+        id="infotabselector"
+        onclick="
+          document.querySelector('.border-bottom').classList.add('_2');
+          document.getElementById('courseTab').style.display = 'none';
+          document.getElementById('infoTab').style.display = 'block';
+        "
+      >
+        info
+      </button>
+      <div class="border-bottom"></div>
     </header>
     <div id="loading">
       <div class="spinner"></div>
