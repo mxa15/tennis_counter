@@ -206,7 +206,9 @@ img {
   display: grid;
   grid-template-columns: 150px 150px;
   background: white;
-  gap: 1px;
+  gap: 3px;
+  width: auto;
+  height: auto;
 }
 
 #info span {
