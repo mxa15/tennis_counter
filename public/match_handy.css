@@ -208,7 +208,7 @@ img {
 }
 
 #info > span:nth-child(odd) {
-  color: darkgray;
+  background: darkgray;
 }
 
 .rotate {
