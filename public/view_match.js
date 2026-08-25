@@ -41,7 +41,15 @@ socket.onopen = () => {
 
 socket.onmessage = (event) => {
   const { type, data } = JSON.parse(event.data);
+  if (type === "noMatch") {
+    window.location.href = "/startseite";
+    return;
+  }
   if (type === "getmatchData" || type === "updateMatch") {
+    if (!data?.matchsettings) {
+      window.location.href = "/startseite";
+      return;
+    }
     matchsettings = data.matchsettings;
     console.log(matchsettings);
     update_tabelle();

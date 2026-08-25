@@ -782,6 +782,11 @@ wss.on("connection", (socket) => {
         data.matchcode,
       ]);
 
+      if (match.rows.length === 0) {
+        socket.send(JSON.stringify({ type: "noMatch" }));
+        return;
+      }
+
       socket.send(
         JSON.stringify({
           type: "getmatchData",
