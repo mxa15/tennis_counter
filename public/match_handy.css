@@ -183,6 +183,10 @@ img {
   background: blue;
 }
 
+.border-bottom._2 {
+  left: 50%;
+}
+
 #course {
   font-family: monospace;
   padding-top: 88vh;
