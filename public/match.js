@@ -92,7 +92,7 @@ matchcode: ${matchsettings.code}.<br>
 Satz: bis ${matchsettings.data.set}.<br>
 Gewinnsätze: ${setToWin}.<br>
 Mit Vorteil: ${withAdvantage}.<br>
-${lastSet}.`;
+Letzter Satz: ${lastSet}.`;
 }
 
 getdata();
