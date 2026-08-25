@@ -205,7 +205,7 @@ img {
   font-size: 2vh;
   display: grid;
   grid-template-columns: 50% 50%;
-  width: 300px;
+  width: 100%;
   height: auto;
 }
 
