@@ -176,6 +176,11 @@ img {
   height: auto;
 }
 
+#info span {
+  background: black;
+  padding: 5px;
+}
+
 .rotate {
   animation: drehen 0.6s ease;
 }
