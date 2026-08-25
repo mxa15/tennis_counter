@@ -58,6 +58,7 @@
         onclick="
           document.querySelector('.border-bottom').classList.remove('_2');
           document.getElementById('courseTab').style.display = 'block';
+          document.getElementById('infoTab').style.display = 'none';
         "
       >
         spielverlauf
@@ -65,7 +66,11 @@
       <button
         class="tabButton"
         id="infotabselector"
-        onclick="document.querySelector('.border-bottom').classList.add('_2')"
+        onclick="
+          document.querySelector('.border-bottom').classList.add('_2');
+          document.getElementById('courseTab').style.display = 'block';
+          document.getElementById('infoTab').style.display = 'none';
+        "
       >
         info
       </button>
