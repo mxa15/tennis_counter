@@ -209,6 +209,10 @@ img {
   gap: 1px;
 }
 
+#info span {
+  background: black;
+}
+
 .rotate {
   animation: drehen 0.6s ease;
 }
