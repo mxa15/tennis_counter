@@ -167,14 +167,14 @@ img {
   height: 30px;
   border: 0;
   background: transparent;
-  width: 45%;
+  width: 49%;
   margin: 0;
   text-align: center;
 }
 
 #border-bottom {
   position: absolute;
-  left: 49%;
+  left: 45%;
   height: 3px;
   width: 45%;
   background: blue;
