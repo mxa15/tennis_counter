@@ -205,6 +205,11 @@ img {
   font-size: 2vh;
 }
 
+.match-info span {
+  display: inline-block;
+  width: 120px;
+}
+
 .rotate {
   animation: drehen 0.6s ease;
 }
