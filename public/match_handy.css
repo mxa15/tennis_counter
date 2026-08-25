@@ -176,7 +176,8 @@ img {
 #border-bottom {
   position: absolute;
   left: 50%;
-  height: 3px;
+  top: -4px;
+  height: 4px;
   width: 50%;
   background: blue;
 }
