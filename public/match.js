@@ -438,14 +438,14 @@ async function server_return() {
   update_tabelle(false);
 }
 
-function shareMatch() {
+async function shareMatch() {
   try {
-        await navigator.share({
-            title: "Meine Tennis-Website",
-            text: "Schau dir meine Tennis-Website an!",
-            url: window.location.href
-        });
-    } catch (err) {
-        console.log("Teilen abgebrochen");
-    }
+    await navigator.share({
+      title: "Meine Tennis-Website",
+      text: "Schau dir meine Tennis-Website an!",
+      url: window.location.href,
+    });
+  } catch (err) {
+    console.log("Teilen abgebrochen");
+  }
 }
