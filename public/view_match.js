@@ -58,6 +58,7 @@ socket.onmessage = (event) => {
     update_tabelle();
     tabele.names[0].innerHTML = matchsettings.data.player1;
     tabele.names[1].innerHTML = matchsettings.data.player2;
+    loadin_screen.style.display = "none";
 
     const setToWin = matchsettings.data.max_sets == 3 ? 2 : 3;
     const withAdvantage = matchsettings.data.advantage ? "ja" : "nein";
