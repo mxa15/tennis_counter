@@ -144,11 +144,11 @@ img {
 
 #border-bottom {
   position: fixed;
-  left: 50%;
+  left: 0;
   top: 100px;
   transition: left 0.4s ease;
   height: 4px;
-  width: 50%;
+  width: 200px;
   background: blue;
 }
 
