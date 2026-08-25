@@ -82,9 +82,7 @@ async function getdata() {
   }
 
   const setToWin = matchsettings.data.max_sets == 3 ? 2 : 3;
-  const withAdvantage = matchsettings.data.advantage
-    ? "mit Vorteil"
-    : "ohne Vorteil";
+  const withAdvantage = matchsettings.data.advantage ? "ja" : "nein";
   const lastSet =
     matchsettings.data.third_set == "set"
       ? "der letzte Satz ist ein normaler Satz"
