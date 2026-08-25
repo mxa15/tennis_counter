@@ -223,7 +223,7 @@ img {
   background: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
   border: 2px solid white;
-  border-radius: 7px;
+  border-radius: 15px;
 }
 
 .rotate {
