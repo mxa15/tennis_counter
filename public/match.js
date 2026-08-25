@@ -445,7 +445,8 @@ async function shareMatch() {
     await navigator.share({
       title: "Live Tennis Spiel",
       text: `schau dir das Tennis Spiel zwischen ${matchsettings.data.player1} und ${matchsettings.data.player2} live an.
-klicke auf diesen Link ➡️${viewURL}`,
+klicke auf diesen Link ➡️`,
+      url: viewURL,
     });
   } catch (err) {
     console.log("Teilen abgebrochen");
