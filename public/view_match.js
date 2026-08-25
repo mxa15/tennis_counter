@@ -22,6 +22,13 @@ const tabele = {
   ],
   game: [document.getElementById("game1"), document.getElementById("game2")],
 };
+const header = document.querySelector("header");
+const info = document.getElementById("info");
+
+const observer = new ResizeObserver(() => {
+  info.style.marginTop = header.offsetHeight + 30 + "px";
+  console.log(header.offsetHeight);
+});
 
 const protocol = location.protocol === "https:" ? "wss:" : "ws:";
 
