@@ -216,9 +216,13 @@ img {
 }
 
 #shareBtn {
-  width: 100%;
+  width: 80%;
   height: 30px;
   font-size: 20px;
+  margin-left: 10%;
+  background: white;
+  color: black;
+  border-radius: 7px;
 }
 
 .rotate {
