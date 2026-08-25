@@ -29,7 +29,7 @@ const header = document.querySelector("header");
 const info = document.getElementById("info");
 
 const observer = new ResizeObserver(() => {
-  info.style.marginTop = header.offsetHeight;
+  info.style.marginTop = header.offsetHeight + 30 + "px";
   console.log(header.offsetHeight);
 });
 
