@@ -25,6 +25,8 @@ const pointbtn1 = document.getElementById("point1");
 const pointbtn2 = document.getElementById("point2");
 const returnbtn = document.getElementById("return");
 const returnimg = document.getElementById("returnimg");
+const header = document.querySelector("header");
+const info = document.getElementById("info");
 
 returnbtn.addEventListener("click", () => {
   returnimg.classList.remove("rotate");
