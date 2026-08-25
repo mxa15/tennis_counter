@@ -88,11 +88,11 @@ async function getdata() {
       ? "normaler Satz"
       : "Tiebreak bis " + matchsettings.data.third_set;
   info.innerHTML = `
-<span>Matchcode:</span> ${matchsettings.code}<br>
-<span>Satz:</span> bis ${matchsettings.data.set}<br>
-<span>Gewinnsätze:</span> ${setToWin}<br>
-<span>Mit Vorteil:</span> ${withAdvantage}<br>
-<span>Letzter Satz:</span> ${lastSet}`;
+<span>Matchcode:</span> <span>${matchsettings.code}</span>
+<span>Satz:</span> <span>bis ${matchsettings.data.set}</span>
+<span>Gewinnsätze:</span> <span>${setToWin}</span>
+<span>Mit Vorteil:</span> <span>${withAdvantage}</span>
+<span>Letzter Satz:</span> <span>${lastSet}</span>`;
 }
 
 getdata();
