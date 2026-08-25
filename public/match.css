@@ -172,7 +172,7 @@ img {
   font-size: 2vh;
   display: grid;
   grid-template-columns: 50% 50%;
-  width: 100%;
+  width: 300px;
   height: auto;
 }
 
