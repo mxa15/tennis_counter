@@ -31,6 +31,8 @@ const observer = new ResizeObserver(() => {
   console.log(header.offsetHeight);
 });
 
+observer.observe(header);
+
 const protocol = location.protocol === "https:" ? "wss:" : "ws:";
 
 const socket = new WebSocket(`${protocol}//${location.host}`);
