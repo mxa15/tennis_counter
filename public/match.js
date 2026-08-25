@@ -443,7 +443,7 @@ async function shareMatch() {
   const viewURL = url.origin + "/view_match?code=" + matchsettings.code;
   try {
     await navigator.share({
-      title: "Meine Tennis-Website",
+      title: "Live Tennis Spiel",
       text: "Schau dir meine Tennis-Website an!",
       url: viewURL,
     });
