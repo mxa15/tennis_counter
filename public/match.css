@@ -155,6 +155,10 @@ img {
   background: blue;
 }
 
+.border-bottom._2 {
+  left: 200px;
+}
+
 #course {
   font-family: monospace;
   padding-top: 150px;
