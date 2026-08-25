@@ -28,6 +28,10 @@ const returnimg = document.getElementById("returnimg");
 const header = document.querySelector("header");
 const info = document.getElementById("info");
 
+const observer = new ResizeObserver(() => {
+  info.style.marginTop = header.offsetHeight;
+});
+
 returnbtn.addEventListener("click", () => {
   returnimg.classList.remove("rotate");
   void returnimg.offsetWidth;
