@@ -80,6 +80,8 @@ async function getdata() {
   if (matchsettings.status == "finished") {
     finish_match();
   }
+  info.innerHTML = `
+matchcode: ${matchsettings.code}`;
 }
 
 getdata();
