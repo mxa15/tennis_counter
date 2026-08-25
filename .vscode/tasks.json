@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm push",
+      "type": "shell",
+      "command": "npm run push",
+      "problemMatcher": []
+    }
+  ]
+}
