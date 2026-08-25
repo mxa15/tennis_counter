@@ -198,6 +198,11 @@ img {
   margin-left: 5px;
 }
 
+#info {
+  font-family: monospace;
+  margin: 20px;
+}
+
 .rotate {
   animation: drehen 0.6s ease;
 }
