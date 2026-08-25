@@ -53,7 +53,14 @@
       <button id="home" class="btns" onclick="location.href = '/startseite'">
         <img src="/public/home.png" alt="home" id="homeimg" />
       </button>
-      <button class="tabButton">spielverlauf</button>
+      <button
+        class="tabButton"
+        onclick="
+          document.querySelector('.border-bottom').classList.remove('_2')
+        "
+      >
+        spielverlauf
+      </button>
       <button
         class="tabButton"
         id="infotabselector"
