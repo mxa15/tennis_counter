@@ -138,6 +138,10 @@ img {
   padding-bottom: 4px;
 }
 
+#infotabselector {
+  left: 200px;
+}
+
 #border-bottom {
   position: fixed;
   left: 50%;
