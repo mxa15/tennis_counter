@@ -88,13 +88,13 @@ async function getdata() {
   const lastSet =
     matchsettings.data.third_set == "set"
       ? "der letzte Satz ist ein normaler Satz"
-      : "der letzte Satz ist ein Tiebreak bis" + matchsettings.data.third_set;
+      : "der letzte Satz ist ein Tiebreak bis " + matchsettings.data.third_set;
   info.innerHTML = `
-matchcode: ${matchsettings.code}<br>
-ein Satz geht bis ${matchsettings.data.set}<br>
-wer als erstes ${setToWin} Sätze gewinnt hat gewonnen<br>
-${withAdvantage}<br>
-${lastSet}`;
+matchcode: ${matchsettings.code}.<br>
+ein Satz geht bis ${matchsettings.data.set}.<br>
+wer als erstes ${setToWin} Sätze gewinnt hat gewonnen.<br>
+${withAdvantage}.<br>
+${lastSet}.`;
 }
 
 getdata();
