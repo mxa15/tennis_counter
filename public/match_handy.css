@@ -180,7 +180,7 @@ img {
   height: 4px;
   width: 50%;
   background: blue;
-  z-index: 200;
+  z-index: 500;
 }
 
 #course {
