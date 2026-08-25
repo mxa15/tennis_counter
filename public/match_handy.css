@@ -173,7 +173,7 @@ img {
 }
 
 #border-bottom {
-  position: absolute;
+  position: fixed;
   height: 3px;
   width: 45%;
   background: blue;
