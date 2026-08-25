@@ -439,11 +439,12 @@ async function server_return() {
 }
 
 async function shareMatch() {
+  const url = new URL(window.location.href);
   try {
     await navigator.share({
       title: "Meine Tennis-Website",
       text: "Schau dir meine Tennis-Website an!",
-      url: window.location.href,
+      url: "",
     });
   } catch (err) {
     console.log("Teilen abgebrochen");
