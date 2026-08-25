@@ -2,6 +2,7 @@ const params = new URLSearchParams(window.location.search);
 
 const matchcode = params.get("code");
 const loadin_screen = document.getElementById("loading");
+loadin_screen.style.display = "flex";
 let matchsettings = null;
 const tabele = {
   servers: [
