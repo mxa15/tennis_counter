@@ -167,6 +167,7 @@ img {
   height: 50px;
   border: 0;
   border-bottom: 2px solid rgb(0, 4, 255);
+  background: transparent;
 }
 
 #course {
