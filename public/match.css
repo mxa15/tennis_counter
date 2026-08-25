@@ -168,6 +168,12 @@ img {
 #info {
   font-family: monospace;
   margin: 20px;
+  color: white;
+  font-size: 2vh;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 100%;
+  height: auto;
 }
 
 .rotate {
