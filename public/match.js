@@ -93,7 +93,8 @@ async function getdata() {
 matchcode: ${matchsettings.code}<br>
 ein Satz geht bis ${matchsettings.data.set}<br>
 wer als erstes ${setToWin} Sätze gewinnt hat gewonnen<br>
-${withAdvantage}<br>`;
+${withAdvantage}<br>
+${lastSet}`;
 }
 
 getdata();
