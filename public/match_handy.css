@@ -170,8 +170,8 @@ img {
   width: 100px;
 }
 
-.border-bottom {
-  height: 20px;
+#border-bottom {
+  height: 3px;
   width: 100px;
   background: blue;
 }
