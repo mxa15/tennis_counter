@@ -125,6 +125,27 @@ img {
   }
 }
 
+.tabButton {
+  font-size: 20px;
+  height: 30px;
+  border: 0;
+  background: transparent;
+  width: 49%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+#border-bottom {
+  position: fixed;
+  left: 50%;
+  transition: left 0.4s ease;
+  height: 4px;
+  width: 50%;
+  background: blue;
+}
+
 #course {
   font-family: monospace;
   padding-top: 150px;
