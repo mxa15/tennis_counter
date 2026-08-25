@@ -173,6 +173,8 @@ img {
 .border-bottom {
   position: absolute;
   height: 3px;
+  width: 100px;
+  background: blue;
 }
 
 #course {
