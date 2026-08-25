@@ -81,7 +81,8 @@ async function getdata() {
     finish_match();
   }
   info.innerHTML = `
-matchcode: ${matchsettings.code}`;
+matchcode: ${matchsettings.code}<br>
+ein Satz geht bis ${matchsettings.data.set}`;
 }
 
 getdata();
