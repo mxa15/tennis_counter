@@ -169,6 +169,8 @@ img {
   background: transparent;
   width: 45%;
   margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
 #border-bottom {
