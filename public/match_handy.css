@@ -172,7 +172,7 @@ img {
 
 .border-bottom {
   position: absolute;
-  height: 3px;
+  height: 5px;
   width: 100px;
   background: blue;
 }
