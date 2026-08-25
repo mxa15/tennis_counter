@@ -440,6 +440,7 @@ async function server_return() {
 
 async function shareMatch() {
   const url = new URL(window.location.href);
+  const viewURL = url.origin + "/view_match?code=" + matchsettings.code;
   try {
     await navigator.share({
       title: "Meine Tennis-Website",
