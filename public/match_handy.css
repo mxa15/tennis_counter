@@ -171,7 +171,6 @@ img {
 }
 
 .border-bottom {
-  position: absolute;
   height: 5px;
   width: 100px;
   background: blue;
