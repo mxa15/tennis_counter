@@ -85,13 +85,13 @@ async function getdata() {
   const withAdvantage = matchsettings.data.advantage ? "ja" : "nein";
   const lastSet =
     matchsettings.data.third_set == "set"
-      ? "der letzte Satz ist ein normaler Satz"
-      : "der letzte Satz ist ein Tiebreak bis " + matchsettings.data.third_set;
+      ? "normaler Satz"
+      : "Tiebreak bis " + matchsettings.data.third_set;
   info.innerHTML = `
 matchcode: ${matchsettings.code}.<br>
-ein Satz geht bis ${matchsettings.data.set}.<br>
-wer als erstes ${setToWin} Sätze gewinnt hat gewonnen.<br>
-${withAdvantage}.<br>
+Satz: bis ${matchsettings.data.set}.<br>
+Gewinnsätze: ${setToWin}.<br>
+Mit Vorteil: ${withAdvantage}.<br>
 ${lastSet}.`;
 }
 
