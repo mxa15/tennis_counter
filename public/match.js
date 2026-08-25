@@ -32,6 +32,8 @@ const observer = new ResizeObserver(() => {
   info.style.marginTop = header.offsetHeight;
 });
 
+observer.observe(header);
+
 returnbtn.addEventListener("click", () => {
   returnimg.classList.remove("rotate");
   void returnimg.offsetWidth;
