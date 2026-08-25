@@ -207,7 +207,7 @@ img {
   grid-template-columns: 150px 150px;
   background: white;
   gap: 3px;
-  width: auto;
+  width: 300px;
   height: auto;
 }
 
