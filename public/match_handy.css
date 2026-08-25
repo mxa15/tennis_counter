@@ -171,7 +171,7 @@ img {
 }
 
 .border-bottom {
-  height: 5px;
+  height: 20px;
   width: 100px;
   background: blue;
 }
