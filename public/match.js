@@ -81,7 +81,10 @@ async function getdata() {
     finish_match();
   }
 
-  const setToWin = matchsettings.code.max_sets == 3 ? 2 : 3;
+  const setToWin = matchsettings.data.max_sets == 3 ? 2 : 3;
+  const withAdvantage = matchsettings.data.advantage
+    ? "mit Vorteil"
+    : "ohne Vorteil";
   info.innerHTML = `
 matchcode: ${matchsettings.code}<br>
 ein Satz geht bis ${matchsettings.data.set}<br>
