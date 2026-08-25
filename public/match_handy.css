@@ -162,6 +162,13 @@ img {
   }
 }
 
+.tabButton {
+  font-size: 40px;
+  height: 50px;
+  border: 0;
+  border-bottom: 2px solid black;
+}
+
 #course {
   font-family: monospace;
   padding-top: 88vh;
