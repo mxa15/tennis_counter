@@ -235,3 +235,17 @@ ${c2}<br>`;
   p.innerHTML = output;
   window.scrollTo(0, document.body.scrollHeight);
 }
+
+async function shareMatch() {
+  const url = new URL(window.location.href);
+  const viewURL = url.origin + "/view_match?code=" + matchsettings.code;
+  try {
+    await navigator.share({
+      title: "Live Tennis Spiel",
+      text: `schau dir das Tennis Spiel zwischen ${matchsettings.data.player1} und ${matchsettings.data.player2} live an.`,
+      url: viewURL,
+    });
+  } catch (err) {
+    console.log("Teilen abgebrochen");
+  }
+}
