@@ -22,6 +22,7 @@ const tabele = {
   ],
   game: [document.getElementById("game1"), document.getElementById("game2")],
 };
+
 const header = document.querySelector("header");
 const info = document.getElementById("info");
 
