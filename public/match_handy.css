@@ -174,9 +174,9 @@ img {
   padding-bottom: 4px;
 }
 
-#border-bottom {
+.border-bottom {
   position: fixed;
-  left: 50%;
+  left: 0%;
   transition: left 0.4s ease;
   height: 4px;
   width: 50%;
