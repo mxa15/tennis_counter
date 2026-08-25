@@ -87,8 +87,8 @@ async function getdata() {
     : "ohne Vorteil";
   const lastSet =
     matchsettings.data.third_set == "set"
-      ? "der letzte Satz ist ein Tiebreak"
-      : "der letzte Satz ";
+      ? "der letzte Satz ist ein normaler Satz"
+      : "der letzte Satz ist ein Tiebreak bis" + matchsettings.data.third_set;
   info.innerHTML = `
 matchcode: ${matchsettings.code}<br>
 ein Satz geht bis ${matchsettings.data.set}<br>
