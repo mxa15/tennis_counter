@@ -80,9 +80,12 @@ async function getdata() {
   if (matchsettings.status == "finished") {
     finish_match();
   }
+
+  const setToWin = matchsettings.code.max_sets === 3 ? 2 : 3;
   info.innerHTML = `
 matchcode: ${matchsettings.code}<br>
-ein Satz geht bis ${matchsettings.data.set}`;
+ein Satz geht bis ${matchsettings.data.set}<br>
+wer als erstes ${matchsettings.data.max_sets}`;
 }
 
 getdata();
