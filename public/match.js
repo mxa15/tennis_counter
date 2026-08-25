@@ -30,6 +30,7 @@ const info = document.getElementById("info");
 
 const observer = new ResizeObserver(() => {
   info.style.marginTop = header.offsetHeight;
+  console.log(header.offsetHeight);
 });
 
 observer.observe(header);
