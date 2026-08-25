@@ -47,6 +47,19 @@ socket.onmessage = (event) => {
     update_tabelle();
     tabele.names[0].innerHTML = matchsettings.data.player1;
     tabele.names[1].innerHTML = matchsettings.data.player2;
+
+    const setToWin = matchsettings.data.max_sets == 3 ? 2 : 3;
+    const withAdvantage = matchsettings.data.advantage ? "ja" : "nein";
+    const lastSet =
+      matchsettings.data.third_set == "set"
+        ? "normaler Satz"
+        : "Tiebreak bis " + matchsettings.data.third_set;
+    info.innerHTML = `
+<span>Matchcode:</span> <span>${matchsettings.code}</span>
+<span>Satz:</span> <span>bis ${matchsettings.data.set}</span>
+<span>Gewinnsätze:</span> <span>${setToWin}</span>
+<span>Mit Vorteil:</span> <span>${withAdvantage}</span>
+<span>Letzter Satz:</span> <span>${lastSet}</span>`;
   }
 };
 
