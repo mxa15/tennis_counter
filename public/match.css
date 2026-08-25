@@ -164,6 +164,10 @@ img {
   padding-top: 150px;
 }
 
+#info {
+  font-family: monospace;
+}
+
 .rotate {
   animation: drehen 0.6s ease;
 }
