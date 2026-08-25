@@ -203,11 +203,8 @@ img {
   margin: 5px;
   color: white;
   font-size: 2vh;
-}
-
-.match-info span {
-  display: inline-block;
-  width: 120px;
+  display: grid;
+  grid-template-columns: 150px 150px;
 }
 
 .rotate {
