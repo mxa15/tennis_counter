@@ -514,8 +514,14 @@ app.post("/api/getmatches", async (req, res) => {
       status: "no match",
     });
   }
+  let matches;
   if (status === "all") {
-    const matches = await db.query(
+    matches = await db.query(
+      "SELECT * FROM matches WHERE owner_id = ANY($1) ORDER BY created_at DESC",
+      [output_ids],
+    );
+  } else {
+    matches = await db.query(
       "SELECT * FROM matches WHERE owner_id = ANY($1) ORDER BY created_at DESC",
       [output_ids],
     );
