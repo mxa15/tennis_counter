@@ -162,7 +162,7 @@ async function getmatches(ids, status) {
     },
     body: JSON.stringify({
       user_ids: ids,
-      status: 
+      status: status,
     }),
   });
   const data = await response.json();
