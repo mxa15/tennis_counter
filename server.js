@@ -522,8 +522,8 @@ app.post("/api/getmatches", async (req, res) => {
     );
   } else {
     matches = await db.query(
-      "SELECT * FROM matches WHERE owner_id = ANY($1) ORDER BY created_at DESC",
-      [output_ids],
+      "SELECT * FROM matches WHERE owner_id = ANY($1) AND status = $2 ORDER BY created_at DESC",
+      [output_ids, status],
     );
   }
 
