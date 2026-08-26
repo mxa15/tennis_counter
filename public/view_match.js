@@ -52,11 +52,6 @@ socket.onopen = () => {
 
 socket.onmessage = (event) => {
   const { type, data } = JSON.parse(event.data);
-  if (type === "matchNotFound") {
-    document.getElementById("course").textContent = "Partie nicht gefunden";
-    loadin_screen.style.display = "none";
-    return;
-  }
   if (type === "getmatchData" || type === "updateMatch") {
     matchsettings = data.matchsettings;
     console.log(matchsettings);
