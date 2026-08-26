@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "freunde",
       "partien",
       "einstellungen",
+      "profile",
     ].includes(page)
   ) {
     changesection(page);
@@ -50,14 +51,14 @@ async function set_newfrienddiv(search) {
         if (request.username.toLowerCase().startsWith(search.toLowerCase())) {
           output.innerHTML += `
             <div class="friend"  id="${request.id}">
-              <p>${request.username}</p>
+              <p>${escapeHTML(request.username)}</p>
               <button onclick="confirmFriend('${request.id}')><img src="/public/accept-user.png" alt="add" /></button>
             </div>`;
         }
       } else {
         output.innerHTML += `
           <div class="friend"  id="${request.id}">
-            <p>${request.username}</p>
+            <p>${escapeHTML(request.username)}</p>
             <button onclick="confirmFriend('${request.id}')" style="z-index: 50"><img src="/public/accept-user.png" alt="add" /></button>
           </div>`;
       }
@@ -74,7 +75,7 @@ async function set_newfrienddiv(search) {
       if (!friendrequests.some((f) => f.username == result.username)) {
         output.innerHTML += `
         <div class="friend" id="${result.id}">
-          <p>${result.username}</p>
+          <p>${escapeHTML(result.username)}</p>
           <button><img src="/public/add-user.png" alt="add" onclick="addfriend('${result.id}')"/></button>
         </div>
         `;
@@ -206,10 +207,10 @@ function addmatches(id, tableid) {
         games[1] = pointsystem[match.points.points[1]];
       }
       div.innerHTML = `
-        <div class="matchinfo">${match.status} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })}</div>
+          <div class="matchinfo">${escapeHTML(match.status)} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })}</div>
           <div class="matchpoints" onclick="location.href = '/match/${match.code}'">
             <div>${servers[0]}</div>
-            <div>${match.data.player1}</div>
+            <div>${escapeHTML(match.data.player1)}</div>
             <div>${sets[0][0]}</div>
             <div>${sets[1][0]}</div>
             <div>${sets[2][0]}</div>
@@ -218,7 +219,7 @@ function addmatches(id, tableid) {
             <div>${games[0]}</div>
 
             <div>${servers[1]}</div>
-            <div>${match.data.player2}</div>
+            <div>${escapeHTML(match.data.player2)}</div>
             <div>${sets[0][1]}</div>
             <div>${sets[1][1]}</div>
             <div>${sets[2][1]}</div>
@@ -264,7 +265,7 @@ function login_user(userdata) {
   user = userdata;
   profilebutton.style.display = "block";
 
-  profilename.innerHTML = user.username;
+  profilename.textContent = user.username;
 }
 
 open_sidebarbutton.addEventListener("click", () => {
@@ -471,10 +472,23 @@ function add_friendelement(name, userid) {
   const output = document.getElementById("friendoutput");
   output.innerHTML += `
         <div class="friend" id="${userid}">
-          <p>${name}</p>
+          <p>${escapeHTML(name)}</p>
           <button onclick="delete_friend('${userid}')"><img src="/public/remove-user.png" alt="add"/></button>
         </div>
   `;
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>'"]/g, (character) => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "'": "&#39;",
+      '"': "&quot;",
+    };
+    return entities[character];
+  });
 }
 
 async function server_addfriend(id) {

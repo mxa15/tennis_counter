@@ -52,12 +52,17 @@ socket.onopen = () => {
 
 socket.onmessage = (event) => {
   const { type, data } = JSON.parse(event.data);
+  if (type === "matchNotFound") {
+    document.getElementById("course").textContent = "Partie nicht gefunden";
+    loadin_screen.style.display = "none";
+    return;
+  }
   if (type === "getmatchData" || type === "updateMatch") {
     matchsettings = data.matchsettings;
     console.log(matchsettings);
     update_tabelle();
-    tabele.names[0].innerHTML = matchsettings.data.player1;
-    tabele.names[1].innerHTML = matchsettings.data.player2;
+    tabele.names[0].textContent = matchsettings.data.player1;
+    tabele.names[1].textContent = matchsettings.data.player2;
     loadin_screen.style.display = "none";
     console.log("hallo");
 

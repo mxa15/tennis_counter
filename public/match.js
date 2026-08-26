@@ -74,8 +74,8 @@ async function getdata() {
   matchsettings = data.match;
   if (matchsettings.status == "created") matchsettings.course = [];
 
-  tabele.names[0].innerHTML = matchsettings.data.player1;
-  tabele.names[1].innerHTML = matchsettings.data.player2;
+  tabele.names[0].textContent = matchsettings.data.player1;
+  tabele.names[1].textContent = matchsettings.data.player2;
   update_tabelle(false);
   if (matchsettings.status == "finished") {
     finish_match();
