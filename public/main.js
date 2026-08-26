@@ -114,6 +114,7 @@ async function get_friends() {
 
   data.friends.forEach((friend) => {
     add_friendelement(friend.username, friend.id);
+    friendids.push(friend.id);
   });
 }
 
