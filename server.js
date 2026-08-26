@@ -146,7 +146,7 @@ app.post("/api/login", async (req, res) => {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
         httpOnly: true,
         sameSite: "lax",
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
       });
 
       res.json({
@@ -209,7 +209,7 @@ app.post("/api/signin", async (req, res) => {
     maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
     httpOnly: true,
     sameSite: "lax",
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
   });
 
   res.json({
@@ -781,6 +781,16 @@ wss.on("connection", (socket) => {
       const match = await db.query("SELECT * FROM matches WHERE code = $1", [
         data.matchcode,
       ]);
+
+      if (match.rows.length === 0) {
+        socket.send(
+          JSON.stringify({
+            type: "matchNotFound",
+          }),
+        );
+        socket.close();
+        return;
+      }
 
       socket.send(
         JSON.stringify({
