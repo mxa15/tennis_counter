@@ -52,7 +52,7 @@ async function set_newfrienddiv(search) {
           output.innerHTML += `
             <div class="friend"  id="${request.id}">
               <p>${escapeHTML(request.username)}</p>
-              <button onclick="confirmFriend('${request.id}')><img src="/public/accept-user.png" alt="add" /></button>
+              <button onclick="confirmFriend('${request.id}')"><img src="/public/accept-user.png" alt="add" /></button>
             </div>`;
         }
       } else {
