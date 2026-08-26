@@ -2,6 +2,8 @@ const params = new URLSearchParams(window.location.search);
 
 const page = params.get("page");
 
+const friendids = [];
+
 document.addEventListener("DOMContentLoaded", () => {
   if (
     [
