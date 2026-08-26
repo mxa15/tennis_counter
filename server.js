@@ -486,6 +486,7 @@ app.get("/api/match_return", async (req, res) => {
 
 app.post("/api/getmatches", async (req, res) => {
   const user_ids = req.body.user_ids;
+  const status = req.body.status;
 
   if (!Array.isArray(req.body.user_ids)) {
     return res.json({
