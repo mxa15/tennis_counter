@@ -154,7 +154,7 @@ function check_user() {
 
 check_user();
 
-async function getmatches(ids) {
+async function getmatches(ids, status) {
   const response = await fetch("/api/getmatches", {
     method: "POST",
     headers: {
@@ -162,6 +162,7 @@ async function getmatches(ids) {
     },
     body: JSON.stringify({
       user_ids: ids,
+      status: 
     }),
   });
   const data = await response.json();
