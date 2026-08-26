@@ -177,7 +177,7 @@ async function getmatches(ids, status) {
   return data.matches;
 }
 
-function addmatches(id, tableid) {
+function addmatches(id, tableid, status) {
   const table = document.getElementById(tableid);
   getmatches(id).then((matches) => {
     if (matches === "failed") return;
