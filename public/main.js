@@ -238,7 +238,7 @@ function addmatches(id, tableid, status) {
   });
 }
 
-addmatches(["my_id"], "mymatches", "created");
+addmatches(["my_id"], "mymatches", "all");
 
 function getDate(dateString) {
   const timeZone = "Europe/Rome";
