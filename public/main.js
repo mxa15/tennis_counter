@@ -116,7 +116,7 @@ async function get_friends() {
     add_friendelement(friend.username, friend.id);
     friendids.push(friend.id);
   });
-  addmatches(friendids, "livematches", "created");
+  addmatches(friendids, "livematches", "live");
 }
 
 get_friends();
