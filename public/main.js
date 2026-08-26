@@ -179,7 +179,7 @@ async function getmatches(ids, status) {
 
 function addmatches(id, tableid, status) {
   const table = document.getElementById(tableid);
-  getmatches(id).then((matches) => {
+  getmatches(id, status).then((matches) => {
     if (matches === "failed") return;
 
     matches.forEach((match) => {
