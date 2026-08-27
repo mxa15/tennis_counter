@@ -551,6 +551,14 @@ app.post("/api/getmatches", async (req, res) => {
     });
   }
 
+  const matchoutput = matches.rows;
+
+  matchoutput.forEach((match) => {
+    if (match.owner_id == req.userid) {
+      match.username = "du";
+    }
+  });
+
   res.json({
     status: "ok",
     matches: matches.rows,
