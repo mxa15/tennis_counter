@@ -217,7 +217,7 @@ function addmatches(id, tableid, status) {
         games[1] = pointsystem[match.points.points[1]];
       }
       div.innerHTML = `
-          <div class="matchinfo">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })}</div>
+          <div class="matchinfo">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</div>
           <div class="matchpoints" onclick="location.href = '/match/${match.code}'">
             <div>${servers[0]}</div>
             <div>${escapeHTML(match.data.player1)}</div>
