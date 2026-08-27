@@ -522,7 +522,7 @@ app.post("/api/getmatches", async (req, res) => {
       FROM matches
       JOIN users
       ON matches.owner_id = users.id
-      WHERE matches.owner_id = ANY($1) ORDER BY created_at DESC
+      WHERE matches.owner_id = ANY($1) ORDER BY matches.created_at DESC
       `,
       [output_ids],
     );
