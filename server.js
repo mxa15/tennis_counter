@@ -526,7 +526,7 @@ app.post("/api/getmatches", async (req, res) => {
       `,
       [output_ids],
     );
-  } else {
+  } else if (status) {
     matches = await db.query(
       `
       SELECT matches.*, users.username 
@@ -539,6 +539,10 @@ app.post("/api/getmatches", async (req, res) => {
       `,
       [output_ids, status],
     );
+  } else {
+    return res.json({
+      status: "invalid",
+    });
   }
 
   if (matches.rows.length == 0) {
