@@ -238,7 +238,7 @@ function addmatches(id, tableid, status) {
             <div>${sets[4][1]}</div>
             <div>${games[1]}</div>
           </div>
-      `;
+        `;
       }
       table.appendChild(div);
     });
