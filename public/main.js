@@ -239,6 +239,29 @@ function addmatches(id, tableid, status) {
             <div>${games[1]}</div>
           </div>
         `;
+      } else {
+        div.innerHTML = `
+          <div class="matchinfo">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</div>
+          <div class="matchpoints" onclick="location.href = '/match/${match.code}'">
+            <div>${servers[0]}</div>
+            <div>${escapeHTML(match.data.player1)}</div>
+            <div>${sets[0][0]}</div>
+            <div>${sets[1][0]}</div>
+            <div>${sets[2][0]}</div>
+            <div>${sets[3][0]}</div>
+            <div>${sets[4][0]}</div>
+            <div>${games[0]}</div>
+
+            <div>${servers[1]}</div>
+            <div>${escapeHTML(match.data.player2)}</div>
+            <div>${sets[0][1]}</div>
+            <div>${sets[1][1]}</div>
+            <div>${sets[2][1]}</div>
+            <div>${sets[3][1]}</div>
+            <div>${sets[4][1]}</div>
+            <div>${games[1]}</div>
+          </div>
+        `;
       }
       table.appendChild(div);
     });
