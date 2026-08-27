@@ -191,6 +191,11 @@ function addmatches(id, tableid, status) {
       } else if (match.points.server == "player2") {
         servers[1] = "🟡";
       }
+      const matchstatus = new Map([
+        ["created", "Erstellt"],
+        ["live", "Live"],
+        ["finished", "Fertig"],
+      ]);
       let sets = [
         ["", ""],
         ["", ""],
