@@ -76,6 +76,10 @@ socket.onmessage = (event) => {
 
     const lat = Number(matchsettings.data.position.lat);
     const lon = Number(matchsettings.data.position.lon);
+
+    document.getElementById("posbtn").addEventListener("click", () => {
+      window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
+    });
   }
 };
 
