@@ -85,8 +85,6 @@ socket.onmessage = (event) => {
 
     // Position
     L.marker([lat, lon]).addTo(map);
-
-    map.invalidateSize();
   }
 };
 
