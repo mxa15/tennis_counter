@@ -5,13 +5,13 @@
     },
   ],
   "settings": {
-    "emeraldwalk.runonsave": {
+    /*"emeraldwalk.runonsave": {
       "commands": [
         {
           "match": ".*",
           "cmd": "npm run push",
         },
       ],
-    },
+    },*/
   },
 }
