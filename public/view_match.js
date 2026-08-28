@@ -75,6 +75,7 @@ socket.onmessage = (event) => {
 <span>Letzter Satz:</span> <span>${lastSet}</span>`;
 
     const lat = Number(matchsettings.data.position.lat);
+    const lon = Number(matchsettings.data.position.lon);
 
     const map = L.map("map").setView(
       [matchsettings.data.position.lat, matchsettings.data.lon],
