@@ -84,7 +84,10 @@ socket.onmessage = (event) => {
     }).addTo(map);
 
     // Position
-    L.marker([lat, lon]).addTo(map).bindPopup("Du bist hier").openPopup();
+    L.marker([
+      matchsettings.data.position.lat,
+      matchsettings.data.position.lon,
+    ]).addTo(map);
   }
 };
 
