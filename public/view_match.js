@@ -76,17 +76,6 @@ socket.onmessage = (event) => {
 
     const lat = Number(matchsettings.data.position.lat);
     const lon = Number(matchsettings.data.position.lon);
-
-    const map = L.map("map").setView([lat, lon], 17);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap contributors",
-    }).addTo(map);
-
-    // Position
-    L.marker([lat, lon]).addTo(map);
-    document.getElementById("courseTab").style.display = "block";
-    document.getElementById("infoTab").style.display = "none";
   }
 };
 
