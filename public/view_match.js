@@ -74,7 +74,10 @@ socket.onmessage = (event) => {
 <span>Mit Vorteil:</span> <span>${withAdvantage}</span>
 <span>Letzter Satz:</span> <span>${lastSet}</span>`;
 
-    const map = L.map("map").setView([lat, lon], 17);
+    const map = L.map("map").setView(
+      [matchsettings.data.position.lat, matchsettings.data.lon],
+      17,
+    );
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "© OpenStreetMap contributors",
