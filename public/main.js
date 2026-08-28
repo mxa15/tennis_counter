@@ -393,6 +393,11 @@ async function start_match() {
     p1 = "player1";
     p2 = "player2";
   }
+
+  const position = await new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+
   const data = {
     player1: p1,
     player2: p2,
