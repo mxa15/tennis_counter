@@ -84,10 +84,7 @@ socket.onmessage = (event) => {
     }).addTo(map);
 
     // Position
-    L.marker([
-      matchsettings.data.position.lat,
-      matchsettings.data.position.lon,
-    ]).addTo(map);
+    L.marker([lat, lon]).addTo(map);
   }
 };
 
