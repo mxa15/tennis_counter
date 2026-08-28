@@ -77,10 +77,7 @@ socket.onmessage = (event) => {
     const lat = Number(matchsettings.data.position.lat);
     const lon = Number(matchsettings.data.position.lon);
 
-    const map = L.map("map").setView(
-      [matchsettings.data.position.lat, matchsettings.data.lon],
-      17,
-    );
+    const map = L.map("map").setView([lat, lon], 17);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "© OpenStreetMap contributors",
