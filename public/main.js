@@ -268,6 +268,8 @@ function addmatches(id, tableid, status) {
   });
 }
 
+const hallo = "ich";
+
 addmatches(["my_id"], "mymatches", "all");
 
 function getDate(dateString) {
