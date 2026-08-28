@@ -73,6 +73,15 @@ socket.onmessage = (event) => {
 <span>Gewinnsätze:</span> <span>${setToWin}</span>
 <span>Mit Vorteil:</span> <span>${withAdvantage}</span>
 <span>Letzter Satz:</span> <span>${lastSet}</span>`;
+
+    const map = L.map("map").setView([lat, lon], 17);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors",
+    }).addTo(map);
+
+    // Position
+    L.marker([lat, lon]).addTo(map).bindPopup("Du bist hier").openPopup();
   }
 };
 
