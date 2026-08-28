@@ -406,6 +406,10 @@ async function start_match() {
     third_set: document.getElementById("3rd_set").value,
     advantage: document.getElementById("advantage").value,
     beginner: document.getElementById("beginner").value,
+    position: {
+      lat: position.coords.latitude,
+      lon: position.coords.longitude,
+    },
   };
 
   const response = await fetch("/api/creatematch", {
