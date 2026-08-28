@@ -387,6 +387,7 @@ function delete_user() {
 }
 
 async function start_match() {
+  loadin_screen.style.display = "flex";
   let p1 = document.getElementById("player1").value;
   let p2 = document.getElementById("player2").value;
   if (p1 == "" || p2 == "") {
