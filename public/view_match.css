@@ -169,6 +169,7 @@ img {
   color: rgb(255, 255, 255);
   border: 2px solid white;
   border-radius: 15px;
+  margin-bottom: 10px;
 }
 
 .animate {
