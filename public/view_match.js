@@ -85,6 +85,8 @@ socket.onmessage = (event) => {
 
     // Position
     L.marker([lat, lon]).addTo(map);
+    document.getElementById("courseTab").style.display = "block";
+    document.getElementById("infoTab").style.display = "none";
   }
 };
 
