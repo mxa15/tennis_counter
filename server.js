@@ -324,7 +324,10 @@ app.post("/api/creatematch", async (req, res) => {
       );
       let tournaments = req.cookies.tournaments;
       if (tournaments) {
-        const to = tournaments;
+        tournaments.push(req.body.tournament);
+        res.cookie("tournaments", tournaments, {
+          maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
+        });
       } else {
         res.cookie("tournaments", [req.body.tournament], {
           maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
