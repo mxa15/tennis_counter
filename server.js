@@ -800,6 +800,8 @@ app.post("/api/SQL", async (req, res) => {
   });
 
   const result = await db.query(sql, params);
+
+  res.json(result);
 });
 
 const PORT = process.env.PORT || 3000;
