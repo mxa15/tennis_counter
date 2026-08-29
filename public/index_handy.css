@@ -380,3 +380,8 @@ select,
     padding: 0px;
   }
 }
+
+.favoritnames {
+  display: flex;
+  justify-content: space-between;
+}
