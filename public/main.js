@@ -20,6 +20,18 @@ document.addEventListener("DOMContentLoaded", () => {
     history.pushState({}, "", "?page=startseite");
     changesection("startseite");
   }
+  let tournaments = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("tournaments="))
+    ?.split("=")[1];
+
+  if (tournaments) {
+    const datalist = document.getElementById("tournaments");
+    tournaments = JSON.parse(tournaments);
+    tournaments.forEach((t) => {
+      datalist.innerHTML += `<option value="${t}">`;
+    });
+  }
 
   const newfriend_search = document.getElementById("newfriend_search");
 
