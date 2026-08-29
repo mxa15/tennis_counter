@@ -610,7 +610,7 @@ function addfavoritName() {
   console.log("hallo");
 
   const output = document.getElementById("favoritNameDiv");
-  const name = document.getElementById("favoritNameInput");
+  const name = document.getElementById("favoritNameInput").value;
 
   output.innerHTML += `
     <div class="favoritnames">
