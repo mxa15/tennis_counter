@@ -799,7 +799,9 @@ app.post("/api/SQL", async (req, res) => {
     if (value == "user_id") params[index] = req.userid;
   });
 
-  const result = await db.query(sql, params);
+  try {
+    const result = await db.query(sql, params);
+  } catch {}
 
   res.json(result);
 });
