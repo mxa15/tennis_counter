@@ -399,4 +399,5 @@ select,
 .favoritnames button {
   height: 20px;
   width: 20px;
+  padding: 0;
 }
