@@ -323,11 +323,12 @@ app.post("/api/creatematch", async (req, res) => {
         ],
       );
       const tournaments = req.cookies.tournaments;
-      if (tournaments)
-        return res.json({
-          code: code,
-          status: "ok",
-        });
+      if (tournaments) {
+      }
+      return res.json({
+        code: code,
+        status: "ok",
+      });
     } catch (error) {
       if (error.code == "23505") {
         continue;
