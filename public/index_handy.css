@@ -388,6 +388,7 @@ select,
   height: 25px;
   width: 90%;
   margin-left: 5%;
+  background-color: gray;
 }
 
 .favoritnames img {
