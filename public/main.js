@@ -608,6 +608,11 @@ async function confirmFriend(id) {
 
 function addfavoritName() {
   const output = document.getElementById("favoritNames");
+  const name = document.getElementById("favoritNameInput");
 
-  output.innerHTML += 
+  output.innerHTML += `
+    <div class="favoritnames">
+      <h3>max</h3>
+      <button><img src="/public/close.png" alt="" /></button>
+    </div>`;
 }
