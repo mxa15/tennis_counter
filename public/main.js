@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("hallo");
 
     const datalist = document.getElementById("tournaments");
-    tournaments = JSON.parse(tournaments);
+    tournaments = JSON.parse(decodeURIComponent(tournaments));
     tournaments.forEach((t) => {
       datalist.innerHTML += `<option value="${t}"></option>`;
     });
