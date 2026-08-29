@@ -384,6 +384,10 @@ select,
 .favoritnames {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 25px;
+  width: 90%;
+  margin-left: 5%;
 }
 
 .favoritnames img {
