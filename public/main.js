@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ?.split("=")[1];
 
   if (tournaments) {
+    console.log("hallo");
+
     const datalist = document.getElementById("tournaments");
     tournaments = JSON.parse(tournaments);
     tournaments.forEach((t) => {
