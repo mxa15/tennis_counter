@@ -798,7 +798,6 @@ app.post("/api/SQL", async (req, res) => {
   if (!Array.isArray(params) || !params || !sql) {
     console.log(sql);
     console.log(params);
-    console.log();
 
     return res.json({
       status: "invalid",
