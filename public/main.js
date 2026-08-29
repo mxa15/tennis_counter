@@ -606,4 +606,8 @@ async function confirmFriend(id) {
   }
 }
 
-function addfavoritName() {}
+function addfavoritName() {
+  const output = document.getElementById("favoritNames");
+
+  output.innerHTML += 
+}
