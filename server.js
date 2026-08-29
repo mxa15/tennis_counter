@@ -326,11 +326,13 @@ app.post("/api/creatematch", async (req, res) => {
         ? JSON.parse(req.cookies.tournaments)
         : [];
 
-      tournaments.push(req.body.tournament);
+      if (req.body.tournament) {
+        tournaments.push(req.body.tournament);
 
-      res.cookie("tournaments", JSON.stringify(tournaments), {
-        maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
-      });
+        res.cookie("tournaments", JSON.stringify(tournaments), {
+          maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
+        });
+      }
 
       return res.json({
         code: code,
