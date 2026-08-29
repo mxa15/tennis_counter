@@ -404,7 +404,7 @@ select,
 .favoritnames button {
   height: 55px;
   width: 55px;
-  padding: 6px;
+  padding: 8px;
   border: 0;
   background: transparent;
 }
