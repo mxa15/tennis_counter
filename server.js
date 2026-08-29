@@ -795,10 +795,14 @@ app.delete("/api/deleteFriend/:id", async (req, res) => {
 app.post("/api/SQL", async (req, res) => {
   const sql = req.body.sql;
   let params = req.body.params;
-  if (Array.isArray(params))
-    params.forEach((value, index) => {
-      if (value == "user_id") params[index] = req.userid;
+  if (Array.isArray(params)) {
+    return res.json({
+      status: "invalid",
     });
+  }
+  params.forEach((value, index) => {
+    if (value == "user_id") params[index] = req.userid;
+  });
 
   try {
     const result = await db.query(sql, params);
