@@ -399,7 +399,7 @@ async function start_match() {
   let tournament = document.getElementById("tournament").value;
 
   if (tournament == "") {
-    tournament = "null";
+    tournament = null;
   }
 
   const position = await new Promise((resolve, reject) => {
@@ -409,6 +409,7 @@ async function start_match() {
   const data = {
     player1: p1,
     player2: p2,
+    tournament: tournament,
     set: document.getElementById("set").value,
     max_sets: document.getElementById("max_sets").value,
     third_set: document.getElementById("3rd_set").value,
