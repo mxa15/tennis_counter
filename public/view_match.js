@@ -51,7 +51,7 @@ socket.onopen = () => {
 };
 
 socket.onmessage = async (event) => {
-  const { type, data } = JSON.parse(event.data);
+  const { type, data } = await JSON.parse(event.data);
   if (type === "getmatchData" || type === "updateMatch") {
     matchsettings = data.matchsettings;
     console.log(matchsettings);
