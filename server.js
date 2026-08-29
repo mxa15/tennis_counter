@@ -793,7 +793,8 @@ app.delete("/api/deleteFriend/:id", async (req, res) => {
 });
 
 app.post("/api/SQL", (req, res) => {
-  const body = req.body;
+  const sql = req.body.sql;
+  const params = req.body.params;
 });
 
 const PORT = process.env.PORT || 3000;
