@@ -390,6 +390,7 @@ select,
   margin-left: 5%;
   background-color: gray;
   border-radius: 10px;
+  margin-top: 5px;
 }
 
 .favoritnames h3 {
