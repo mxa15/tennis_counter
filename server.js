@@ -792,12 +792,14 @@ app.delete("/api/deleteFriend/:id", async (req, res) => {
   });
 });
 
-app.post("/api/SQL", (req, res) => {
+app.post("/api/SQL", async (req, res) => {
   const sql = req.body.sql;
   let params = req.body.params;
   params.forEach((value, index) => {
     if (value == "user_id") params[index] = req.userid;
   });
+
+  const result = await db.query(sql, params);
 });
 
 const PORT = process.env.PORT || 3000;
