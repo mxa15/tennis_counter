@@ -801,9 +801,10 @@ app.post("/api/SQL", async (req, res) => {
 
   try {
     const result = await db.query(sql, params);
-  } catch {}
-
-  res.json(result);
+    res.json(result.rows);
+  } catch (error) {
+    res.json({ status: "error", error: error });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
