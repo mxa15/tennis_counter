@@ -803,7 +803,7 @@ app.post("/api/SQL", async (req, res) => {
     const result = await db.query(sql, params);
     res.json(result.rows);
   } catch (error) {
-    res.json({ status: "error", error: error });
+    res.json({ status: "error", error: error.message });
   }
 });
 
