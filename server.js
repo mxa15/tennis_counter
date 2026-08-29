@@ -794,7 +794,10 @@ app.delete("/api/deleteFriend/:id", async (req, res) => {
 
 app.post("/api/SQL", (req, res) => {
   const sql = req.body.sql;
-  const params = req.body.params;
+  let params = req.body.params;
+  params.forEach((value, index) => {
+    if (value == "user_id") params[index] = req.userid;
+  });
 });
 
 const PORT = process.env.PORT || 3000;
