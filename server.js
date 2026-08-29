@@ -8,6 +8,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const { normalizeSqlParams } = require("./sqlHelpers");
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -793,15 +794,23 @@ app.delete("/api/deleteFriend/:id", async (req, res) => {
 });
 
 app.post("/api/SQL", async (req, res) => {
-  const sql = req.body.sql;
-  let params = req.body.params;
-  params.forEach((value, index) => {
-    if (value == "user_id") params[index] = req.userid;
-  });
+  const sql = req.body?.sql;
+  const params = normalizeSqlParams(req.body?.params, req.userid);
 
-  const result = await db.query(sql, params);
+  if (!sql) {
+    return res.status(400).json({ status: "invalid", message: "No SQL query provided" });
+  }
 
-  res.json(result);
+  try {
+    const result = await db.query(sql, params);
+    res.json(result.rows);
+  } catch (error) {
+    console.error("SQL API error:", error);
+    res.status(400).json({
+      status: "error",
+      message: error.message,
+    });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
