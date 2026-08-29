@@ -605,3 +605,7 @@ async function confirmFriend(id) {
     get_friends();
   }
 }
+
+function addfavoritName() {
+  console.log("hallo");
+}
