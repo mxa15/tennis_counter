@@ -72,6 +72,12 @@ socket.onmessage = async (event) => {
     });
     const data = await response.json();
 
+    let owner_name;
+
+    if (data.status == "ok") {
+      owner_name = data.rows[0].username;
+    }
+
     const setToWin = matchsettings.data.max_sets == 3 ? 2 : 3;
     const withAdvantage = matchsettings.data.advantage ? "ja" : "nein";
     const lastSet =
