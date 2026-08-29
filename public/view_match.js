@@ -50,7 +50,7 @@ socket.onopen = () => {
   );
 };
 
-socket.onmessage = (event) => {
+socket.onmessage = async (event) => {
   const { type, data } = JSON.parse(event.data);
   if (type === "getmatchData" || type === "updateMatch") {
     matchsettings = data.matchsettings;
@@ -59,7 +59,17 @@ socket.onmessage = (event) => {
     tabele.names[0].textContent = matchsettings.data.player1;
     tabele.names[1].textContent = matchsettings.data.player2;
     loadin_screen.style.display = "none";
-    console.log("hallo");
+
+    const response = await fetch("/api/SQL", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        sql: "SELECT username FROM users WHERE id = $1",
+        params: [matchsettings.owner_id],
+      }),
+    });
 
     const setToWin = matchsettings.data.max_sets == 3 ? 2 : 3;
     const withAdvantage = matchsettings.data.advantage ? "ja" : "nein";
