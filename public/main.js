@@ -612,7 +612,7 @@ function addfavoritName() {
 
   output.innerHTML += `
     <div class="favoritnames">
-      <h3>max</h3>
+      <h3>${name}</h3>
       <button><img src="/public/close.png" alt="" /></button>
     </div>`;
 }
