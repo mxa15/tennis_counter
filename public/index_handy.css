@@ -391,6 +391,10 @@ select,
   background-color: gray;
 }
 
+.favoritnames h3 {
+  font-size: 40px;
+}
+
 .favoritnames img {
   width: 100%;
   height: 100%;
