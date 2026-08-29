@@ -331,6 +331,7 @@ app.post("/api/creatematch", async (req, res) => {
       res.cookie("tournaments", JSON.stringify(tournaments), {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
       });
+
       return res.json({
         code: code,
         status: "ok",
