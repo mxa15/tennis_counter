@@ -76,6 +76,9 @@ socket.onmessage = async (event) => {
 
     if (data.status == "ok") {
       owner_name = data.rows[0].username;
+    } else {
+      console.log(data);
+      owner_name = "fehler";
     }
 
     const setToWin = matchsettings.data.max_sets == 3 ? 2 : 3;
