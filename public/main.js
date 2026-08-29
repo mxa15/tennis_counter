@@ -609,7 +609,7 @@ async function confirmFriend(id) {
 function addfavoritName() {
   console.log("hallo");
 
-  const output = document.getElementById("favoritNames");
+  const output = document.getElementById("favoritNameDiv");
   const name = document.getElementById("favoritNameInput");
 
   output.innerHTML += `
