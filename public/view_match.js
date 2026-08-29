@@ -51,7 +51,7 @@ socket.onopen = () => {
 };
 
 socket.onmessage = async (event) => {
-  const { type, data } = await JSON.parse(event.data);
+  const { type, data } = JSON.parse(event.data);
   if (type === "getmatchData" || type === "updateMatch") {
     matchsettings = data.matchsettings;
     console.log(matchsettings);
@@ -70,14 +70,14 @@ socket.onmessage = async (event) => {
         params: [matchsettings.owner_id],
       }),
     });
-    const data = await response.json();
+    const dataoutput = await response.json();
 
     let owner_name;
 
-    if (data.status == "ok") {
-      owner_name = data.rows[0].username;
+    if (dataoutput.status == "ok") {
+      owner_name = dataoutput.rows[0].username;
     } else {
-      console.log(data);
+      console.log(dataoutput.status);
       owner_name = "fehler";
     }
 
