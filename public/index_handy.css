@@ -395,6 +395,7 @@ select,
 
 .favoritnames h3 {
   font-size: 25px;
+  margin-left: 5px;
 }
 
 .favoritnames img {
