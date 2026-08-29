@@ -89,7 +89,7 @@ socket.onmessage = async (event) => {
         : "Tiebreak bis " + matchsettings.data.third_set;
     info.innerHTML = `
 <span>Matchcode:</span> <span>${matchsettings.code}</span>
-<span>Zähler:</span> <button>${owner_name}</button>
+<span>Zähler:</span> <span>${owner_name}</span>
 <span>Satz:</span> <span>bis ${matchsettings.data.set}</span>
 <span>Gewinnsätze:</span> <span>${setToWin}</span>
 <span>Mit Vorteil:</span> <span>${withAdvantage}</span>
