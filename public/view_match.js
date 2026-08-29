@@ -70,6 +70,7 @@ socket.onmessage = async (event) => {
         params: [matchsettings.owner_id],
       }),
     });
+    const data = await response.json();
 
     const setToWin = matchsettings.data.max_sets == 3 ? 2 : 3;
     const withAdvantage = matchsettings.data.advantage ? "ja" : "nein";
