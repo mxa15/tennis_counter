@@ -400,4 +400,6 @@ select,
   height: 40px;
   width: 40px;
   padding: 0;
+  border: 0;
+  background: transparent;
 }
