@@ -117,6 +117,7 @@ async function get_friends() {
     friendids.push(friend.id);
   });
   addmatches(friendids, "livematches", "live");
+  addmatches(friendids, "finishedmatches", "finished");
 }
 
 get_friends();
