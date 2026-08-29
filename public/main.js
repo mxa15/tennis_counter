@@ -606,6 +606,4 @@ async function confirmFriend(id) {
   }
 }
 
-function addfavoritName() {
-  console.log("hallo");
-}
+function addfavoritName() {}
