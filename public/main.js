@@ -607,6 +607,8 @@ async function confirmFriend(id) {
 }
 
 function addfavoritName() {
+  console.log("hallo");
+
   const output = document.getElementById("favoritNames");
   const name = document.getElementById("favoritNameInput");
 
