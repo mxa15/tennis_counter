@@ -806,7 +806,10 @@ app.post("/api/SQL", async (req, res) => {
       rows: result.rows,
     });
   } catch (error) {
-    res.json({ status: "error", error: error.message });
+    res.json({
+      status: "error",
+      error: error.message,
+    });
   }
 });
 
