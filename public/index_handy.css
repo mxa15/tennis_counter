@@ -385,7 +385,7 @@ select,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 55px;
+  height: 35px;
   width: 90%;
   margin-left: 5%;
   background-color: gray;
@@ -394,7 +394,7 @@ select,
 }
 
 .favoritnames h3 {
-  font-size: 40px;
+  font-size: 25px;
 }
 
 .favoritnames img {
@@ -403,9 +403,9 @@ select,
 }
 
 .favoritnames button {
-  height: 55px;
-  width: 55px;
-  padding: 8px;
+  height: 35px;
+  width: 35px;
+  padding: 5px;
   border: 0;
   background: transparent;
 }
