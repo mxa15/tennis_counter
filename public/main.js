@@ -396,6 +396,12 @@ async function start_match() {
     p2 = "player2";
   }
 
+  let tournament = document.getElementById("tournament").value;
+
+  if (tournament == "") {
+    tournament = "null";
+  }
+
   const position = await new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
