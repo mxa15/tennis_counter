@@ -417,6 +417,7 @@ async function start_match() {
   }
 
   let position;
+  let posdata;
 
   try {
     position = await new Promise((resolve, reject) => {
