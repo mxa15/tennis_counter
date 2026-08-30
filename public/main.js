@@ -416,9 +416,13 @@ async function start_match() {
     tournament = null;
   }
 
-  const position = await new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  });
+  let position;
+
+  try {
+    position = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  } catch (error) {}
 
   const data = {
     player1: p1,
