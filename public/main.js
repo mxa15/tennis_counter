@@ -425,12 +425,16 @@ async function start_match() {
     });
 
     posdata = {
+      aloowed: true,
       lat: position.coords.latitude,
       lon: position.coords.longitude,
     };
   } catch (error) {
     console.log(error);
-    loadin_screen.style.display = "none";
+    posdata = {
+      allowed: false,
+      error: error.message,
+    };
     return;
   }
 
