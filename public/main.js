@@ -423,6 +423,11 @@ async function start_match() {
     position = await new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
+
+    posdata = {
+      lat: position.coords.latitude,
+      lon: position.coords.longitude,
+    };
   } catch (error) {
     console.log(error);
     loadin_screen.style.display = "none";
