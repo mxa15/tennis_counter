@@ -193,7 +193,12 @@ function update_tabelle() {
 }
 
 function update_course() {
-  const course_and_now = structuredClone(matchsettings.course);
+  const course = Array.isArray(matchsettings.course)
+    ? matchsettings.course
+    : [];
+
+  const course_and_now = structuredClone(course);
+
   course_and_now.push({
     points: matchsettings.points,
     status: matchsettings.status,
