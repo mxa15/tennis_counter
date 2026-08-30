@@ -422,7 +422,11 @@ async function start_match() {
     position = await new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    loadin_screen.style.display = "none";
+    return;
+  }
 
   const data = {
     player1: p1,
