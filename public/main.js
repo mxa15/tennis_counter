@@ -435,7 +435,6 @@ async function start_match() {
       allowed: false,
       error: error.message,
     };
-    return;
   }
 
   const data = {
