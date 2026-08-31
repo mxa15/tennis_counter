@@ -490,7 +490,7 @@ function openPopUp(text, color = "gray", time = 1500) {
 
 document.addEventListener("keydown", (e) => {
   if (e.key == "e") {
-    openPopUp("hallo weld", "red", "1500");
+    openPopUp("hallo weld", "red", 1500);
   }
 });
 
