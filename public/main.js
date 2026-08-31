@@ -467,7 +467,9 @@ async function start_match() {
   location.href = "/match/" + code.code;
 }
 
-function openPopUp(text, color, time) {}
+function openPopUp(text, color, time) {
+  console.log("hallo");
+}
 
 class SearchInput extends HTMLElement {
   connectedCallback() {
