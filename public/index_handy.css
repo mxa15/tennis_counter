@@ -19,7 +19,7 @@ button,
 textarea {
   font-family: inherit;
 }
-.pop-in {
+.pop-up {
   position: fixed;
   transform: translate(-50%, -100%);
   left: 50%;
@@ -38,7 +38,7 @@ textarea {
     opacity 0.5s ease,
     top 0.5s ease;
 }
-.pop-in.open {
+.pop-up.open {
   top: 45px;
   opacity: 1;
 }
