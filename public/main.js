@@ -489,7 +489,7 @@ function openPopUp(text, color = "gray", time = 1500) {
 }
 
 setTimeout(() => {
-  openPopUp("hallo mein name ist Max", "red", 2000);
+  openPopUp("ortung fehlgeschlagen", "red", 2000);
 }, 5000);
 
 class SearchInput extends HTMLElement {
