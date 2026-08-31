@@ -17,6 +17,29 @@ button,
 textarea {
   font-family: inherit;
 }
+.pop-in {
+  position: fixed;
+  transform: translate(-50%, -100%);
+  left: 50%;
+  top: -3px;
+  width: auto;
+  height: auto;
+  padding: 3px;
+  border-radius: 7px;
+  background: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  opacity: 0;
+  transition:
+    opacity 0.5s ease,
+    top 0.5s ease;
+}
+.pop-in.open {
+  top: 45px;
+  opacity: 1;
+}
 header {
   position: fixed;
   background-color: green;
