@@ -474,6 +474,7 @@ function openPopUp(text, color, time) {
   PopUp.innerText = text;
 
   PopUp.style.background = color;
+  document.appendChild(PopUp);
   setTimeout(() => {
     PopUp.classList.add("open");
     setTimeout(() => {
