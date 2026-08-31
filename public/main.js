@@ -488,6 +488,10 @@ function openPopUp(text, color = "gray", time = 1500) {
   }, time);
 }
 
+setTimeout(() => {
+  openPopUp("hallo", "green", 2000);
+}, 5000);
+
 class SearchInput extends HTMLElement {
   connectedCallback() {
     const placeholder = this.getAttribute("placeholder");
