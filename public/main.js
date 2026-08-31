@@ -478,6 +478,9 @@ function openPopUp(text, color, time) {
     PopUp.classList.add("open");
     setTimeout(() => {
       PopUp.classList.remove("open");
+      setTimeout(() => {
+        PopUp.remove();
+      }, 500);
     }, time);
   }, 100);
 }
