@@ -24,7 +24,7 @@ textarea {
   transform: translate(-50%, -100%);
   left: 50%;
   top: -3px;
-  width: min-content;
+  width: auto;
   height: min-content;
   padding: 3px;
   border-radius: 7px;
