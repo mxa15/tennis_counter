@@ -470,7 +470,7 @@ async function start_match() {
 function openPopUp(text, color = "gray", time = 1500) {
   const popup = document.createElement("div");
   popup.classList.add("pop-up");
-  popup.innerText = text;
+  popup.innerHTML = text;
   popup.style.background = color;
 
   const container = document.body || document.documentElement;
