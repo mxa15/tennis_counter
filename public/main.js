@@ -488,11 +488,6 @@ function openPopUp(text, color = "gray", time = 1500) {
   }, time + 100);
 }
 
-openPopUp("hallo zuhause", "red", 6000);
-setTimeout(() => {
-  openPopUp("ortung fehlgeschlagen", "red", 2000);
-}, 5000);
-
 class SearchInput extends HTMLElement {
   connectedCallback() {
     const placeholder = this.getAttribute("placeholder");
