@@ -36,11 +36,11 @@ textarea {
   opacity: 0;
   transition:
     opacity 0.5s ease,
-    top 0.5s ease;
+    transform 0.5s ease;
   z-index: 1000;
 }
 .pop-up.open {
-  top: 45px;
+  transform: translate(-50%, 20px);
   opacity: 1;
 }
 header {
