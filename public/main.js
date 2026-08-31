@@ -488,6 +488,12 @@ function openPopUp(text, color = "gray", time = 1500) {
   }, time + 100);
 }
 
+document.addEventListener("keydown", (e) => {
+  if (e.key == "e") {
+    openPopUp("hallo weld", "red", "1500");
+  }
+});
+
 class SearchInput extends HTMLElement {
   connectedCallback() {
     const placeholder = this.getAttribute("placeholder");
