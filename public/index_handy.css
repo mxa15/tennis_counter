@@ -25,7 +25,7 @@ textarea {
   left: 50%;
   top: -3px;
   width: min-content;
-  height: auto;
+  height: min-content;
   padding: 3px;
   border-radius: 7px;
   background: gray;
