@@ -4,5 +4,14 @@
       "path": ".",
     },
   ],
-  "settings": {},
+  "settings": {
+    "emeraldwalk.runonsave": {
+      "commands": [
+        {
+          "match": ".*",
+          "cmd": "npm run push",
+        },
+      ],
+    },
+  },
 }

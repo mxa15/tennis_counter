@@ -468,7 +468,8 @@ async function start_match() {
 }
 
 function openPopUp(text, color, time) {
-  console.log("hallo");
+  const PopUp = document.createElement("div");
+  PopUp.classList.add("pop-up");
 }
 
 class SearchInput extends HTMLElement {
