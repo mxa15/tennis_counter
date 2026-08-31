@@ -467,23 +467,25 @@ async function start_match() {
   location.href = "/match/" + code.code;
 }
 
-function openPopUp(text, color, time) {
-  const PopUp = document.createElement("div");
-  PopUp.classList.add("pop-up");
+function openPopUp(text, color = "gray", time = 1500) {
+  const popup = document.createElement("div");
+  popup.classList.add("pop-up");
+  popup.innerText = text;
+  popup.style.background = color;
 
-  PopUp.innerText = text;
+  const container = document.body || document.documentElement;
+  container.appendChild(popup);
 
-  PopUp.style.background = color;
-  document.appendChild(PopUp);
+  requestAnimationFrame(() => {
+    popup.classList.add("open");
+  });
+
   setTimeout(() => {
-    PopUp.classList.add("open");
+    popup.classList.remove("open");
     setTimeout(() => {
-      PopUp.classList.remove("open");
-      setTimeout(() => {
-        PopUp.remove();
-      }, 500);
-    }, time);
-  }, 100);
+      popup.remove();
+    }, 500);
+  }, time);
 }
 
 class SearchInput extends HTMLElement {
