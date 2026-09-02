@@ -99,7 +99,11 @@ socket.onmessage = async (event) => {
     const lon = Number(matchsettings.data.position.lon);
 
     document.getElementById("posbtn").addEventListener("click", () => {
-      window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
+      if (matchsettings.data.position.aloowed) {
+        window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
+      } else {
+        openPopUp("position nicht verfügbar", "red");
+      }
     });
   }
 };
