@@ -465,4 +465,5 @@ select,
   display: block;
   text-align: center;
   line-height: 30px;
+  transform: translateX(-100%);
 }
