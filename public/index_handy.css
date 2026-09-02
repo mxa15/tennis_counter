@@ -447,12 +447,12 @@ select,
 }
 
 .check::after {
-  content: "off";
+  content: "OFF";
   display: block;
   text-align: center;
   line-height: 30px;
 }
 
 .check:checked::after {
-  content: "on";
+  content: "ON";
 }
