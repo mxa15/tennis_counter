@@ -452,7 +452,6 @@ select,
 
 .check::before,
 .check::after {
-  content: "";
   position: absolute;
   transform: translateY(-50%);
 }
