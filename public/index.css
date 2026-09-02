@@ -412,6 +412,46 @@ select,
 }
 
 .check {
-  width: 30px;
+  appearance: none;
+  width: 70px;
   height: 30px;
+  background: red;
+  transition: background 0.5s ease;
+  overflow: hidden;
+  border-radius: 0;
+  margin: 0px;
+}
+
+.check:checked {
+  background: green;
+}
+
+.check::before {
+  content: "OFF";
+  display: block;
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  transform: translateX(0px);
+  transition: transform 0.5s ease;
+  background: red;
+}
+
+.check:checked::before {
+  transform: translateX(-100%);
+}
+
+.check::after {
+  content: "ON";
+  display: block;
+  text-align: center;
+  line-height: 30px;
+  transform: translate(100%, -100%);
+  transition: transform 0.5s ease;
+  background: green;
+  height: 30px;
+}
+
+.check:checked::after {
+  transform: translate(0px, -100%);
 }
