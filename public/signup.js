@@ -1,11 +1,11 @@
-function signin() {
+function signup() {
   const name = document.getElementById("name");
   const password = document.getElementById("password");
   const subtitle = document.getElementById("subtitle");
   const loadin_screen = document.getElementById("loading");
 
   loadin_screen.style.display = "flex";
-  fetch("/api/signin", {
+  fetch("/api/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

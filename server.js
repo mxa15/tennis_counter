@@ -40,8 +40,8 @@ app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "html_files", "login.html"));
 });
 
-app.get("/sign_in", (req, res) => {
-  res.sendFile(path.join(__dirname, "html_files", "signin.html"));
+app.get("/sign_up", (req, res) => {
+  res.sendFile(path.join(__dirname, "html_files", "signup.html"));
 });
 
 app.get("/match/:code", async (req, res) => {
@@ -164,7 +164,7 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-app.post("/api/signin", async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   const message = req.body;
 
   const user = await db.query("SELECT id FROM users WHERE username = $1", [
