@@ -441,6 +441,7 @@ select,
   height: 30px;
   background: red;
   transition: background 0.5s ease;
+  overflow: hidden;
   border-radius: 0;
 }
 
