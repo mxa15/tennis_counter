@@ -449,6 +449,14 @@ select,
   background: green;
 }
 
+.check::before,
+.check::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .check::before {
   content: "OFF";
   display: block;
@@ -464,8 +472,6 @@ select,
 }
 
 .check::after {
-  position: absolute;
-  top: -100%;
   content: "ON";
   display: block;
   text-align: center;
