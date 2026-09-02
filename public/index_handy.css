@@ -456,6 +456,7 @@ select,
   transform: translateX(0px);
   transition: transform 0.5s ease;
   background: red;
+  border-radius: 0;
 }
 
 .check:checked::before {
