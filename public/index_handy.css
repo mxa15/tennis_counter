@@ -441,6 +441,7 @@ select,
   height: 30px;
   background: red;
   transition: background 0.5s ease;
+  overflow: hidden;
 }
 
 .check:checked {
@@ -467,7 +468,6 @@ select,
   line-height: 30px;
   transform: translate(-100%, -100%);
   transition: transform 0.5s ease;
-  overflow: hidden;
 }
 
 .check:checked::after {
