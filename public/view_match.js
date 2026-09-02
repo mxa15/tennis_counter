@@ -308,3 +308,24 @@ async function shareMatch() {
     console.log("Teilen abgebrochen");
   }
 }
+
+function openPopUp(text, color = "gray", time = 1500) {
+  const popup = document.createElement("div");
+  popup.classList.add("pop-up");
+  popup.innerHTML = text;
+  popup.style.background = color;
+
+  const container = document.body || document.documentElement;
+  container.appendChild(popup);
+
+  setTimeout(() => {
+    popup.classList.add("open");
+  }, 100);
+
+  setTimeout(() => {
+    popup.classList.remove("open");
+    setTimeout(() => {
+      popup.remove();
+    }, 500);
+  }, time + 100);
+}
