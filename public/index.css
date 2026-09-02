@@ -434,7 +434,6 @@ select,
   height: 30px;
   transform: translateX(0px);
   transition: transform 0.5s ease;
-  background: red;
 }
 
 .check:checked::before {
@@ -448,7 +447,6 @@ select,
   line-height: 30px;
   transform: translate(100%, -100%);
   transition: transform 0.5s ease;
-  background: green;
   height: 30px;
 }
 
