@@ -454,7 +454,7 @@ select,
   display: block;
   text-align: center;
   line-height: 30px;
-  height: 0px;
+  height: 30px;
   transform: translateX(0px);
   transition: transform 0.5s ease;
   background: red;
@@ -472,6 +472,7 @@ select,
   transform: translate(100%, -100%);
   transition: transform 0.5s ease;
   background: green;
+  height: 30px;
 }
 
 .check:checked::after {
