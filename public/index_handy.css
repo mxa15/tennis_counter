@@ -434,3 +434,8 @@ select,
   border: 0;
   background: transparent;
 }
+
+#aloowposition {
+  width: 30px;
+  height: 30px;
+}
