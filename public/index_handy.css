@@ -439,8 +439,15 @@ select,
   appearance: none;
   width: 30px;
   height: 30px;
+  background: red;
 }
 
 .check:checked {
   background: green;
+}
+
+.check::after {
+  content: "off";
+  display: block;
+  text-align: center;
 }
