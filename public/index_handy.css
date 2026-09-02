@@ -443,6 +443,7 @@ select,
   transition: background 0.5s ease;
   overflow: hidden;
   border-radius: 0;
+  position: relative;
 }
 
 .check:checked {
