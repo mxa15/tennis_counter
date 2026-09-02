@@ -466,4 +466,9 @@ select,
   text-align: center;
   line-height: 30px;
   transform: translate(-100%, -100%);
+  transition: transform 0.5s ease;
+}
+
+.check:checked::after {
+  transform: translate(0px, -100%);
 }
