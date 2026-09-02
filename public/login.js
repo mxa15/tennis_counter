@@ -27,14 +27,9 @@ function login() {
         openPopUp("falsches passwort", "red");
       } else if (status == "not found") {
         loadin_screen.style.display = "none";
-        subtitle.innerHTML = "user nicht gefunden";
-        subtitle.style.color = "red";
         name.value = "";
         password.value = "";
-        setTimeout(() => {
-          subtitle.innerHTML = "login";
-          subtitle.style.color = "black";
-        }, 1000);
+        openPopUp("benutzer nicht gefunden", "red");
       }
     });
 }
