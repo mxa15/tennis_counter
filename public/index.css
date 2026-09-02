@@ -410,3 +410,8 @@ select,
     padding: 0px;
   }
 }
+
+#aloowposition {
+  width: 30px;
+  height: 30px;
+}
