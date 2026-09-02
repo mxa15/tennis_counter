@@ -443,17 +443,10 @@ select,
   transition: background 0.5s ease;
   overflow: hidden;
   border-radius: 0;
-  position: relative;
 }
 
 .check:checked {
   background: green;
-}
-
-.check::before,
-.check::after {
-  position: absolute;
-  transform: translateY(-50%);
 }
 
 .check::before {
