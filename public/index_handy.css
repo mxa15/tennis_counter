@@ -456,7 +456,7 @@ select,
 }
 
 .check:checked::before {
-  display: none;
+  transform: translateX(-100%);
 }
 
 .check::after {
