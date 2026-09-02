@@ -447,7 +447,7 @@ select,
 }
 
 .check:checked {
-  background: green;
+  background: rgb(0, 255, 0);
 }
 
 .check::before {
