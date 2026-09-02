@@ -435,7 +435,7 @@ select,
   background: transparent;
 }
 
-#aloowposition {
+.check {
   width: 30px;
   height: 30px;
 }
