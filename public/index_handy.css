@@ -442,6 +442,7 @@ select,
   background: red;
   transition: background 0.5s ease;
   overflow: hidden;
+  border-radius: 0;
 }
 
 .check:checked {
@@ -456,7 +457,6 @@ select,
   transform: translateX(0px);
   transition: transform 0.5s ease;
   background: red;
-  border-radius: 0;
 }
 
 .check:checked::before {
