@@ -23,13 +23,8 @@ function login() {
         location.href = "/startseite";
       } else if (status == "incorect password") {
         loadin_screen.style.display = "none";
-        subtitle.innerHTML = "falsches password";
-        subtitle.style.color = "red";
         password.value = "";
-        setTimeout(() => {
-          subtitle.innerHTML = "login";
-          subtitle.style.color = "black";
-        }, 1000);
+        openPopUp("falsches passwort", "red");
       } else if (status == "not found") {
         loadin_screen.style.display = "none";
         subtitle.innerHTML = "user nicht gefunden";
