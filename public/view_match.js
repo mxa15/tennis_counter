@@ -95,12 +95,14 @@ socket.onmessage = async (event) => {
 <span>Mit Vorteil:</span> <span>${withAdvantage}</span>
 <span>Letzter Satz:</span> <span>${lastSet}</span>`;
 
-    const lat = Number(matchsettings.data.position.lat);
-    const lon = Number(matchsettings.data.position.lon);
+    if (matchsettings.data.position.aloowed) {
+      const lat = Number(matchsettings.data.position.lat);
+      const lon = Number(matchsettings.data.position.lon);
 
-    document.getElementById("posbtn").addEventListener("click", () => {
-      window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
-    });
+      document.getElementById("posbtn").addEventListener("click", () => {
+        window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
+      });
+    }
   }
 };
 
