@@ -436,6 +436,11 @@ select,
 }
 
 .check {
+  appearance: none;
   width: 30px;
   height: 30px;
+}
+
+.check:checked {
+  background: green;
 }
