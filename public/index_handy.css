@@ -456,3 +456,10 @@ select,
 .check:checked::before {
   display: none;
 }
+
+.check:checked::after {
+  content: "ON";
+  display: block;
+  text-align: center;
+  line-height: 30px;
+}
