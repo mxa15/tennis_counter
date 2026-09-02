@@ -440,7 +440,7 @@ select,
   width: 70px;
   height: 30px;
   background: red;
-  transition: background 0.5 ease;
+  transition: all 0.5 ease;
 }
 
 .check:checked {
