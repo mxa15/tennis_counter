@@ -446,13 +446,13 @@ select,
   background: green;
 }
 
-.check::after {
+.check::before {
   content: "OFF";
   display: block;
   text-align: center;
   line-height: 30px;
 }
 
-.check:checked::after {
-  content: "ON";
+.check:checked::before {
+  display: none;
 }
