@@ -452,6 +452,7 @@ select,
 
 .check::before {
   content: "OFF";
+  color: black;
   display: block;
   text-align: center;
   line-height: 30px;
@@ -466,6 +467,7 @@ select,
 
 .check::after {
   content: "ON";
+  color: black;
   display: block;
   text-align: center;
   line-height: 30px;
