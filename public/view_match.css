@@ -8,6 +8,31 @@ body {
   padding: 0;
 }
 
+.pop-up {
+  position: fixed;
+  transform: translate(-50%, -100%);
+  left: 50%;
+  top: -3px;
+  width: auto;
+  height: auto;
+  padding: 3px;
+  border-radius: 7px;
+  background: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  opacity: 0;
+  transition:
+    opacity 0.5s ease,
+    top 0.5s ease;
+  z-index: 1000;
+}
+.pop-up.open {
+  top: 45px;
+  opacity: 1;
+}
+
 section {
   display: grid;
   grid-template-columns: auto 400px repeat(5, auto) 70px;
