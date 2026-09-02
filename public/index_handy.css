@@ -450,6 +450,7 @@ select,
   content: "off";
   display: block;
   text-align: center;
+  line-height: 30px;
 }
 
 .check:checked::after {
