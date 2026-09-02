@@ -464,7 +464,8 @@ select,
 }
 
 .check::after {
-  position: fixed;
+  position: absolute;
+  top: -100%;
   content: "ON";
   display: block;
   text-align: center;
