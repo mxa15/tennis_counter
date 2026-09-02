@@ -458,7 +458,7 @@ select,
 }
 
 .check:checked::after {
-  content: "ON";
+  content: "ONee";
   display: block;
   text-align: center;
   line-height: 30px;
