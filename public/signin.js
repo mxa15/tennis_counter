@@ -23,19 +23,14 @@ function signin() {
         location.href = "/startseite";
       } else if (status == "user exists") {
         loadin_screen.style.display = "none";
-        subtitle.innerHTML = "user existiert bereits";
-        subtitle.style.color = "red";
         name.value = "";
         password.value = "";
-        setTimeout(() => {
-          subtitle.innerHTML = "Sign in";
-          subtitle.style.color = "black";
-        }, 1000);
+        openPopUp("user existiert bereits", "red");
       }
     });
 }
 
-function openPopUp(text, color = "gray", time = 1500) {
+function openPopUp(text, color = "gray", time = 2000) {
   const popup = document.createElement("div");
   popup.classList.add("pop-up");
   popup.innerHTML = text;
