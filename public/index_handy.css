@@ -472,7 +472,7 @@ select,
   transform: translate(100%, -100%);
   transition: transform 0.5s ease;
   background: green;
-  height: 0px;
+  height: 30px;
 }
 
 .check:checked::after {
