@@ -452,13 +452,14 @@ select,
   display: block;
   text-align: center;
   line-height: 30px;
+  transform: translateX(0px);
 }
 
 .check:checked::before {
   display: none;
 }
 
-.check:checked::after {
+.check::after {
   content: "ON";
   display: block;
   text-align: center;
