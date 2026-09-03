@@ -644,7 +644,6 @@ async function confirmFriend(id) {
 async function addfavoritName() {
   console.log("hallo");
 
-  const output = document.getElementById("favoritNameDiv");
   const name = document.getElementById("favoritNameInput").value;
 
   const response = await fetch("/api/SQL", {
@@ -697,5 +696,7 @@ async function getfavoritNames() {
   const data = await response.json();
   if (data.status !== "ok") {
     openPopUp("fehler:" + data.status, "red");
+    return;
   }
+  const output = document.getElementById("favoritNameDiv");
 }
