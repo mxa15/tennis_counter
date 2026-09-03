@@ -701,6 +701,7 @@ async function getfavoritNames() {
 
   if (data.rows.length == 0) {
     console.log("keine favoriten");
+    return;
   }
 
   const names = data.rows[0].names;
