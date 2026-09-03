@@ -745,4 +745,9 @@ RETURNING *;`,
       params: ["user_id", name],
     }),
   });
+  const data = await response.json();
+
+  if (data.status !== "ok") {
+    openPopUp("fehler:" + data.status, "red");
+  }
 }
