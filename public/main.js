@@ -664,7 +664,7 @@ async function addfavoritName() {
       params: ["user_id"],
     }),
   });
-  const result = await response.json();
+  const rows = await response.json();
 
   output.innerHTML += `
     <div class="favoritnames">
