@@ -705,6 +705,8 @@ async function getfavoritNames() {
   output.innerHTML = "";
 
   names.forEach((name, index) => {
+    console.log(name);
+
     output.innerHTML += `
     <div class="favoritnames" id="fav-${index}>
       <h3>${name}</h3>
