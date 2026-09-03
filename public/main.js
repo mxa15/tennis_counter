@@ -641,11 +641,28 @@ async function confirmFriend(id) {
   }
 }
 
-function addfavoritName() {
+async function addfavoritName() {
   console.log("hallo");
 
   const output = document.getElementById("favoritNameDiv");
   const name = document.getElementById("favoritNameInput").value;
+
+  const response = await fetch("/api/SQL", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      sql: `
+UPDATE users
+SET settings = jsonb_set(
+    settings,
+    '{favoritNames}',
+    (settings->'favoritNames') || '"${name}"'::jsonb
+)
+WHERE id = 1;`,
+    }),
+  });
 
   output.innerHTML += `
     <div class="favoritnames">
