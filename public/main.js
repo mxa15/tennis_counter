@@ -654,13 +654,14 @@ async function addfavoritName() {
     },
     body: JSON.stringify({
       sql: `
-UPDATE users
-SET settings = jsonb_set(
-    settings,
-    '{favoritNames}',
-    (settings->'favoritNames') || '"${name}"'::jsonb
-)
-WHERE id = 1;`,
+      UPDATE users
+      SET settings = jsonb_set(
+        settings,
+        '{favoritNames}',
+        (settings->'favoritNames') || '"${name}"'::jsonb
+      )
+      WHERE id = $1;`,
+      params: {},
     }),
   });
 
