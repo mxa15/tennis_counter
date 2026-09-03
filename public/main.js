@@ -679,6 +679,7 @@ async function addfavoritName() {
     openPopUp("name existiert schon", "red");
   }
   writefavoritNames();
+  document.getElementById("favoritNameInput").value = "";
 }
 
 async function getfavoritNames() {
