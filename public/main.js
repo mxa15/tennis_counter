@@ -674,12 +674,6 @@ async function addfavoritName() {
 
     return;
   }
-
-  output.innerHTML += `
-    <div class="favoritnames">
-      <h3>${name}</h3>
-      <button><img src="/public/close.png" alt="" /></button>
-    </div>`;
 }
 
 async function getfavoritNames() {
@@ -709,4 +703,12 @@ async function getfavoritNames() {
   const output = document.getElementById("favoritNameDiv");
 
   output.innerHTML = "";
+
+  names.forEach((name) => {
+    output.innerHTML += `
+    <div class="favoritnames">
+      <h3>${name}</h3>
+      <button><img src="/public/close.png" alt="" /></button>
+    </div>`;
+  });
 }
