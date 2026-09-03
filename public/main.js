@@ -744,7 +744,7 @@ SET settings = jsonb_set(
   )
 )
 WHERE id = $1
-RETURNING *;
+RETURNING *;`,
       params: ["user_id", name],
     }),
   });
