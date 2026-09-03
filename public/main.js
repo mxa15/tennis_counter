@@ -704,9 +704,9 @@ async function getfavoritNames() {
 
   output.innerHTML = "";
 
-  names.forEach((name) => {
+  names.forEach((name, index) => {
     output.innerHTML += `
-    <div class="favoritnames">
+    <div class="favoritnames" id="fav-${index}>
       <h3>${name}</h3>
       <button><img src="/public/close.png" alt="" /></button>
     </div>`;
