@@ -661,7 +661,9 @@ async function addfavoritName() {
         (settings->'favoritNames') || '"${name}"'::jsonb
       )
       WHERE id = $1;`,
-      params: {},
+      params: {
+        ["user_id"]
+      },
     }),
   });
 
