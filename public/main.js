@@ -708,7 +708,7 @@ async function getfavoritNames() {
     console.log(name);
 
     output.innerHTML += `
-    <div class="favoritnames" id="fav-${index}>
+    <div class="favoritnames">
       <h3>${name}</h3>
       <button><img src="/public/close.png" alt="" /></button>
     </div>`;
