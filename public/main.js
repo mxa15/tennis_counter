@@ -695,4 +695,7 @@ async function getfavoritNames() {
     }),
   });
   const data = await response.json();
+  if (data.status !== "ok") {
+    openPopUp("fehler:" + data.status, "red");
+  }
 }
