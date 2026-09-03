@@ -674,6 +674,7 @@ async function addfavoritName() {
 
     return;
   }
+  getfavoritNames();
 }
 
 async function getfavoritNames() {
