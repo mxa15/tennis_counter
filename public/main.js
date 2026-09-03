@@ -675,6 +675,9 @@ async function addfavoritName() {
 
     return;
   }
+  if (result.rows.length == 0) {
+    openPopUp("name existiert schon", "red");
+  }
   getfavoritNames();
 }
 
