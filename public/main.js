@@ -704,20 +704,6 @@ async function getfavoritNames() {
   }
 
   return data.rows[0].names;
-
-  const output = document.getElementById("favoritNameDiv");
-
-  output.innerHTML = "";
-
-  names.forEach((name, index) => {
-    console.log(name);
-
-    output.innerHTML += `
-    <div class="favoritnames">
-      <h3>${name}</h3>
-      <button onclick="deletefavoritName('${name}')"><img src="/public/close.png" alt="" /></button>
-    </div>`;
-  });
 }
 
 async function deletefavoritName(name) {
