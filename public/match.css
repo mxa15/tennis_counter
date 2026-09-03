@@ -122,31 +122,92 @@ img {
   margin-right: 20px;
 }
 
-#loading {
+.loader {
   position: fixed;
+  display: flex;
   inset: 0;
-  background: white;
-  display: none;
   justify-content: center;
   align-items: center;
-  z-index: 300;
+  z-index: 1000;
+  background: white;
 }
-
-.spinner {
-  width: 60px;
-  height: 60px;
-  border: 6px solid #ddd;
-  border-top: 6px solid #007bff;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+.loadingcircle {
+  width: 20px;
+  height: 20px;
 }
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
+.c {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background: black;
+  opacity: 0;
+}
+#c1 {
+  transform: translateY(-40px);
+  animation: canim 1.4s linear infinite;
+}
+#c2 {
+  transform: rotateZ(26deg) translateY(-40px);
+  animation: canim 1.4s linear 0.1s infinite;
+}
+#c3 {
+  transform: rotateZ(52deg) translateY(-40px);
+  animation: canim 1.4s linear 0.2s infinite;
+}
+#c4 {
+  transform: rotateZ(78deg) translateY(-40px);
+  animation: canim 1.4s linear 0.3s infinite;
+}
+#c5 {
+  transform: rotateZ(104deg) translateY(-40px);
+  animation: canim 1.4s linear 0.4s infinite;
+}
+#c6 {
+  transform: rotateZ(130deg) translateY(-40px);
+  animation: canim 1.4s linear 0.5s infinite;
+}
+#c7 {
+  transform: rotateZ(156deg) translateY(-40px);
+  animation: canim 1.4s linear 0.6s infinite;
+}
+#c8 {
+  transform: rotateZ(182deg) translateY(-40px);
+  animation: canim 1.4s linear 0.7s infinite;
+}
+#c9 {
+  transform: rotateZ(208deg) translateY(-40px);
+  animation: canim 1.4s linear 0.8s infinite;
+}
+#c10 {
+  transform: rotateZ(234deg) translateY(-40px);
+  animation: canim 1.4s linear 0.9s infinite;
+}
+#c11 {
+  transform: rotateZ(260deg) translateY(-40px);
+  animation: canim 1.4s linear 1s infinite;
+}
+#c12 {
+  transform: rotateZ(286deg) translateY(-40px);
+  animation: canim 1.4s linear 1.1s infinite;
+}
+#c13 {
+  transform: rotateZ(312deg) translateY(-40px);
+  animation: canim 1.4s linear 1.2s infinite;
+}
+#c14 {
+  transform: rotateZ(338deg) translateY(-40px);
+  animation: canim 1.4s linear 1.3s infinite;
+}
+@keyframes canim {
+  0% {
+    opacity: 1;
   }
-  to {
-    transform: rotate(360deg);
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
