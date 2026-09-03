@@ -721,3 +721,28 @@ async function getfavoritNames() {
 }
 
 getfavoritNames();
+
+async function deletefavoritName() {
+  const response = await fetch("/api/SQL", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      sql: `
+UPDATE users
+SET settings = jsonb_set(
+  settings,
+  '{favoritNames}',
+  (
+    SELECT jsonb_agg(value)
+    FROM jsonb_array_elements_text(settings->'favoritNames') AS value
+    WHERE value <> $2
+  )
+)
+WHERE id = $1
+RETURNING *;`,
+      params: ["user_id"],
+    }),
+  });
+}
