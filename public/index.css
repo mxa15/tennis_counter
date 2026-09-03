@@ -85,6 +85,7 @@ header {
   height: 12px;
   border-radius: 6px;
   background: black;
+  opacity: 0;
 }
 #c1 {
   transform: translateY(-40px);
