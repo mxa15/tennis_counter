@@ -764,7 +764,7 @@ function writefavoritNames() {
 
   output.innerHTML = "";
 
-  names.forEach((name, index) => {
+  names.forEach((name) => {
     console.log(name);
 
     output.innerHTML += `
