@@ -682,3 +682,16 @@ async function addfavoritName() {
       <button><img src="/public/close.png" alt="" /></button>
     </div>`;
 }
+
+async function getfavoritNames() {
+  const response = await fetch("/api/SQL", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      sql: "SELECT settings->'favoritNames' AS names FROM users WHERE id = $1",
+      params: ["user_id"],
+    }),
+  });
+}
