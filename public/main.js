@@ -745,6 +745,7 @@ RETURNING *;`,
 async function writefavoritNames() {
   const names = await getfavoritNames();
   const output = document.getElementById("favoritNameDiv");
+  const list = document.getElementById("favoritNames");
 
   output.innerHTML = "";
 
