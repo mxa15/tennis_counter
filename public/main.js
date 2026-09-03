@@ -749,5 +749,6 @@ RETURNING *;`,
 
   if (data.status !== "ok") {
     openPopUp("fehler:" + data.status, "red");
+    return;
   }
 }
