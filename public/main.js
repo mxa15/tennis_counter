@@ -658,7 +658,7 @@ async function addfavoritName() {
       SET settings = jsonb_set(
         settings,
         '{favoritNames}',
-        (settings->'favoritNames') || jsonb_build_array($2)
+        (settings->'favoritNames') || jsonb_build_array($2::text)
       )
       WHERE id = $1
       RETURNING *`,
