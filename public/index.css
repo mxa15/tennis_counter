@@ -71,6 +71,7 @@ header {
   align-items: center;
   min-height: 100vh;
   z-index: 1000;
+  background: white;
 }
 .loadingcircle {
   width: 20px;
