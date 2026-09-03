@@ -660,6 +660,7 @@ async function addfavoritName() {
         (settings->'favoritNames') || jsonb_build_array($2::text)
       )
       WHERE id = $1
+      AND NOT (settings->'favoritNames' @> jsonb_build_array($2::text))
       RETURNING *`,
       params: ["user_id", name],
     }),
