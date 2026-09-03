@@ -698,6 +698,9 @@ async function getfavoritNames() {
     openPopUp("fehler:" + data.status, "red");
     return;
   }
+
+  const names = data.rows[0].names;
+
   const output = document.getElementById("favoritNameDiv");
 
   output.innerHTML = "";
