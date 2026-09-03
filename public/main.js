@@ -722,7 +722,7 @@ async function getfavoritNames() {
 
 getfavoritNames();
 
-async function deletefavoritName() {
+async function deletefavoritName(name) {
   const response = await fetch("/api/SQL", {
     method: "POST",
     headers: {
@@ -742,7 +742,7 @@ SET settings = jsonb_set(
 )
 WHERE id = $1
 RETURNING *;`,
-      params: ["user_id"],
+      params: ["user_id", name],
     }),
   });
 }
