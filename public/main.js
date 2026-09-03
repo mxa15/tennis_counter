@@ -699,4 +699,6 @@ async function getfavoritNames() {
     return;
   }
   const output = document.getElementById("favoritNameDiv");
+
+  output.innerHTML = "";
 }
