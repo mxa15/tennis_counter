@@ -748,6 +748,7 @@ async function writefavoritNames() {
   const list = document.getElementById("favoritNames");
 
   output.innerHTML = "";
+  list.innerHTML = "";
 
   names.forEach((name) => {
     console.log(name);
@@ -757,6 +758,8 @@ async function writefavoritNames() {
       <h3>${name}</h3>
       <button onclick="deletefavoritName('${name}')"><img src="/public/close.png" alt="" /></button>
     </div>`;
+
+    list.innerHTML += "<option value='" + name + "'>";
   });
 }
 
