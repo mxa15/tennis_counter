@@ -667,7 +667,7 @@ async function addfavoritName() {
   const result = await response.json();
 
   if (result.status !== "ok") {
-    openPopUp("fehler", "red");
+    openPopUp("fehler:" + result.status, "red");
     return;
   }
 
