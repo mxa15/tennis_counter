@@ -712,3 +712,5 @@ async function getfavoritNames() {
     </div>`;
   });
 }
+
+getfavoritNames();
