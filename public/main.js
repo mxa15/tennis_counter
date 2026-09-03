@@ -699,6 +699,10 @@ async function getfavoritNames() {
     return;
   }
 
+  if (data.rows.length == 0) {
+    console.log("keine favoriten");
+  }
+
   const names = data.rows[0].names;
 
   const output = document.getElementById("favoritNameDiv");
