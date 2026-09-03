@@ -734,14 +734,17 @@ UPDATE users
 SET settings = jsonb_set(
   settings,
   '{favoritNames}',
-  (
-    SELECT jsonb_agg(value)
-    FROM jsonb_array_elements_text(settings->'favoritNames') AS value
-    WHERE value <> $2
+  COALESCE(
+    (
+      SELECT jsonb_agg(value)
+      FROM jsonb_array_elements_text(settings->'favoritNames') AS value
+      WHERE value <> $2
+    ),
+    '[]'::jsonb
   )
 )
 WHERE id = $1
-RETURNING *;`,
+RETURNING *;
       params: ["user_id", name],
     }),
   });
