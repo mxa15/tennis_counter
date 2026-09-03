@@ -742,7 +742,7 @@ RETURNING *;`,
   writefavoritNames();
 }
 
-async function writeinsettingsfavoritNames() {
+async function writefavoritNames() {
   const names = await getfavoritNames();
   const output = document.getElementById("favoritNameDiv");
 
