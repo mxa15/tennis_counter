@@ -666,6 +666,11 @@ async function addfavoritName() {
   });
   const result = await response.json();
 
+  if (result.status == "ok") {
+    openPopUp("fehler", "red");
+    return;
+  }
+
   output.innerHTML += `
     <div class="favoritnames">
       <h3>${name}</h3>
