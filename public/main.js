@@ -715,7 +715,7 @@ async function getfavoritNames() {
     output.innerHTML += `
     <div class="favoritnames">
       <h3>${name}</h3>
-      <button><img src="/public/close.png" alt="" /></button>
+      <button onclick="deletefavoritName('${name}')"><img src="/public/close.png" alt="" /></button>
     </div>`;
   });
 }
