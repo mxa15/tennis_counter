@@ -670,7 +670,9 @@ async function addfavoritName() {
   console.log(result.rows);
 
   if (result.status !== "ok") {
-    openPopUp("fehler:" + result.error, "red");
+    openPopUp("fehler:" + result.status, "red");
+    console.log(result.error);
+
     return;
   }
 
