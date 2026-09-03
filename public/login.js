@@ -1,7 +1,6 @@
 function login() {
   const name = document.getElementById("name");
   const password = document.getElementById("password");
-  const subtitle = document.getElementById("subtitle");
   const loadin_screen = document.getElementById("loading");
 
   loadin_screen.style.display = "flex";
