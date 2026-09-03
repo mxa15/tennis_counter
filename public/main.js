@@ -742,8 +742,8 @@ RETURNING *;`,
   writefavoritNames();
 }
 
-function writefavoritNames() {
-  const names = getfavoritNames();
+async function writefavoritNames() {
+  const names = await getfavoritNames();
   const output = document.getElementById("favoritNameDiv");
 
   output.innerHTML = "";
