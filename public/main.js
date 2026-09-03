@@ -759,6 +759,7 @@ RETURNING *;`,
 }
 
 function writefavoritNames() {
+  const names = getfavoritNames();
   const output = document.getElementById("favoritNameDiv");
 
   output.innerHTML = "";
