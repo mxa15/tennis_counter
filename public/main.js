@@ -660,11 +660,14 @@ async function addfavoritName() {
         '{favoritNames}',
         (settings->'favoritNames') || '"${name}"'::jsonb
       )
-      WHERE id = $1;`,
+      WHERE id = $1
+      RETURNING *`,
       params: ["user_id"],
     }),
   });
   const result = await response.json();
+
+  console.log(result.rows);
 
   if (result.status !== "ok") {
     openPopUp("fehler:" + result.status, "red");
