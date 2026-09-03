@@ -751,5 +751,6 @@ RETURNING *;`,
     openPopUp("fehler:" + data.status, "red");
     return;
   }
+
   getfavoritNames();
 }
