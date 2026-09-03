@@ -694,4 +694,5 @@ async function getfavoritNames() {
       params: ["user_id"],
     }),
   });
+  const data = await response.json();
 }
