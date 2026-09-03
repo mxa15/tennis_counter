@@ -678,7 +678,7 @@ async function addfavoritName() {
   if (result.rows.length == 0) {
     openPopUp("name existiert schon", "red");
   }
-  getfavoritNames();
+  writefavoritNames();
 }
 
 async function getfavoritNames() {
@@ -720,8 +720,6 @@ async function getfavoritNames() {
   });
 }
 
-getfavoritNames();
-
 async function deletefavoritName(name) {
   const response = await fetch("/api/SQL", {
     method: "POST",
@@ -755,7 +753,7 @@ RETURNING *;`,
     return;
   }
 
-  getfavoritNames();
+  writefavoritNames();
 }
 
 function writefavoritNames() {
@@ -774,3 +772,5 @@ function writefavoritNames() {
     </div>`;
   });
 }
+
+writefavoritNames();
