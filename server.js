@@ -814,6 +814,7 @@ app.post("/api/SQL", async (req, res) => {
   }
   params.forEach((value, index) => {
     if (value == "user_id") params[index] = req.userid;
+    console.log("läuft");
   });
 
   try {

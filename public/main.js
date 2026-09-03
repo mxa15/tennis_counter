@@ -658,11 +658,11 @@ async function addfavoritName() {
       SET settings = jsonb_set(
         settings,
         '{favoritNames}',
-        (settings->'favoritNames') || '"${name}"'::jsonb
+        (settings->'favoritNames') || jsonb_build_array($2)
       )
       WHERE id = $1
       RETURNING *`,
-      params: ["user_id"],
+      params: ["user_id", name],
     }),
   });
   const result = await response.json();
