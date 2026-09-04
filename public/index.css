@@ -483,3 +483,7 @@ select,
   border-radius: 11px;
   background: red;
 }
+
+.check:checked::after {
+  background: black;
+}
