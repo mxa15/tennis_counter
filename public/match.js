@@ -151,8 +151,9 @@ function addpoint(winner, loser) {
     (set == 4 &&
       ((points.sets[points.sets.length - 1][0] == 4 &&
         points.sets[points.sets.length - 1][1] == 4) ||
-        (points.sets[points.sets.length - 1][0] == 4 &&
-          points.sets[points.sets.length - 1][1] == 4)))
+        (points.sets[points.sets.length - 1][0] == 3 &&
+          points.sets[points.sets.length - 1][1] == 3 &&
+          three_three)))
   ) {
     points.tiebrake[winner] += 1;
 
