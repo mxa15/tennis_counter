@@ -104,9 +104,11 @@ function addpoint(winner, loser) {
   const third_set = matchsettings.data.third_set;
   const winnergame = tabele.game[winner];
   const points = matchsettings.points;
+  let three_three = false;
 
   if (set == "3-3") {
     set = "4";
+    three_three = true;
   }
 
   matchsettings.course.push({
