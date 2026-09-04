@@ -488,45 +488,35 @@ select,
 
 .check {
   appearance: none;
-  width: 70px;
-  height: 30px;
-  background: red;
+  width: 40px;
+  height: 24px;
   transition: background 0.5s ease;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 12px;
   margin: 0px;
+  border: 2px solid black;
+  background: rgba(255, 0, 0, 0.3);
+  transition: background 0.5s ease-in-out;
 }
 
 .check:checked {
-  background: rgb(0, 162, 0);
+  background: rgba(31, 144, 0, 0.3);
 }
 
 .check::before {
-  content: "OFF";
-  color: black;
+  content: "";
   display: block;
-  text-align: center;
-  line-height: 30px;
-  height: 30px;
+  height: 22px;
+  width: 22px;
+  border-radius: 11px;
+  background: red;
   transform: translateX(0px);
-  transition: transform 0.5s ease;
+  transition:
+    transform 0.5s ease-in-out,
+    background 0.5s ease-in-out;
 }
 
 .check:checked::before {
-  transform: translateX(-100%);
-}
-
-.check::after {
-  content: "ON";
-  color: black;
-  display: block;
-  text-align: center;
-  line-height: 30px;
-  transform: translate(100%, -100%);
-  transition: transform 0.5s ease;
-  height: 30px;
-}
-
-.check:checked::after {
-  transform: translate(0px, -100%);
+  background: rgb(31, 144, 0);
+  transform: translateX(16px);
 }
