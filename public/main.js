@@ -708,7 +708,11 @@ async function getfavoritNames() {
 }
 
 async function deletefavoritName(name) {
-  const element = document.getElementById();
+  const element = document.getElementById("name-" + name);
+  element.classList.add("delete_friend");
+  setTimeout(() => {
+    element.remove;
+  }, 1000);
   const response = await fetch("/api/SQL", {
     method: "POST",
     headers: {
