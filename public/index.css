@@ -487,6 +487,6 @@ select,
 }
 
 .check:checked::before {
-  background: black;
+  background: rgb(31, 144, 0);
   transform: translateX(26px);
 }
