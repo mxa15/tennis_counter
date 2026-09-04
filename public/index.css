@@ -500,5 +500,6 @@ select,
 }
 
 #aloowposition {
+  position: relative;
   left: 90%;
 }
