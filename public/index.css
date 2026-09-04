@@ -476,6 +476,10 @@ select,
   background: rgba(255, 0, 0, 0.3);
 }
 
+.check:checked {
+  background: rgba(31, 144, 0, 0.3);
+}
+
 .check::before {
   content: "";
   display: block;
