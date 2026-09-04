@@ -466,7 +466,7 @@ select,
 
 .check {
   appearance: none;
-  width: 50px;
+  width: 40px;
   height: 24px;
   transition: background 0.5s ease;
   overflow: hidden;
@@ -496,5 +496,5 @@ select,
 
 .check:checked::before {
   background: rgb(31, 144, 0);
-  transform: translateX(26px);
+  transform: translateX(16px);
 }
