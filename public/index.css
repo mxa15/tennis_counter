@@ -475,15 +475,18 @@ select,
   border: 2px solid black;
 }
 
-.check::after {
+.check::before {
   content: "";
   display: block;
   height: 22px;
   width: 22px;
   border-radius: 11px;
   background: red;
+  transform: translateX(0px);
+  transition: transform 0.5s ease;
 }
 
-.check:checked::after {
+.check:checked::before {
   background: black;
+  transform: translateX(20px);
 }
