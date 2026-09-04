@@ -483,7 +483,9 @@ select,
   border-radius: 11px;
   background: red;
   transform: translateX(0px);
-  transition: transform 0.5s ease;
+  transition:
+    transform 0.5s ease,
+    background 0.5s ease;
 }
 
 .check:checked::before {
