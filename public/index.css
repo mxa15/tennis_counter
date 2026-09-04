@@ -474,7 +474,7 @@ select,
   margin: 0px;
   border: 2px solid black;
   background: rgba(255, 0, 0, 0.3);
-  transition: background 0.5s ease-in-out;
+  transition: background 0.3s ease-in-out;
 }
 
 .check:checked {
@@ -490,8 +490,8 @@ select,
   background: red;
   transform: translateX(0px);
   transition:
-    transform 0.5s ease-in-out,
-    background 0.5s ease-in-out;
+    transform 0.3s ease-in-out,
+    background 0.3s ease-in-out;
 }
 
 .check:checked::before {
