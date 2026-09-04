@@ -708,6 +708,7 @@ async function getfavoritNames() {
 }
 
 async function deletefavoritName(name) {
+  const element = document.getElementById();
   const response = await fetch("/api/SQL", {
     method: "POST",
     headers: {
@@ -755,7 +756,7 @@ async function writefavoritNames() {
     console.log(name);
 
     output.innerHTML += `
-    <div class="favoritnames">
+    <div class="favoritnames" id="name-${name}">
       <h3>${name}</h3>
       <button onclick="deletefavoritName('${name}')"><img src="/public/close.png" alt="" /></button>
     </div>`;
