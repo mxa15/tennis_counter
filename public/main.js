@@ -419,6 +419,9 @@ async function start_match() {
   let position;
   let posdata;
 
+  if (document.getElementById("aloowposition").value == "OFF") {
+  }
+
   try {
     position = await new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resolve, reject);
