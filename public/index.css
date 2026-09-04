@@ -475,7 +475,7 @@ select,
   border: 2px solid black;
 }
 
-.check::before {
+.check::after {
   content: "";
   height: 22px;
   width: 22px;
