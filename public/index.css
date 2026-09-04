@@ -466,7 +466,7 @@ select,
 
 .check {
   appearance: none;
-  width: 70px;
+  width: 55px;
   height: 24px;
   transition: background 0.5s ease;
   overflow: hidden;
