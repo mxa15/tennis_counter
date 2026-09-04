@@ -148,9 +148,11 @@ function addpoint(winner, loser) {
   if (
     (points.sets[points.sets.length - 1][0] == 6 &&
       points.sets[points.sets.length - 1][1] == 6) ||
-    (points.sets[points.sets.length - 1][0] == 4 &&
-      points.sets[points.sets.length - 1][1] == 4 &&
-      set == 4)
+    (set == 4 &&
+      ((points.sets[points.sets.length - 1][0] == 4 &&
+        points.sets[points.sets.length - 1][1] == 4) ||
+        (points.sets[points.sets.length - 1][0] == 4 &&
+          points.sets[points.sets.length - 1][1] == 4)))
   ) {
     points.tiebrake[winner] += 1;
 
