@@ -122,6 +122,9 @@ function update_tabelle() {
     (matchsettings.points.sets[matchsettings.points.sets.length - 1][0] == 4 &&
       matchsettings.points.sets[matchsettings.points.sets.length - 1][1] == 4 &&
       matchsettings.data.set == 4) ||
+    (matchsettings.points.sets[matchsettings.points.sets.length - 1][0] == 3 &&
+      matchsettings.points.sets[matchsettings.points.sets.length - 1][1] == 3 &&
+      matchsettings.data.set == "3-3") ||
     matchsettings.points.championstiebrake == true
   ) {
     tabele.game[0].innerHTML = matchsettings.points.tiebrake[0];
