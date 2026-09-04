@@ -99,11 +99,15 @@ getdata();
 
 function addpoint(winner, loser) {
   const advantage = matchsettings.data.advantage == "true";
-  const set = matchsettings.data.set;
+  let set = matchsettings.data.set;
   const max_sets = matchsettings.data.max_sets;
   const third_set = matchsettings.data.third_set;
   const winnergame = tabele.game[winner];
   const points = matchsettings.points;
+
+  if (set == "3-3") {
+    set = "4";
+  }
 
   matchsettings.course.push({
     points: structuredClone(matchsettings.points),
