@@ -420,25 +420,23 @@ async function start_match() {
   let posdata;
 
   if (document.getElementById("aloowposition").checked) {
-    document.getElementById("aloowposition").checked;
-  }
+    try {
+      position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
 
-  try {
-    position = await new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
-
-    posdata = {
-      aloowed: true,
-      lat: position.coords.latitude,
-      lon: position.coords.longitude,
-    };
-  } catch (error) {
-    console.log(error);
-    posdata = {
-      allowed: false,
-      error: error.message,
-    };
+      posdata = {
+        aloowed: true,
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      };
+    } catch (error) {
+      console.log(error);
+      posdata = {
+        allowed: false,
+        error: error.message,
+      };
+    }
   }
 
   const data = {
