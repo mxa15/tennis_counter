@@ -419,9 +419,8 @@ async function start_match() {
   let position;
   let posdata;
 
-  console.log(document.getElementById("aloowposition").checked);
-
   if (document.getElementById("aloowposition").value == "OFF") {
+    document.getElementById("aloowposition").checked;
   }
 
   try {
