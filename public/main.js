@@ -437,6 +437,10 @@ async function start_match() {
         error: error.message,
       };
     }
+  } else {
+    posdata = {
+      allowed: false,
+    };
   }
 
   const data = {
