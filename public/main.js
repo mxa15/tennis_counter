@@ -419,7 +419,7 @@ async function start_match() {
   let position;
   let posdata;
 
-  if (document.getElementById("aloowposition").value == "OFF") {
+  if (document.getElementById("aloowposition").checked) {
     document.getElementById("aloowposition").checked;
   }
 
