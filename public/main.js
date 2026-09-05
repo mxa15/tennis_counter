@@ -440,7 +440,7 @@ async function start_match() {
   } else {
     posdata = {
       allowed: false,
-      error: "not allowed",
+      error: "user has not allowed",
     };
   }
 
