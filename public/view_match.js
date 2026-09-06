@@ -36,58 +36,61 @@ observer.observe(header);
 
 const protocol = location.protocol === "https:" ? "wss:" : "ws:";
 
-const socket = new WebSocket(`${protocol}//${location.host}`);
+let socket;
 
-socket.onopen = () => {
-  console.log("WebSocket verbunden");
-  socket.send(
-    JSON.stringify({
-      type: "loginViewer",
-      data: {
-        matchcode: matchcode,
-      },
-    }),
-  );
-};
+function connectsocket() {
+  socket = new WebSocket(`${protocol}//${location.host}`);
 
-socket.onmessage = async (event) => {
-  const { type, data } = JSON.parse(event.data);
-  if (type === "getmatchData" || type === "updateMatch") {
-    matchsettings = data.matchsettings;
-    console.log(matchsettings);
-    update_tabelle();
-    tabele.names[0].textContent = matchsettings.data.player1;
-    tabele.names[1].textContent = matchsettings.data.player2;
-    loadin_screen.style.display = "none";
-
-    const response = await fetch("/api/SQL", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        sql: "SELECT username FROM users WHERE id = $1",
-        params: [matchsettings.owner_id],
+  socket.onopen = () => {
+    console.log("WebSocket verbunden");
+    socket.send(
+      JSON.stringify({
+        type: "loginViewer",
+        data: {
+          matchcode: matchcode,
+        },
       }),
-    });
-    const dataoutput = await response.json();
+    );
+  };
 
-    let owner_name;
+  socket.onmessage = async (event) => {
+    const { type, data } = JSON.parse(event.data);
+    if (type === "getmatchData" || type === "updateMatch") {
+      matchsettings = data.matchsettings;
+      console.log(matchsettings);
+      update_tabelle();
+      tabele.names[0].textContent = matchsettings.data.player1;
+      tabele.names[1].textContent = matchsettings.data.player2;
+      loadin_screen.style.display = "none";
 
-    if (dataoutput.status == "ok") {
-      owner_name = dataoutput.rows[0].username;
-    } else {
-      console.log(dataoutput.status);
-      owner_name = "fehler";
-    }
+      const response = await fetch("/api/SQL", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sql: "SELECT username FROM users WHERE id = $1",
+          params: [matchsettings.owner_id],
+        }),
+      });
+      const dataoutput = await response.json();
 
-    const setToWin = matchsettings.data.max_sets == 3 ? 2 : 3;
-    const withAdvantage = matchsettings.data.advantage ? "ja" : "nein";
-    const lastSet =
-      matchsettings.data.third_set == "set"
-        ? "normaler Satz"
-        : "Tiebreak bis " + matchsettings.data.third_set;
-    info.innerHTML = `
+      let owner_name;
+
+      if (dataoutput.status == "ok") {
+        owner_name = dataoutput.rows[0].username;
+      } else {
+        console.log(dataoutput.status);
+        owner_name = "fehler";
+      }
+
+      const setToWin = matchsettings.data.max_sets == 3 ? 2 : 3;
+      const withAdvantage = matchsettings.data.advantage ? "ja" : "nein";
+      const lastSet =
+        matchsettings.data.third_set == "set"
+          ? "normaler Satz"
+          : "Tiebreak bis " + matchsettings.data.third_set;
+      info.innerHTML = `
 <span>Matchcode:</span> <span>${matchsettings.code}</span>
 <span>Zähler:</span> <span>${owner_name}</span>
 <span>Satz:</span> <span>bis ${matchsettings.data.set}</span>
@@ -95,18 +98,19 @@ socket.onmessage = async (event) => {
 <span>Mit Vorteil:</span> <span>${withAdvantage}</span>
 <span>Letzter Satz:</span> <span>${lastSet}</span>`;
 
-    const lat = Number(matchsettings.data.position.lat);
-    const lon = Number(matchsettings.data.position.lon);
+      const lat = Number(matchsettings.data.position.lat);
+      const lon = Number(matchsettings.data.position.lon);
 
-    document.getElementById("posbtn").addEventListener("click", () => {
-      if (matchsettings.data.position.aloowed) {
-        window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
-      } else {
-        openPopUp("position nicht verfügbar", "red");
-      }
-    });
-  }
-};
+      document.getElementById("posbtn").addEventListener("click", () => {
+        if (matchsettings.data.position.aloowed) {
+          window.open(`https://www.google.com/maps?q=${lat},${lon}`, "_blank");
+        } else {
+          openPopUp("position nicht verfügbar", "red");
+        }
+      });
+    }
+  };
+}
 
 const pointsystem = ["0", "15", "30", "40", "ad"];
 
