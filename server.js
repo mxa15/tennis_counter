@@ -8,6 +8,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const UAParser = require("ua-parser-js");
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
