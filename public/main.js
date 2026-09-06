@@ -771,10 +771,4 @@ async function writefavoritNames() {
   });
 }
 
-`
-<div class="friend" id="${userid}">
-          <p>${escapeHTML(name)}</p>
-          <button onclick="delete_friend('${userid}')"><img src="/public/remove-user.png" alt="add"/></button>
-        </div>`;
-
 writefavoritNames();
