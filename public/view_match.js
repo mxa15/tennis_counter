@@ -112,6 +112,11 @@ function connectsocket() {
   };
 }
 
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+  }
+});
+
 const pointsystem = ["0", "15", "30", "40", "ad"];
 
 function update_tabelle() {
