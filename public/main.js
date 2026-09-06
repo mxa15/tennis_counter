@@ -715,6 +715,8 @@ async function getfavoritNames() {
 }
 
 async function deletefavoritName(name) {
+  const objeckt = document.getElementById("name-" + name);
+
   const response = await fetch("/api/SQL", {
     method: "POST",
     headers: {
