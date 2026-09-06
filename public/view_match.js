@@ -112,6 +112,8 @@ function connectsocket() {
   };
 }
 
+connectsocket();
+
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") {
     if (!socket || socket.readyState !== WebSocket.OPEN) {
