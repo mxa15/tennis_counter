@@ -35,8 +35,6 @@ app.get("/", (req, res) => {
 
 app.get("/startseite", (req, res) => {
   res.sendFile(path.join(__dirname, "html_files", "index.html"));
-  const parser = new UAParser(req.headers["user-agent"]);
-  console.log(parser.getDevice());
 });
 
 app.get("/login", (req, res) => {
