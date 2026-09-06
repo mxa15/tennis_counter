@@ -762,13 +762,19 @@ async function writefavoritNames() {
     console.log(name);
 
     output.innerHTML += `
-    <div class="favoritnames" id="name-${name}">
-      <h3>${name}</h3>
+    <div class="friend" id="name-${name}">
+      <p>${name}</p>
       <button onclick="deletefavoritName('${name}')"><img src="/public/close.png" alt="" /></button>
     </div>`;
 
     list.innerHTML += "<option value='" + name + "'>";
   });
 }
+
+`
+<div class="friend" id="${userid}">
+          <p>${escapeHTML(name)}</p>
+          <button onclick="delete_friend('${userid}')"><img src="/public/remove-user.png" alt="add"/></button>
+        </div>`;
 
 writefavoritNames();
