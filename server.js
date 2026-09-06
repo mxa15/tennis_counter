@@ -34,6 +34,7 @@ app.get("/", (req, res) => {
 
 app.get("/startseite", (req, res) => {
   res.sendFile(path.join(__dirname, "html_files", "index.html"));
+  console.log(req.headers["user-agent"]);
 });
 
 app.get("/login", (req, res) => {
