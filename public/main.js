@@ -719,6 +719,10 @@ async function deletefavoritName(name) {
 
   objeckt.classList.add("delete_friend");
 
+  setTimeout(() => {
+    objeckt.remove();
+  }, 1000);
+
   const response = await fetch("/api/SQL", {
     method: "POST",
     headers: {
