@@ -207,7 +207,7 @@ section {
   height: 40px;
   border: 0px;
   border-top: 3px solid black;
-  background-color: var(--sidebar-color);
+  background-color: transparent;
   font-size: 20px;
   color: black;
 }
