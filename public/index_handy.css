@@ -1,5 +1,6 @@
 :root {
   --header-color: rgba(153, 255, 0, 0.621);
+  --sidebar-color: rgba(152, 254, 0, 0.658);
 }
 
 ::-webkit-scrollbar {
@@ -165,7 +166,7 @@ header {
   position: fixed;
   height: 100%;
   width: 70%;
-  background: rgba(152, 254, 0, 0.658);
+  background: var(--sidebar-color);
   backdrop-filter: blur(10px);
   border-bottom-right-radius: 35px;
   border-top-right-radius: 35px;
