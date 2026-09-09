@@ -192,9 +192,6 @@ header {
   height: 40px;
   width: 40px;
 }
-.open_close:hover {
-  background-color: rgb(255, 255, 255);
-}
 #close_sidebar {
   margin-top: 15px;
 }
