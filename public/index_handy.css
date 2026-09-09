@@ -160,7 +160,7 @@ header {
 #sidebar {
   position: fixed;
   height: 100%;
-  width: 50%;
+  width: 70%;
   background: rgba(152, 254, 0, 0.658);
   backdrop-filter: blur(10px);
   border-bottom-right-radius: 25px;
