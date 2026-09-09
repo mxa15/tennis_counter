@@ -47,7 +47,10 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: green;
+  border-bottom-left-radius: 17px;
+  border-bottom-right-radius: 17px;
+  background: rgba(34, 35, 43, 0.471);
+  backdrop-filter: blur(10px);
   height: 80px;
   width: 100%;
   display: flex;
