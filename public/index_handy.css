@@ -1,4 +1,5 @@
 :root {
+  --background-color: white;
   --header-color: rgba(153, 255, 0, 0.621);
   --sidebar-color: rgba(152, 254, 0, 0.658);
 }
@@ -19,7 +20,7 @@ html {
 body {
   margin: 0;
   font-family: "Orbitron";
-  background-color: white;
+  background-color: var(--background-color);
   min-height: 100vh;
 }
 input,
