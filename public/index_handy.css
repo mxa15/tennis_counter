@@ -3,6 +3,10 @@
   --sidebar-color: rgba(152, 254, 0, 0.658);
 }
 
+html {
+  background: var(--header-color);
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
