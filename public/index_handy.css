@@ -80,6 +80,10 @@
   src: url("/public/Rustico-Regular.otf") format("opentype");
 }
 
+html {
+  background: var(--background-color);
+}
+
 body {
   margin: 0;
   font-family: "Orbitron";
