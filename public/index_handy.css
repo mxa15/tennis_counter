@@ -266,7 +266,7 @@ label {
 }
 .matches {
   flex: 0 0 auto;
-  width: min-content;
+  width: fit-content;
   height: 100px;
   border: 2px solid black;
   border-radius: 10px;
