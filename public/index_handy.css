@@ -48,13 +48,14 @@
   --color1: rgba(153, 255, 0, 1);
   --color2: rgba(0, 180, 255, 1);
   --text: rgba(25, 30, 25, 1);
-  transition: --background-color 5s ease;
-  transition: --background2 5s ease;
-  transition: --header-color 5s ease;
-  transition: --sidebar-color 5s ease;
-  transition: --color1 5s ease;
-  transition: --color2 5s ease;
-  transition: --text 5s ease;
+  transition:
+    --background-color 5s ease,
+    --background2 5s ease,
+    --header-color 5s ease,
+    --sidebar-color 5s ease,
+    --color1 5s ease,
+    --color2 5s ease,
+    --text 5s ease;
 }
 
 [data-theme="dark"] {
