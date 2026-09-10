@@ -89,6 +89,7 @@ body {
   font-family: "Orbitron";
   background: var(--background-color);
   min-height: 100vh;
+  padding-top: env(safe-area-inset-top);
 }
 input,
 select,
