@@ -556,8 +556,11 @@ label {
 
 .big-text {
   color: var(--text);
-  font-size: 25;
+  font-size: 25px;
+  font-weight: 600;
 }
 
 .smal-text {
+  color: var(--text);
+  font-size: 15px;
 }
