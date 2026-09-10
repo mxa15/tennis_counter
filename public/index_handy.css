@@ -530,7 +530,7 @@ section h1 {
 .check {
   appearance: none;
   width: 40px;
-  height: 24px;
+  height: 22px;
   transition: background 0.5s ease;
   overflow: hidden;
   border-radius: 12px;
