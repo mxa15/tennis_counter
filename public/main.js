@@ -781,4 +781,8 @@ async function writefavoritNames() {
 
 writefavoritNames();
 
-document.documentElement.dataset.theme = "dark";
+document.addEventListener("keydown", (e) => {
+  if (e.key == "a") {
+    document.documentElement.dataset.theme = "dark";
+  }
+});
