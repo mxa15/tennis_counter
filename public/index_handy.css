@@ -116,6 +116,13 @@ textarea {
   transform: translate(-50%, 20px);
   opacity: 1;
 }
+#over-header {
+  position: fixed;
+  width: 100vw;
+  height: 200px;
+  top: -200px;
+  left: 0;
+}
 header {
   position: fixed;
   top: 0;
