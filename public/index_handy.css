@@ -529,16 +529,3 @@ select,
   background: rgb(31, 144, 0);
   transform: translateX(16px);
 }
-
-@media (min-width: 600px) {
-  html,
-  body {
-    width: 400px;
-  }
-  header {
-    width: 400px;
-  }
-  #sidebar {
-    width: 300px;
-  }
-}
