@@ -86,7 +86,7 @@ header {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  background: white;
+  background: var(--background-color);
 }
 .loadingcircle {
   width: 20px;
@@ -97,7 +97,7 @@ header {
   width: 12px;
   height: 12px;
   border-radius: 6px;
-  background: black;
+  background: var(--text);
   opacity: 0;
 }
 #c1 {
@@ -304,10 +304,6 @@ section h1 {
   background-color: red;
 }
 
-#start_match:hover {
-  background-color: lightgray;
-}
-
 .search_div {
   position: relative;
   display: inline-block;
@@ -353,7 +349,7 @@ section h1 {
   left: 50%;
   top: 95%;
   transform: translate(-50%, -100%);
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--header-color);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 2px solid black;
