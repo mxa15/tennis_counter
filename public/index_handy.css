@@ -299,12 +299,12 @@ section input,
 select,
 #start_match {
   font-size: 26px;
-  color: gray;
+  color: var(--background2);
   font-weight: bold;
   margin-bottom: 20px;
   width: 90%;
   height: 50px;
-  border: 2px solid black;
+  border: 2px solid var(--color2);
   border-radius: 7px;
   background-color: white;
 }
