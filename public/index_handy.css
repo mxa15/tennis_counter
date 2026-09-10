@@ -247,12 +247,6 @@ section h1 {
   display: flex;
   justify-content: center;
 }
-section p,
-label {
-  font-size: 25px;
-  color: gray;
-  font-weight: bold;
-}
 .matchdiv {
   display: flex;
   gap: 10px;
