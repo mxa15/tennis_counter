@@ -86,7 +86,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Orbitron";
+  font-family: Arial;
   background: var(--background-color);
   min-height: 100vh;
   padding-top: env(safe-area-inset-top);
