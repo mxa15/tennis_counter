@@ -518,8 +518,6 @@ label {
 }
 
 .inputs {
-  margin-top: 200px;
-
   width: 100%;
   box-sizing: border-box;
 
@@ -544,7 +542,6 @@ label {
 
 .main-button {
   margin: 3%;
-  margin-top: 130px;
   height: 46px;
   padding: 12px 20px;
   border-radius: 12px;
