@@ -780,3 +780,5 @@ async function writefavoritNames() {
 }
 
 writefavoritNames();
+
+document.documentElement.dataset.theme = "dark";
