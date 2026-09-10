@@ -790,3 +790,21 @@ darkmode.addEventListener("change", () => {
     document.documentElement.setAttribute("data-theme", "ligth");
   }
 });
+
+function setTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  document.cookie = `theme=${theme}; max-age=31536000; path=/`;
+}
+
+function loadTheme() {
+  const cookie = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("theme="));
+
+  if (cookie) {
+    const theme = cookie.split("=")[1];
+    document.documentElement.setAttribute("data-theme", theme);
+  }
+}
+
+loadTheme();
