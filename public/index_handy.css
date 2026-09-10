@@ -553,3 +553,11 @@ label {
   background: var(--color1);
   color: var(--text);
 }
+
+.big-text {
+  color: var(--text);
+  font-size: 25;
+}
+
+.smal-text {
+}
