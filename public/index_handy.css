@@ -551,4 +551,5 @@ label {
   border: none;
   width: 94%;
   background: var(--color1);
+  color: var(--text);
 }
