@@ -306,7 +306,7 @@ select,
   height: 50px;
   border: 2px solid var(--color2);
   border-radius: 7px;
-  background-color: var(--background2);
+  background-color: var(--background-color);
 }
 
 .logout_delete {
