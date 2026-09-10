@@ -407,7 +407,7 @@ section h1 {
   align-items: center;
   width: calc(100% - 20px);
   font-size: 45px;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--color2);
   height: 50px;
   margin-bottom: 5px;
   padding: 5px;
