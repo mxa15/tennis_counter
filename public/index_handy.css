@@ -4,6 +4,42 @@
   initial-value: rgb(255, 255, 255);
 }
 
+@property --background2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(235, 242, 232, 1);
+}
+
+@property --header-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(153, 255, 0, 0.621);
+}
+
+@property --sidebar-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(152, 254, 0, 0.658);
+}
+
+@property --color1 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(153, 255, 0, 1);
+}
+
+@property --color2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(0, 180, 255, 1);
+}
+
+@property --text {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(25, 30, 25, 1);
+}
+
 :root {
   --background-color: rgb(255, 255, 255);
   --background2: rgba(235, 242, 232, 1);
