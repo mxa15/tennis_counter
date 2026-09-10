@@ -24,6 +24,9 @@ body {
   min-height: 100vh;
 }
 @media (min-width: 600px) {
+  body {
+    width: 400px;
+  }
 }
 input,
 select,
