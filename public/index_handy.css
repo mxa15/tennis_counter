@@ -341,13 +341,13 @@ section h1 {
   width: 200px;
   height: 35px;
   padding-left: 30px;
-  color: black;
+  color: var(--text);
   border: 2px solid #06b6d4;
   border-radius: 10px;
 }
 
 .search:focus::placeholder {
-  color: black;
+  color: var(--text);
 }
 
 .search_img {
