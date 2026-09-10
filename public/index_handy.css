@@ -6,10 +6,6 @@
   --color2: rgba(235, 242, 232, 1);
 }
 
-html {
-  background: var(--header-color);
-}
-
 ::-webkit-scrollbar {
   display: none;
 }
