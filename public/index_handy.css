@@ -23,11 +23,6 @@ body {
   background-color: var(--background-color);
   min-height: 100vh;
 }
-@media (min-width: 600px) {
-  body {
-    width: 400px;
-  }
-}
 input,
 select,
 button,
@@ -533,4 +528,13 @@ select,
 .check:checked::before {
   background: rgb(31, 144, 0);
   transform: translateX(16px);
+}
+
+@media (min-width: 600px) {
+  body {
+    width: 400px;
+  }
+  header {
+    width: 400px;
+  }
 }
