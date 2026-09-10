@@ -254,6 +254,7 @@ section {
   margin-right: 10px;
 }
 section h1 {
+  color: var(--text);
   font-size: 30px;
   width: 100%;
   display: flex;
