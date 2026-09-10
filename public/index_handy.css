@@ -529,3 +529,34 @@ select,
   background: rgb(31, 144, 0);
   transform: translateX(16px);
 }
+
+.inputs {
+  margin-top: 200px;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  /* Hintergrund */
+  background: white;
+
+  /* Text */
+  color: rgba(25, 30, 25, 1);
+  font-size: 16px;
+  font-family: inherit;
+
+  /* Rand */
+  border: 2px solid rgba(0, 180, 255, 1);
+  border-radius: 10px;
+
+  /* Innenabstand */
+  padding: 12px 14px;
+
+  /* Kein Standard-Browser-Styling */
+  outline: none;
+
+  /* Übergang */
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
