@@ -49,13 +49,13 @@
   --color2: rgba(0, 180, 255, 1);
   --text: rgba(25, 30, 25, 1);
   transition:
-    --background-color 5s ease,
-    --background2 5s ease,
-    --header-color 5s ease,
-    --sidebar-color 5s ease,
-    --color1 5s ease,
-    --color2 5s ease,
-    --text 5s ease;
+    --background-color 0.5s ease,
+    --background2 0.5s ease,
+    --header-color 0.5s ease,
+    --sidebar-color 0.5s ease,
+    --color1 0.5s ease,
+    --color2 0.5s ease,
+    --text 0.5s ease;
 }
 
 [data-theme="dark"] {
