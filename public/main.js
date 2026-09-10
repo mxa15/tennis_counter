@@ -785,8 +785,8 @@ const darkmode = document.getElementById("darkmode");
 
 darkmode.addEventListener("change", () => {
   if (darkmode.checked) {
-    document.documentElement.setAttribute("data-theme", "light");
-  } else {
     document.documentElement.setAttribute("data-theme", "dark");
+  } else {
+    document.documentElement.setAttribute("data-theme", "ligth");
   }
 });
