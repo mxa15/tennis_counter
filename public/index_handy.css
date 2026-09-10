@@ -558,7 +558,7 @@ section h1 {
 
 .check:checked::before {
   background: rgb(31, 144, 0);
-  transform: translateX(16px);
+  transform: translateX(18px);
 }
 
 .inputs {
