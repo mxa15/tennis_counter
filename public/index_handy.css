@@ -299,7 +299,7 @@ section input,
 select,
 #start_match {
   font-size: 26px;
-  color: var(--background2);
+  color: gray;
   font-weight: bold;
   margin-bottom: 20px;
   width: 90%;
