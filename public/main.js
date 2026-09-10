@@ -781,9 +781,12 @@ async function writefavoritNames() {
 
 writefavoritNames();
 
-document.addEventListener("keydown", (e) => {
-  if (e.key == "a") {
-    document.documentElement.dataset.theme =
-      document.documentElement.dataset.theme == "light" ? "dark" : "light";
+const darkmode = document.getElementById("darkmode");
+
+darkmode.addEventListener("change", () => {
+  if (darkmode.checked) {
+    document.documentElement.setAttribute("data-theme", "light");
+  } else {
+    document.documentElement.setAttribute("data-theme", "dark");
   }
 });
