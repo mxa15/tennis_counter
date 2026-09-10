@@ -537,7 +537,7 @@ select,
   box-sizing: border-box;
 
   /* Hintergrund */
-  background: white;
+  background: var(--background-color);
 
   /* Text */
   color: rgba(25, 30, 25, 1);
@@ -545,7 +545,7 @@ select,
   font-family: inherit;
 
   /* Rand */
-  border: 2px solid rgba(0, 180, 255, 1);
+  border: 2px solid var(--color2);
   border-radius: 10px;
 
   /* Innenabstand */
@@ -553,12 +553,6 @@ select,
 
   /* Kein Standard-Browser-Styling */
   outline: none;
-
-  /* Übergang */
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
 }
 
 .main-button {
@@ -571,5 +565,5 @@ select,
   font-weight: 600;
   border: none;
   width: 94%;
-  background: rgba(153, 255, 0, 1);
+  background: var(--color1);
 }
