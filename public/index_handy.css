@@ -1,5 +1,5 @@
 :root {
-  --background-color: white;
+  --background: white;
   --background2: rgba(235, 242, 232, 1);
   --header-color: rgba(153, 255, 0, 0.621);
   --sidebar-color: rgba(152, 254, 0, 0.658);
@@ -9,7 +9,7 @@
 }
 
 [data-theme="dark"] {
-  --background-color: rgba(15, 20, 15, 1);
+  --background: rgba(15, 20, 15, 1);
   --background2: rgba(25, 32, 25, 1);
 
   --header-color: rgba(153, 255, 0, 0.621);
@@ -33,7 +33,7 @@
 body {
   margin: 0;
   font-family: "Orbitron";
-  background-color: var(--background-color);
+  background: var(--background-color);
   min-height: 100vh;
 }
 input,
@@ -199,7 +199,7 @@ header {
 .open_close {
   height: 50px;
   width: 50px;
-  background-color: transparent;
+  background: transparent;
   border: 0px;
   display: flex;
   justify-content: center;
@@ -222,7 +222,7 @@ section {
   height: 40px;
   border: 0px;
   border-top: 3px solid black;
-  background-color: transparent;
+  background: transparent;
   font-size: 20px;
   color: black;
 }
@@ -248,7 +248,7 @@ section {
 
 #profilebutton {
   border: 0px;
-  background-color: transparent;
+  background: transparent;
   margin-right: 10px;
 }
 #loginbutton {
@@ -276,14 +276,14 @@ section h1 {
   width: fit-content;
   height: 100px;
   border-radius: 10px;
-  background-color: var(--background2);
+  background: var(--background2);
   padding: 5px;
 }
 .matchpoints {
   display: grid;
   grid-template-columns: repeat(8, max-content);
   text-align: center;
-  background-color: var(--color1);
+  background: var(--color1);
   width: fit-content;
   border-radius: 7px;
   margin-left: 5px;
@@ -305,10 +305,10 @@ section h1 {
   border-radius: 7px;
 }
 #logout {
-  background-color: rgb(171, 171, 171);
+  background: rgb(171, 171, 171);
 }
 #delete_user {
-  background-color: red;
+  background: red;
 }
 
 .search_div {
@@ -454,7 +454,7 @@ section h1 {
   height: 35px;
   width: 90%;
   margin-left: 5%;
-  background-color: gray;
+  background: gray;
   border-radius: 10px;
   margin-top: 5px;
 }
