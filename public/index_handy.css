@@ -526,7 +526,7 @@ label {
   background: var(--background-color);
 
   /* Text */
-  color: rgba(25, 30, 25, 1);
+  color: var(--text);
   font-size: 16px;
   font-family: inherit;
 
