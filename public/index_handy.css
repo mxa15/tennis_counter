@@ -538,4 +538,7 @@ select,
   header {
     width: 400px;
   }
+  #sidebar {
+    width: 300px;
+  }
 }
