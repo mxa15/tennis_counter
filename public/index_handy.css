@@ -387,6 +387,7 @@ section h1 {
   color: transparent;
   border: 2px solid black;
   border-radius: 0px;
+  font-size: 16px;
 }
 
 .search::placeholder {
