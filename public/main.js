@@ -114,7 +114,7 @@ async function uptdate_newfrienddiv(search) {
   loading_newfrienddiv.style.display = "flex";
   await get_friendrequests();
   await set_newfrienddiv(search);
-  //loading_newfrienddiv.style.display = "none";
+  loading_newfrienddiv.style.display = "none";
 }
 
 async function get_friends() {
