@@ -35,7 +35,6 @@ body {
   font-family: "Orbitron";
   background: var(--background-color);
   min-height: 100vh;
-  transition: background 0.5s ease;
 }
 input,
 select,
@@ -74,7 +73,6 @@ header {
   border-bottom-left-radius: 17px;
   border-bottom-right-radius: 17px;
   background: var(--header-color);
-  transition: background 0.5s ease;
   backdrop-filter: blur(10px);
   height: 80px;
   width: 100%;
@@ -102,7 +100,6 @@ header {
   align-items: center;
   z-index: 1000;
   background: var(--background-color);
-  transition: background 0.5s ease;
 }
 .loadingcircle {
   width: 20px;
@@ -114,7 +111,6 @@ header {
   height: 12px;
   border-radius: 6px;
   background: var(--text);
-  transition: background 0.5s ease;
   opacity: 0;
 }
 #c1 {
@@ -194,9 +190,7 @@ header {
   border-top-right-radius: 35px;
   z-index: 101;
   transform: translateX(-100%);
-  transition:
-    transform 0.3s ease,
-    background 0.5s ease;
+  transition: transform 0.3s ease;
 }
 
 #sidebar.open {
@@ -205,7 +199,7 @@ header {
 .open_close {
   height: 50px;
   width: 50px;
-  background: transparent;
+  background-color: transparent;
   border: 0px;
   display: flex;
   justify-content: center;
@@ -228,7 +222,7 @@ section {
   height: 40px;
   border: 0px;
   border-top: 3px solid black;
-  background: transparent;
+  background-color: transparent;
   font-size: 20px;
   color: black;
 }
@@ -254,7 +248,7 @@ section {
 
 #profilebutton {
   border: 0px;
-  background: transparent;
+  background-color: transparent;
   margin-right: 10px;
 }
 #loginbutton {
@@ -282,16 +276,14 @@ section h1 {
   width: fit-content;
   height: 100px;
   border-radius: 10px;
-  background: var(--background2);
-  transition: background 0.5s ease;
+  background-color: var(--background2);
   padding: 5px;
 }
 .matchpoints {
   display: grid;
   grid-template-columns: repeat(8, max-content);
   text-align: center;
-  background: var(--color1);
-  transition: background 0.5s ease;
+  background-color: var(--color1);
   width: fit-content;
   border-radius: 7px;
   margin-left: 5px;
@@ -313,10 +305,10 @@ section h1 {
   border-radius: 7px;
 }
 #logout {
-  background: rgb(171, 171, 171);
+  background-color: rgb(171, 171, 171);
 }
 #delete_user {
-  background: red;
+  background-color: red;
 }
 
 .search_div {
@@ -410,7 +402,6 @@ section h1 {
   width: calc(100% - 20px);
   font-size: 45px;
   background: var(--color1);
-  transition: background 0.5s ease;
   height: 50px;
   margin-bottom: 5px;
   padding: 5px;
@@ -463,7 +454,7 @@ section h1 {
   height: 35px;
   width: 90%;
   margin-left: 5%;
-  background: gray;
+  background-color: gray;
   border-radius: 10px;
   margin-top: 5px;
 }
@@ -528,7 +519,6 @@ section h1 {
 
   /* Hintergrund */
   background: var(--background-color);
-  transition: background 0.5s ease;
 
   /* Text */
   color: var(--text);
@@ -556,9 +546,6 @@ section h1 {
   border: none;
   width: 100%;
   background: var(--color1);
-  transition:
-    background 0.5s ease,
-    color 0.5s ease;
   color: var(--text);
 }
 
