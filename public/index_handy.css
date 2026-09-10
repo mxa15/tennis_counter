@@ -371,6 +371,7 @@ section h1 {
   width: 90vw;
   background: rgba(255, 255, 255, 0.2);
   align-items: baseline;
+  border: 2px solid black;
 }
 
 #newfriend_open_div {
