@@ -531,10 +531,7 @@ select,
 }
 
 @media (min-width: 600px) {
-  body {
-    width: 400px;
-  }
-  header {
+  html {
     width: 400px;
   }
 }
