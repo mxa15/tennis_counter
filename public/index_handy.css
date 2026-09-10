@@ -1,5 +1,11 @@
+@property --background-color {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgb(255, 255, 255);
+}
+
 :root {
-  --background-color: white;
+  --background-color: rgb(255, 255, 255);
   --background2: rgba(235, 242, 232, 1);
   --header-color: rgba(153, 255, 0, 0.621);
   --sidebar-color: rgba(152, 254, 0, 0.658);
