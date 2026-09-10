@@ -122,6 +122,7 @@ textarea {
   height: 200px;
   top: -200px;
   left: 0;
+  background: var(--header-color);
 }
 header {
   position: fixed;
