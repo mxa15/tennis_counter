@@ -783,6 +783,7 @@ writefavoritNames();
 
 document.addEventListener("keydown", (e) => {
   if (e.key == "a") {
-    document.documentElement.dataset.theme = "dark";
+    document.documentElement.dataset.theme =
+      document.documentElement.dataset.theme == "light" ? "dark" : "light";
   }
 });
