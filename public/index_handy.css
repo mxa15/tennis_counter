@@ -558,11 +558,9 @@ label {
   color: var(--text);
   font-size: 25px;
   font-weight: 600;
-  margin: 5px;
 }
 
 .smal-text {
   color: var(--text);
   font-size: 15px;
-  margin: 5px;
 }
