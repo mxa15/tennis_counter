@@ -351,3 +351,16 @@ function openPopUp(text, color = "gray", time = 1500) {
     }, 500);
   }, time + 100);
 }
+
+function loadTheme() {
+  const cookie = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("theme="));
+
+  if (cookie) {
+    const theme = cookie.split("=")[1];
+    document.documentElement.setAttribute("data-theme", theme);
+  }
+}
+
+loadTheme();
