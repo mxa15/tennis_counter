@@ -77,7 +77,7 @@ header {
   top: 0;
   left: 0;
   height: auto;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(7px);
 }
 
 .points {
