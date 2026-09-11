@@ -1,3 +1,26 @@
+:root {
+  --background-color: rgb(255, 255, 255);
+  --background2: rgba(235, 242, 232, 1);
+  --header-color: rgba(153, 255, 0, 0.621);
+  --sidebar-color: rgba(152, 254, 0, 0.658);
+  --color1: rgba(153, 255, 0, 1);
+  --color2: rgba(0, 180, 255, 1);
+  --text: rgba(25, 30, 25, 1);
+}
+
+[data-theme="dark"] {
+  --background-color: rgba(15, 20, 15, 1);
+  --background2: rgba(25, 32, 25, 1);
+
+  --header-color: rgba(153, 255, 0, 0.621);
+  --sidebar-color: rgba(152, 254, 0, 0.658);
+
+  --color1: rgba(153, 255, 0, 1);
+  --color2: rgba(0, 180, 255, 1);
+
+  --text: rgba(240, 245, 240, 1);
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
