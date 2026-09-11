@@ -69,19 +69,23 @@ section {
 
 header {
   position: fixed;
-  background: linear-gradient(to bottom, rgb(0, 0, 0), green);
+  background: linear-gradient(
+    to bottom,
+    var(--background-color),
+    var(--header-color)
+  );
   top: 0;
   left: 0;
   height: auto;
 }
 
 .points {
-  color: white;
+  color: var(--text);
   font-size: 30px;
 }
 
 .player {
-  color: white;
+  color: var(--text);
   font-size: 30px;
 }
 
@@ -300,7 +304,7 @@ img {
 #course {
   font-family: monospace;
   padding-top: 88vh;
-  color: white;
+  color: var(--text);
   font-size: 2vh;
   white-space: nowrap;
   overflow: auto;
@@ -311,7 +315,7 @@ img {
 #info {
   font-family: monospace;
   margin: 5px;
-  color: white;
+  color: var(--text);
   font-size: 2vh;
   display: grid;
   grid-template-columns: 50% 50%;
@@ -320,20 +324,7 @@ img {
 }
 
 #info span {
-  background: black;
   padding: 5px;
-}
-
-.shareBtn {
-  width: 80%;
-  height: 30px;
-  font-size: 20px;
-  margin-left: 10%;
-  background: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-  border: 2px solid white;
-  border-radius: 15px;
-  margin-bottom: 10px;
 }
 
 .rotate {
@@ -360,4 +351,18 @@ img {
   100% {
     transform: scale(1);
   }
+}
+
+.main-button {
+  margin-bottom: 7px;
+  height: 46px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  width: 94%;
+  background: var(--color1);
+  color: var(--text);
+  margin-left: 3%;
 }
