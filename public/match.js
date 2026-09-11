@@ -493,9 +493,6 @@ function loadTheme() {
   if (cookie) {
     const theme = cookie.split("=")[1];
     document.documentElement.setAttribute("data-theme", theme);
-    if (theme == "dark") {
-      darkmode.checked = true;
-    }
   }
 }
 
