@@ -364,3 +364,16 @@ img {
     transform: scale(1);
   }
 }
+
+.main-button {
+  margin-bottom: 7px;
+  height: 46px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  width: 100%;
+  background: var(--color1);
+  color: var(--text);
+}
