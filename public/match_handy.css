@@ -69,7 +69,11 @@ section {
 
 header {
   position: fixed;
-  background: linear-gradient(to bottom, --background-color, --header-color);
+  background: linear-gradient(
+    to bottom,
+    var(--background-color),
+    var(--header-color)
+  );
   top: 0;
   left: 0;
   height: auto;
