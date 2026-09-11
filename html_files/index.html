@@ -30,7 +30,13 @@
       <button id="open_sidebar" , class="open_close">
         <img src="/public/sidebar.png" alt="" class="sidebarbutton" />
       </button>
-      <div id="logodiv" onclick="changesection('startseite')">
+      <div
+        id="logodiv"
+        onclick="
+          changesection('startseite');
+          history.pushState({}, '', '?page=startseite');
+        "
+      >
         <img src="/public/image.png" alt="logo" id="logo" />
         <h1 id="title">Punktezähler</h1>
       </div>
