@@ -792,20 +792,18 @@ writefavoritNames();
 const darkmode = document.getElementById("darkmode");
 
 darkmode.addEventListener("change", () => {
-  if (darkmode.value !== "device") {
-    setTheme(darkmode.value);
-  } else {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }
+  setTheme(darkmode.value);
 });
 
 function setTheme(theme) {
   if (theme !== "device") {
     document.documentElement.setAttribute("data-theme", theme);
+  } else {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
   }
   document.cookie = `theme=${theme}; max-age=31536000; path=/`;
 }
@@ -816,7 +814,14 @@ function loadTheme() {
     .find((row) => row.startsWith("theme="));
 
   if (cookie) {
-    const theme = cookie.split("=")[1];
+    let theme = cookie.split("=")[1];
+    if (theme == "device") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        theme = "dark";
+      } else {
+        theme = "light";
+      }
+    }
     document.documentElement.setAttribute("data-theme", theme);
     if (theme == "dark") {
       darkmode.checked = true;
