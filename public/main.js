@@ -792,10 +792,14 @@ writefavoritNames();
 const darkmode = document.getElementById("darkmode");
 
 darkmode.addEventListener("change", () => {
-  if (darkmode.checked) {
-    setTheme("dark");
+  if (darkmode.value !== "device") {
+    setTheme(darkmode.value);
   } else {
-    setTheme("light");
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
   }
 });
 
