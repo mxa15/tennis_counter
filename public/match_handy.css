@@ -314,7 +314,6 @@ img {
 }
 
 #info {
-  font-family: monospace;
   margin: 5px;
   color: var(--text);
   font-size: 2vh;
