@@ -235,14 +235,15 @@ header {
 @keyframes canim {
   0% {
     opacity: 1;
-    transform: scale(1.3);
+    scale: 1.3;
   }
   60% {
     opacity: 0;
-    transform: scale(0.5);
+    scale: 0.5;
   }
   100% {
     opacity: 0;
+    scale: 0.5;
   }
 }
 #sidebar {
