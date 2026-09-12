@@ -231,7 +231,7 @@ function addmatches(id, tableid, status) {
         games[0] = pointsystem[match.points.points[0]];
         games[1] = pointsystem[match.points.points[1]];
       }
-      if (match.status == "finished") {
+      if (match.status == "finished" || match.status == "created") {
         games = ["", ""];
       }
       if (match.username === "du") {
