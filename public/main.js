@@ -196,6 +196,8 @@ async function addmatches(id, tableid, status) {
   const table = document.getElementById(tableid);
   const matches = await getmatches(id, status);
 
+  console.log(matches);
+
   if (matches === "failed") return;
 
   console.log(matches.length);
