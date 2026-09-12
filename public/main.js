@@ -231,6 +231,9 @@ function addmatches(id, tableid, status) {
         games[0] = pointsystem[match.points.points[0]];
         games[1] = pointsystem[match.points.points[1]];
       }
+      if (match.status == "finished") {
+        games = ["", ""];
+      }
       if (match.username === "du") {
         div.innerHTML = `
           <div class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</div>
