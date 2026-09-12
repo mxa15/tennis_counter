@@ -546,6 +546,7 @@ section h1 {
 
 .check {
   appearance: none;
+  float: right;
   width: 40px;
   height: 22px;
   transition: background 0.5s ease;
