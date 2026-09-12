@@ -647,4 +647,5 @@ section h1 {
   font-size: 16px;
   background-color: var(--background2);
   color: var(--text);
+  border-radius: 6px;
 }
