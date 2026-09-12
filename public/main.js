@@ -804,7 +804,9 @@ darkmode.addEventListener("change", () => {
 });
 
 function setTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
+  if (theme !== "device") {
+    document.documentElement.setAttribute("data-theme", theme);
+  }
   document.cookie = `theme=${theme}; max-age=31536000; path=/`;
 }
 
