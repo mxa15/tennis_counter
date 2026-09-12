@@ -200,7 +200,7 @@ async function addmatches(id, tableid, status) {
 
   console.log(matches.length);
 
-  if (matches.length === 0) {
+  if (matches.length == 0) {
     const info = document.createElement("p");
     info.classList.add("smal-text");
     info.innerText = "keine Matches gefunden";
