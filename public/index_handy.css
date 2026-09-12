@@ -544,6 +544,15 @@ section h1 {
   background: transparent;
 }
 
+#favoritNameDiv {
+  width: 94%;
+  margin-left: 3%;
+  min-height: 50px;
+  max-height: 600px;
+  border-radius: 15px;
+  background: var(--background2);
+}
+
 .check {
   appearance: none;
   float: right;
