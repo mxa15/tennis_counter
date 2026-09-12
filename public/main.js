@@ -192,50 +192,51 @@ async function getmatches(ids, status) {
   return data.matches;
 }
 
-function addmatches(id, tableid, status) {
+async function addmatches(id, tableid, status) {
   const table = document.getElementById(tableid);
-  getmatches(id, status).then((matches) => {
-    if (matches === "failed") return;
+  const matches = await getmatches(id, status);
 
-    matches.forEach((match) => {
-      const div = document.createElement("div");
-      div.classList.add("matches");
-      let servers = ["", ""];
-      if (match.points.server == "player1") {
-        servers[0] = "🟡";
-      } else if (match.points.server == "player2") {
-        servers[1] = "🟡";
-      }
-      const matchstatus = new Map([
-        ["created", "Erstellt"],
-        ["live", "Live"],
-        ["finished", "Fertig"],
-      ]);
-      let sets = [
-        ["", ""],
-        ["", ""],
-        ["", ""],
-        ["", ""],
-        ["", ""],
-      ];
-      let i = 0;
-      match.points.sets.forEach((set) => {
-        sets[i] = set;
-        i++;
-      });
-      let games = ["", ""];
-      if (match.points.tiebrake[0] > 0 || match.points.tiebrake[1] > 0) {
-        games[0] = match.points.tiebrake[0];
-        games[1] = match.points.tiebrake[1];
-      } else {
-        games[0] = pointsystem[match.points.points[0]];
-        games[1] = pointsystem[match.points.points[1]];
-      }
-      if (match.status == "finished" || match.status == "created") {
-        games = ["", ""];
-      }
-      if (match.username === "du") {
-        div.innerHTML = `
+  if (matches === "failed") return;
+
+  matches.forEach((match) => {
+    const div = document.createElement("div");
+    div.classList.add("matches");
+    let servers = ["", ""];
+    if (match.points.server == "player1") {
+      servers[0] = "🟡";
+    } else if (match.points.server == "player2") {
+      servers[1] = "🟡";
+    }
+    const matchstatus = new Map([
+      ["created", "Erstellt"],
+      ["live", "Live"],
+      ["finished", "Fertig"],
+    ]);
+    let sets = [
+      ["", ""],
+      ["", ""],
+      ["", ""],
+      ["", ""],
+      ["", ""],
+    ];
+    let i = 0;
+    match.points.sets.forEach((set) => {
+      sets[i] = set;
+      i++;
+    });
+    let games = ["", ""];
+    if (match.points.tiebrake[0] > 0 || match.points.tiebrake[1] > 0) {
+      games[0] = match.points.tiebrake[0];
+      games[1] = match.points.tiebrake[1];
+    } else {
+      games[0] = pointsystem[match.points.points[0]];
+      games[1] = pointsystem[match.points.points[1]];
+    }
+    if (match.status == "finished" || match.status == "created") {
+      games = ["", ""];
+    }
+    if (match.username === "du") {
+      div.innerHTML = `
           <div class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</div>
           <div class="matchpoints" onclick="location.href = '/match/${match.code}'">
             <div>${servers[0]}</div>
@@ -257,8 +258,8 @@ function addmatches(id, tableid, status) {
             <div>${games[1]}</div>
           </div>
         `;
-      } else {
-        div.innerHTML = `
+    } else {
+      div.innerHTML = `
           <div class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</div>
           <div class="matchpoints" onclick="location.href = '/view_match?code=${match.code}'">
             <div>${servers[0]}</div>
@@ -280,9 +281,8 @@ function addmatches(id, tableid, status) {
             <div>${games[1]}</div>
           </div>
         `;
-      }
-      table.appendChild(div);
-    });
+    }
+    table.appendChild(div);
   });
 }
 
