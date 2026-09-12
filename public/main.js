@@ -286,7 +286,9 @@ async function addmatches(id, tableid, status) {
   });
 }
 
-addmatches(["my_id"], "mymatches", "all");
+addmatches(["my_id"], "mymatches", "all").then(() => {
+  console.log("sucess");
+});
 
 function getDate(dateString) {
   const timeZone = "Europe/Rome";
