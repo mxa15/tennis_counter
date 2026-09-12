@@ -198,7 +198,7 @@ async function addmatches(id, tableid, status) {
 
   if (matches === "failed") return;
 
-  console.log(matches);
+  console.log(matches.length);
 
   if (matches.length === 0) {
     const info = document.createElement("p");
