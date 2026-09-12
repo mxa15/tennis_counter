@@ -643,7 +643,7 @@ section h1 {
   outline: none;
   padding: 5px;
   border: 0px;
-  width: 80px;
+  width: min-content;
   font-size: 16px;
   background-color: var(--background2);
   color: var(--text);
