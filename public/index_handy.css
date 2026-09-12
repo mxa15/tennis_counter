@@ -549,8 +549,7 @@ section h1 {
   padding: 7px;
   width: 94%;
   margin-left: 3%;
-  min-height: 50px;
-  max-height: 200px;
+  height: 200px;
   border-radius: 15px;
   background: var(--background2);
   overflow: auto;
