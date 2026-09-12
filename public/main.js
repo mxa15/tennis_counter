@@ -198,6 +198,8 @@ async function addmatches(id, tableid, status) {
 
   if (matches === "failed") return;
 
+  console.log(matches);
+
   if (matches.length === 0) {
     const info = document.createElement("p");
     info.classList.add("smal-text");
