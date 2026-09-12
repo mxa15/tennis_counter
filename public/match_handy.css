@@ -303,7 +303,7 @@ img {
 }
 
 #course {
-  font-family: Consolas, "Courier New", Courier, monospace;
+  font-family: Consolas;
   padding-top: 88vh;
   color: var(--text);
   font-size: 2vh;
