@@ -304,6 +304,7 @@ img {
 
 #course {
   font-family: "Courier New", Courier, monospace;
+  font-family: "Roboto Mono";
   padding-top: 88vh;
   color: var(--text);
   font-size: 2vh;
