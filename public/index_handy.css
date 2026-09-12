@@ -556,13 +556,6 @@ section h1 {
   transition: background 0.3s ease-in-out;
 }
 
-.setting-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
 .check:checked {
   background: rgba(31, 144, 0, 0.3);
 }
