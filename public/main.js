@@ -815,6 +815,7 @@ function loadTheme() {
 
   if (cookie) {
     let theme = cookie.split("=")[1];
+    darkmode.value = theme;
     if (theme == "device") {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
         theme = "dark";
@@ -823,9 +824,6 @@ function loadTheme() {
       }
     }
     document.documentElement.setAttribute("data-theme", theme);
-    if (theme == "dark") {
-      darkmode.checked = true;
-    }
   }
 }
 
