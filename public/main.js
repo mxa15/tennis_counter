@@ -198,15 +198,14 @@ async function addmatches(id, tableid, status) {
 
   console.log(matches);
 
-  if (matches === "failed") return;
-
   console.log(matches.length);
 
-  if (matches.length == 0) {
+  if (matches == "failed") {
     const info = document.createElement("p");
     info.classList.add("smal-text");
     info.innerText = "keine Matches gefunden";
     table.appendChild(info);
+    return;
   }
   matches.forEach((match) => {
     const div = document.createElement("div");
