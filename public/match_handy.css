@@ -303,7 +303,7 @@ img {
 }
 
 #course {
-  font-family: monospace;
+  font-family: "Courier New", Courier, monospace;
   padding-top: 88vh;
   color: var(--text);
   font-size: 2vh;
