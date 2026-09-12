@@ -553,6 +553,7 @@ section h1 {
   max-height: 600px;
   border-radius: 15px;
   background: var(--background2);
+  overflow: auto;
 }
 
 .check {
