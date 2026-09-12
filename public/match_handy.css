@@ -293,7 +293,7 @@ img {
   position: fixed;
   left: 0%;
   transition: left 0.4s ease;
-  height: 4px;
+  height: 10px;
   width: 50%;
   background: linear-gradient(to bottom, black, transparent);
 }
