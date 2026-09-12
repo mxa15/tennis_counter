@@ -196,11 +196,7 @@ async function addmatches(id, tableid, status) {
   const table = document.getElementById(tableid);
   const matches = await getmatches(id, status);
 
-  console.log(matches);
-
-  console.log(matches.length);
-
-  if (matches == "failed") {
+  if (matches === "failed") {
     const info = document.createElement("p");
     info.classList.add("smal-text");
     info.innerText = "keine Matches gefunden";
