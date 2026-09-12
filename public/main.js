@@ -159,11 +159,11 @@ function check_user() {
     .then((data) => {
       if (data.failed) {
         loginbutton.style.display = "block";
-        loadin_screen.style.display = "none";
+        //loadin_screen.style.display = "none";
         return;
       }
       login_user(data);
-      loadin_screen.style.display = "none";
+      //loadin_screen.style.display = "none";
     });
 }
 
@@ -370,7 +370,7 @@ function logout() {
         location.href = "/startseite";
         return;
       }
-      loadin_screen.style.display = "none";
+      //loadin_screen.style.display = "none";
     });
 }
 
@@ -393,7 +393,7 @@ function delete_user() {
     .then((response) => response.json())
     .then((data) => {
       const status = data.status;
-      loadin_screen.style.display = "none";
+      //loadin_screen.style.display = "none";
 
       if (status == "ok") {
         location.href = "/startseite";
