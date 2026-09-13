@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const tournaments = localStorage.getItem("tournaments")
     ? JSON.parse(localStorage.getItem("tournaments"))
-    : null;
+    : [];
+
+  if(tournaments) 
 
   const newfriend_search = document.getElementById("newfriend_search");
 
