@@ -400,7 +400,7 @@ section h1 {
   height: 35px;
   padding-left: 30px;
   color: var(--text);
-  border: 2px solid #06b6d4;
+  border: 2px solid var(--color2);
   border-radius: 10px;
 }
 
