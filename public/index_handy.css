@@ -235,7 +235,7 @@ header {
 @keyframes canim {
   0% {
     opacity: 1;
-    height: 30px;
+    height: 22px;
   }
   60% {
     opacity: 0;
