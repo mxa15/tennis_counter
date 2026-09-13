@@ -823,15 +823,24 @@ app.post("/api/SQL", async (req, res) => {
 app.post("/api/searchMatch", async (req, res) => {
   const searchtext = req.body;
 
+  const response = await fetch(
+    `${req.protocol}://${req.get("host")}/api/getFriends/id`,
+  );
+  const data = await response.json();
+
+  const friend_ids = data.friend_ids;
+
   const matches = await db.query(
     `
-    SELECT * 
+    SELECT matches.* 
     FROM matches 
-    WHERE data->'player1' ILIKE $1
-    OR data->'player2' ILIKE $1
-    OR data->'tournament' ILIKE $1
-    OR code = $1`,
-    [searchtext],
+    JOIN users ON matches.owner_id = users.id
+    WHERE users.id = ANY($2)
+    AND (matches.data->'player1' ILIKE '%' || $1 || '%'
+    OR matches.data->'player2' ILIKE '%' || $1 || '%'
+    OR matches.data->'tournament' ILIKE '%' || $1 || '%')
+    OR matches.code = $1`,
+    [searchtext, friend_ids],
   );
 });
 
