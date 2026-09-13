@@ -235,15 +235,15 @@ header {
 @keyframes canim {
   0% {
     opacity: 1;
-    height: 43px;
+    height: 35px;
   }
   60% {
     opacity: 0;
-    height: 30px;
+    height: 25px;
   }
   100% {
     opacity: 0;
-    height: 43px;
+    height: 35px;
   }
 }
 #sidebar {
