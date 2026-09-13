@@ -479,7 +479,10 @@ async function start_match() {
     ? JSON.parse(localStorage.getItem("tournaments"))
     : [];
 
-  localStorage.setItem("tournaments", JSON.stringify(tourn.push(tournament)));
+  if (tournament && !tournaments.includes(tournament)) {
+    tournaments.push(tournament);
+    localStorage.setItem("tournaments", JSON.stringify(tournaments));
+  }
 
   location.href = "/match/" + code.code;
 }
