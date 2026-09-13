@@ -465,6 +465,10 @@ async function start_match() {
     return;
   }
 
+  const tourn = localStorage.getItem("tournaments")
+    ? JSON.parse(localStorage.getItem("tournament"))
+    : [];
+
   location.href = "/match/" + code.code;
 }
 
