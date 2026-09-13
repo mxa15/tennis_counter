@@ -23,7 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const datalist = document.getElementById("tournaments");
 
-  const tournaments = localStorage.getItem("tournaments") ? JSON.parse(localStorage.getItem("tournaments"))
+  const tournaments = localStorage.getItem("tournaments")
+    ? JSON.parse(localStorage.getItem("tournaments"))
+    : null;
 
   const newfriend_search = document.getElementById("newfriend_search");
 
