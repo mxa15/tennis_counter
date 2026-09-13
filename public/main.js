@@ -791,16 +791,13 @@ function setTheme(theme) {
       document.documentElement.setAttribute("data-theme", "light");
     }
   }
-  document.cookie = `theme=${theme}; max-age=31536000; path=/`;
+  localStorage.setItem("theme", theme);
 }
 
 function loadTheme() {
-  const cookie = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("theme="));
+  let theme = localStorage.getItem("theme");
 
   if (cookie) {
-    let theme = cookie.split("=")[1];
     darkmode.value = theme;
     if (theme == "device") {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
