@@ -21,6 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
     changesection("startseite");
   }
 
+  const datalist = document.getElementById("tournaments");
+
+  const tournaments = localStorage.getItem("tournaments") ? JSON.parse(localStorage.getItem("tournaments"))
+
   const newfriend_search = document.getElementById("newfriend_search");
 
   newfriend_search.addEventListener("keydown", (e) => {
