@@ -797,7 +797,7 @@ function setTheme(theme) {
 function loadTheme() {
   let theme = localStorage.getItem("theme");
 
-  if (cookie) {
+  if (theme) {
     darkmode.value = theme;
     if (theme == "device") {
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
