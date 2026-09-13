@@ -175,6 +175,7 @@ header {
   border-radius: 6px;
   background: var(--text);
   opacity: 1;
+  transform-origin: center;
 }
 #c1 {
   transform: translateY(-40px);
