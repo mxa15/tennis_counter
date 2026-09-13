@@ -234,16 +234,13 @@ header {
 }
 @keyframes canim {
   0% {
-    opacity: 1;
     height: 22px;
   }
   60% {
-    opacity: 0;
     height: 12px;
   }
   100% {
-    opacity: 0;
-    height: 22px;
+    height: 12px;
   }
 }
 #sidebar {
