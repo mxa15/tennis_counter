@@ -822,6 +822,17 @@ app.post("/api/SQL", async (req, res) => {
 
 app.post("/api/searchMatch", async (req, res) => {
   const searchtext = req.body;
+
+  const matches = await db.query(
+    `
+    SELECT * 
+    FROM matches 
+    WHERE data->'player1' ILIKE $1
+    OR data->'player2' ILIKE $1
+    OR data->'tournament' ILIKE $1
+    OR code = $1`,
+    [searchtext],
+  );
 });
 
 const PORT = process.env.PORT || 3000;
