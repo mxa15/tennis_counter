@@ -853,6 +853,10 @@ app.post("/api/searchMatch", async (req, res) => {
       status: "no match",
     });
   }
+  res.json({
+    status: "ok",
+    matches: matches.rows,
+  });
 });
 
 const PORT = process.env.PORT || 3000;
