@@ -848,6 +848,11 @@ app.post("/api/searchMatch", async (req, res) => {
     OR matches.code = $1`,
     [searchtext, friend_ids],
   );
+  if (matches.rows.length == 0) {
+    return res.json({
+      status: "no match",
+    });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
