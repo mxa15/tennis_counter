@@ -475,7 +475,7 @@ async function start_match() {
     return;
   }
 
-  const tourn = localStorage.getItem("tournaments")
+  let tournaments = localStorage.getItem("tournaments")
     ? JSON.parse(localStorage.getItem("tournaments"))
     : [];
 
