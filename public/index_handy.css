@@ -239,11 +239,11 @@ header {
   }
   60% {
     opacity: 0;
-    height: 22px;
+    height: 12px;
   }
   100% {
     opacity: 0;
-    height: 30px;
+    height: 22px;
   }
 }
 #sidebar {
