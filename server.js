@@ -828,7 +828,13 @@ app.post("/api/searchMatch", async (req, res) => {
   );
   const data = await response.json();
 
-  const friend_ids = data.friend_ids;
+  let friend_ids;
+
+  if (data.status == "ok") {
+    friend_ids = data.friend_ids;
+  } else {
+    friend_ids = [];
+  }
 
   const matches = await db.query(
     `
