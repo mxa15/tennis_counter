@@ -469,6 +469,8 @@ async function start_match() {
     ? JSON.parse(localStorage.getItem("tournament"))
     : [];
 
+  localStorage.setItem("tournaments", JSON.stringify(tourn.push(tournament)));
+
   location.href = "/match/" + code.code;
 }
 
