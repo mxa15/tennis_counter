@@ -27,7 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
     ? JSON.parse(localStorage.getItem("tournaments"))
     : [];
 
-  if(tournaments) 
+  tournaments.forEach((tournament) => {
+    datalist.innerHTML += `<option value="${tournament}"><option>`;
+  });
 
   const newfriend_search = document.getElementById("newfriend_search");
 
