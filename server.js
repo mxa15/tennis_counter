@@ -841,10 +841,10 @@ app.post("/api/searchMatch", async (req, res) => {
     SELECT matches.* 
     FROM matches 
     JOIN users ON matches.owner_id = users.id
-    WHERE users.id = ANY($2)
+    WHERE (users.id = ANY($2)
     AND (matches.data->>'player1' ILIKE '%' || $1 || '%'
     OR matches.data->>'player2' ILIKE '%' || $1 || '%'
-    OR matches.data->>'tournament' ILIKE '%' || $1 || '%')
+    OR matches.data->>'tournament' ILIKE '%' || $1 || '%'))
     OR matches.code = $1`,
     [searchtext, friend_ids],
   );
