@@ -508,22 +508,6 @@ function openPopUp(text, color = "gray", time = 1500) {
   }, time + 100);
 }
 
-class SearchInput extends HTMLElement {
-  connectedCallback() {
-    const placeholder = this.getAttribute("placeholder");
-    const inputID = this.getAttribute("inputID");
-
-    this.innerHTML = `
-      <div class="search_div">
-        <img src="/public/search.png" alt="" class="search_img" />
-        <input type="text" placeholder="${placeholder}" class="search" id="${inputID}" enterkeyhint="search"/>
-      </div>
-    `;
-  }
-}
-
-customElements.define("search-input", SearchInput);
-
 const newfriend_div = document.querySelector(".newfriend_div");
 
 function open_newfrienddiv() {
