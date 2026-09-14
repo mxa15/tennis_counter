@@ -823,12 +823,12 @@ app.post("/api/SQL", async (req, res) => {
 app.post("/api/searchMatch", async (req, res) => {
   const searchtext = req.body;
 
-  console.log(searchtext);
-
   const response = await fetch(
     `${req.protocol}://${req.get("host")}/api/getFriends/id`,
   );
   const data = await response.json();
+
+  console.log(data);
 
   let friend_ids;
 
