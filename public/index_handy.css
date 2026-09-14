@@ -382,6 +382,7 @@ section h1 {
 .search {
   outline: none;
   width: 94%;
+  margin-left: 3%;
   height: 35px;
   padding-left: 30px;
   color: var(--text);
