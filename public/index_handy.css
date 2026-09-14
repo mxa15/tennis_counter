@@ -391,7 +391,7 @@ section h1 {
 }
 
 .newfriend_div h2 {
-  /*position: fixed;*/
+  position: fixed;
 }
 
 .newfriend_div_open {
