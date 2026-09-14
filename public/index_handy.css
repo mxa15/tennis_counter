@@ -397,10 +397,13 @@ section h1 {
 }
 
 .newfriend_div_open {
-  font-size: 10px;
   height: 400px;
   width: 90vw;
   align-items: baseline;
+}
+
+.newfriend_div_open h2 {
+  font-size: 10px;
 }
 
 #newfriend_open_div {
