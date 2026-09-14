@@ -410,13 +410,7 @@ section h1 {
 #newfriend_open_div {
   margin-top: 30px;
   width: 100%;
-}
-
-#newfriend_open_div search-input {
-  position: fixed;
-  margin-top: 0px;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  padding: 7px;
 }
 
 #newfriend_searchoutput {
