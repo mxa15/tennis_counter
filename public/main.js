@@ -821,3 +821,5 @@ async function search_match(search) {
     body: search,
   });
 }
+
+search_match("max");
