@@ -380,21 +380,6 @@ section h1 {
 }
 
 .search {
-  width: 35px;
-  height: 35px;
-  box-sizing: border-box;
-  transition: all 0.4s ease;
-  color: transparent;
-  border: 2px solid black;
-  border-radius: 0px;
-  font-size: 16px;
-}
-
-.search::placeholder {
-  color: transparent;
-}
-
-.search:focus {
   outline: none;
   width: 200px;
   height: 35px;
@@ -404,7 +389,7 @@ section h1 {
   border-radius: 10px;
 }
 
-.search:focus::placeholder {
+.search::placeholder {
   color: var(--text);
 }
 
