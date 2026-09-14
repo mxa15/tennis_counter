@@ -385,7 +385,6 @@ section h1 {
   border-radius: 10px;
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 200px;
   height: 45px;
   transition: all 0.3s ease-in-out;
