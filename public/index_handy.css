@@ -374,33 +374,6 @@ section h1 {
   background-color: red;
 }
 
-.search_div {
-  position: relative;
-  display: inline-block;
-}
-
-.search {
-  outline: none;
-  width: 90%;
-  height: 35px;
-  padding-left: 30px;
-  color: var(--text);
-  border: 2px solid var(--color2);
-  border-radius: 10px;
-  font-size: 16px;
-}
-
-.search::placeholder {
-  color: var(--text);
-}
-
-.search_img {
-  position: absolute;
-  height: 25px;
-  margin: 5px;
-  pointer-events: none;
-}
-
 .newfriend_div {
   position: fixed;
   left: 50%;
