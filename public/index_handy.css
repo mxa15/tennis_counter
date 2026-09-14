@@ -387,6 +387,7 @@ section h1 {
   color: var(--text);
   border: 2px solid var(--color2);
   border-radius: 10px;
+  font-size: 16px;
 }
 
 .search::placeholder {
