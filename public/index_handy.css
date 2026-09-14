@@ -392,6 +392,8 @@ section h1 {
 
 .newfriend_div h2 {
   position: fixed;
+  font-size: 25px;
+  margin: 0;
 }
 
 .newfriend_div_open {
