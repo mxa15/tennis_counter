@@ -394,6 +394,7 @@ section h1 {
   position: fixed;
   font-size: 25px;
   margin: 10px;
+  transition: font-size 0.3s ease;
 }
 
 .newfriend_div_open {
