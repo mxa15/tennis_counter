@@ -814,3 +814,10 @@ function loadTheme() {
 }
 
 loadTheme();
+
+async function search_match(search) {
+  const response = fetch("/api/searchmatch", {
+    method: "POST",
+    body: search,
+  });
+}
