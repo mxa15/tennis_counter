@@ -381,8 +381,7 @@ section h1 {
 
 .search {
   outline: none;
-  width: 94%;
-  margin-left: 3%;
+  width: 200px;
   height: 35px;
   padding-left: 30px;
   color: var(--text);
@@ -433,6 +432,13 @@ section h1 {
 #newfriend_open_div {
   margin-top: 60px;
   width: 100%;
+}
+
+#newfriend_open_div search-input {
+  position: fixed;
+  margin-top: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #newfriend_searchoutput {
