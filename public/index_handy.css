@@ -429,6 +429,11 @@ section h1 {
   align-items: baseline;
 }
 
+#newfriend_open_div {
+  margin-top: 60px;
+  width: 100%;
+}
+
 #newfriend_searchoutput {
   margin-top: 20px;
 }
