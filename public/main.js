@@ -816,10 +816,12 @@ function loadTheme() {
 loadTheme();
 
 async function search_match(search) {
-  const response = fetch("/api/searchmatch", {
+  const response = await fetch("/api/searchmatch", {
     method: "POST",
     body: search,
   });
+  const data = await response.json();
+  console.log(data);
 }
 
 search_match("max");
