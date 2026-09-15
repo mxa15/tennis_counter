@@ -244,7 +244,7 @@
       <h1>Partien</h1>
       <form
         onsubmit="
-          search_match();
+          search_match(this.querySelector('input').value);
           return false;
         "
       >
