@@ -822,21 +822,28 @@ app.post("/api/SQL", async (req, res) => {
 
 app.post("/api/searchMatch", async (req, res) => {
   const searchtext = req.body;
+  const userid = req.userid;
 
-  const response = await fetch(
-    `${req.protocol}://${req.get("host")}/api/getFriends/id`,
+  if (!userid)
+    return res.json({
+      status: "no user",
+    });
+
+  const friends = await db.query(
+    `
+    SELECT
+    CASE
+    WHEN user_id = $1 THEN friend_id
+    ELSE user_id
+    END AS friend_id
+    FROM friends
+    WHERE (user_id = $1 OR friend_id = $1)
+    AND status = 'accepted'
+    `,
+    [userid],
   );
-  const data = await response.json();
 
-  console.log(data);
-
-  let friend_ids;
-
-  if (data.status == "ok") {
-    friend_ids = data.friend_ids;
-  } else {
-    friend_ids = [];
-  }
+  const friend_ids = friends.rows;
 
   const matches = await db.query(
     `
