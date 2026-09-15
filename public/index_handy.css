@@ -604,3 +604,9 @@ section h1 {
   color: var(--text);
   border-radius: 6px;
 }
+
+.big-matches {
+  width: 100%;
+  height: 200px;
+  background: var(--background2);
+}
