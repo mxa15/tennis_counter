@@ -853,7 +853,8 @@ app.post("/api/searchMatch", async (req, res) => {
     WHERE (users.id = ANY($2)
     AND (matches.data->>'player1' ILIKE '%' || $1 || '%'
     OR matches.data->>'player2' ILIKE '%' || $1 || '%'
-    OR matches.data->>'tournament' ILIKE '%' || $1 || '%'))
+    OR matches.data->>'tournament' ILIKE '%' || $1 || '%'
+    OR users.username = $1))
     OR matches.code = $1`,
     [searchtext, friend_ids],
   );
