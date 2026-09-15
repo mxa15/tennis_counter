@@ -619,4 +619,5 @@ section h1 {
   color: var(--text);
   font-size: 15px;
   background: var(--color1);
+  text-align: center;
 }
