@@ -859,11 +859,11 @@ async function search_match(search) {
           <div class="big-matches-points">
             <span>${server[0]}</span><span>${server[1]}</span> 
             <span>${match.data.player1}</span><span>${match.data.player2}</span>
-            <span></span><span></span> 
-            <span></span><span></span>
-            <span></span><span></span> 
-            <span></span><span></span>
-            <span></span><span></span> 
+            <span>${sets[(0, 0)]}</span><span>${sets[(0, 1)]}</span> 
+            <span>${sets[(1, 0)]}</span><span>${sets[(1, 1)]}</span>
+            <span>${sets[(2, 0)]}</span><span>${sets[(2, 1)]}</span> 
+            <span>${sets[(3, 0)]}</span><span>${sets[(3, 1)]}</span>
+            <span>${sets[(4, 0)]}</span><span>${sets[(4, 1)]}</span> 
             <span>${game[0]}</span> <span>${game[1]}</span>
           </div>
         </div>`;
