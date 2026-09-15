@@ -821,5 +821,5 @@ async function search_match(search) {
     body: search,
   });
   const data = await response.json();
-  return data;
+  console.log(data);
 }
