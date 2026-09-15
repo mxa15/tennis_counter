@@ -472,8 +472,6 @@ section h1 {
 #matchSearchForm {
   position: sticky;
   top: 100px;
-  background: transparent;
-  backdrop-filter: blur(10px);
 }
 
 .favoritnames {
