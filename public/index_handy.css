@@ -617,7 +617,7 @@ section h1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   color: var(--text);
-  font-size: 15px;
+  font-size: 25px;
   background: var(--color1);
   text-align: center;
 }
