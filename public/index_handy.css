@@ -616,4 +616,7 @@ section h1 {
   width: calc(100% - 10px);
   display: grid;
   grid-template-columns: 1fr 1fr;
+  color: var(--text);
+  font-size: 15px;
+  background: var(--color1);
 }
