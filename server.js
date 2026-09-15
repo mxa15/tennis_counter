@@ -849,7 +849,7 @@ app.post("/api/searchMatch", async (req, res) => {
 
   const matches = await db.query(
     `
-    SELECT matches.* 
+    SELECT matches.*, users.username
     FROM matches 
     JOIN users ON matches.owner_id = users.id
     WHERE (users.id = ANY($2)
