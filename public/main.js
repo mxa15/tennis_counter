@@ -857,7 +857,7 @@ async function search_match(search) {
       });
       output.innerHTML += `
         <div class="big-matches">
-          <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</p>
+          <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} ${(match.data, tournament)} | ${match.username}</p>
           <div class="big-matches-points">
             <span>${server[0]}</span><span>${server[1]}</span> 
             <span>${match.data.player1}</span><span>${match.data.player2}</span>
