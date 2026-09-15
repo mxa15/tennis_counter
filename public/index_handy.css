@@ -607,7 +607,7 @@ section h1 {
 
 .big-matches {
   width: 100%;
-  height: 200px;
+  height: fit-content;
   background: var(--background2);
   padding: 5px;
 }
