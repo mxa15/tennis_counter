@@ -866,7 +866,7 @@ async function search_match(search) {
             <span>${sets[2][0]}</span><span>${sets[2][1]}</span> 
             <span>${sets[3][0]}</span><span>${sets[3][1]}</span>
             <span>${sets[4][0]}</span><span>${sets[4][1]}</span> 
-            <span>${pointsystem[game[0]]}</span> <span>${pointsystem[game[1]]}</span>
+            <span>${game[0]}</span> <span>${game[1]}</span>
           </div>
         </div>`;
     });
