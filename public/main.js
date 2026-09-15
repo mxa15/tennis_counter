@@ -821,8 +821,7 @@ async function search_match(search) {
     body: search,
   });
   const data = await response.json();
-  console.log(data);
   return data;
 }
 
-search_match("t");
+console.log(search_match("t3"));
