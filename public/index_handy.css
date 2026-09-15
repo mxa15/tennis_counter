@@ -615,5 +615,5 @@ section h1 {
 .big-matches-points {
   width: calc(100% - 10px);
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
 }
