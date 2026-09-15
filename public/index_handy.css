@@ -475,6 +475,7 @@ section h1 {
   background: transparent;
   backdrop-filter: blur(10px);
   width: 100vw;
+  margin-left: -20px;
 }
 
 .favoritnames {
