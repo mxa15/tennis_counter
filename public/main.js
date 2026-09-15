@@ -833,7 +833,9 @@ async function search_match(search) {
         game = [match.points.points[0], match.points.points[1]];
       }
       if (match.status == "finished" || match.status == "created") {
-        game = [0, 0];
+        game = ["", ""];
+      } else {
+        game = [pointsystem[game[0]], pointsystem[game[1]]];
       }
       const server = ["", ""];
       if (match.points.server == "player1") {
