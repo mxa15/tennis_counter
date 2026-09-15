@@ -824,4 +824,4 @@ async function search_match(search) {
   console.log(data);
 }
 
-search_match("");
+search_match("max");
