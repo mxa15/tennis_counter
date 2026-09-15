@@ -611,6 +611,7 @@ section h1 {
   background: var(--background2);
   padding: 10px;
   border-radius: 20px;
+  margin-bottom: 10px;
 }
 
 .big-matches-points {
