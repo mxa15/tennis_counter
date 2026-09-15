@@ -841,14 +841,30 @@ async function search_match(search) {
       } else if (match.points.server == "player2") {
         server[1] = "🟡";
       }
+      let sets = [
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+      ];
+      let i = 0;
+      match.points.sets.forEach((set) => {
+        sets[i] = set;
+        i++;
+      });
       output.innerHTML += `
         <div class="big-matches">
           <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</p>
           <div class="big-matches-points">
-            <span>🟡</span><span></span> <span>max</span><span>paul</span>
-            <span></span><span></span> <span></span><span></span>
-            <span></span><span></span> <span></span><span></span>
-            <span></span><span></span> <span></span> <span></span>
+            <span>${server[0]}</span><span>${server[1]}</span> 
+            <span>${match.data.player1}</span><span>${match.data.player2}</span>
+            <span></span><span></span> 
+            <span></span><span></span>
+            <span></span><span></span> 
+            <span></span><span></span>
+            <span></span><span></span> 
+            <span>${game[0]}</span> <span>${game[1]}</span>
           </div>
         </div>`;
     });
