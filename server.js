@@ -845,6 +845,8 @@ app.post("/api/searchMatch", async (req, res) => {
 
   const friend_ids = friends.rows.map((row) => row.friend_id);
 
+  friend_ids.push(userid);
+
   const matches = await db.query(
     `
     SELECT matches.* 
