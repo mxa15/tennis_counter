@@ -821,5 +821,20 @@ async function search_match(search) {
     body: search,
   });
   const data = await response.json();
-  console.log(data);
+  if (data.status == "ok") {
+    const output = document.getElementById("matchSearchResults");
+    output.innerHTML = "";
+    data.matches.forEach((match) => {
+      output.innerHTML += `
+        <div class="big-matches">
+          <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</p>
+          <div class="big-matches-points">
+            <span>🟡</span><span></span> <span>max</span><span>paul</span>
+            <span></span><span></span> <span></span><span></span>
+            <span></span><span></span> <span></span><span></span>
+            <span></span><span></span> <span></span> <span></span>
+          </div>
+        </div>`;
+    });
+  }
 }
