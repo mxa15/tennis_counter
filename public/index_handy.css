@@ -611,3 +611,9 @@ section h1 {
   background: var(--background2);
   padding: 5px;
 }
+
+.big-matches-points {
+  width: calc(100% - 10px);
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
