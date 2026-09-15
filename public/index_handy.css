@@ -613,7 +613,7 @@ section h1 {
 }
 
 .big-matches-points {
-  width: calc(100% - 10px);
+  width: 100%
   display: grid;
   grid-template-columns: 1fr 1fr;
   color: var(--text);
