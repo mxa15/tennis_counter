@@ -843,7 +843,7 @@ app.post("/api/searchMatch", async (req, res) => {
     [userid],
   );
 
-  const friend_ids = friends.rows;
+  const friend_ids = friends.rows.map((row) => row.friend_id);
 
   const matches = await db.query(
     `
