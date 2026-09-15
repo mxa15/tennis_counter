@@ -835,6 +835,12 @@ async function search_match(search) {
       if (match.status == "finished" || match.status == "created") {
         game = ["", ""];
       }
+      const server = ["", ""];
+      if (match.points.server == "player1") {
+        server[0] = "🟡";
+      } else if (match.points.server == "player2") {
+        server[1] = "🟡";
+      }
       output.innerHTML += `
         <div class="big-matches">
           <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</p>
