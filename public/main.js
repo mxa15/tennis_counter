@@ -822,6 +822,7 @@ async function search_match(search) {
   });
   const data = await response.json();
   console.log(data);
+  return data;
 }
 
 search_match("t");
