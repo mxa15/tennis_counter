@@ -857,7 +857,8 @@ app.post("/api/searchMatch", async (req, res) => {
     OR matches.data->>'player2' ILIKE '%' || $1 || '%'
     OR matches.data->>'tournament' ILIKE '%' || $1 || '%'
     OR users.username = $1))
-    OR matches.code = $1`,
+    OR matches.code = $1
+    ORDER BY matches.created_at DESC`,
     [searchtext, friend_ids],
   );
   if (matches.rows.length == 0) {
