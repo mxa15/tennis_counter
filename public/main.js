@@ -823,5 +823,3 @@ async function search_match(search) {
   const data = await response.json();
   return data;
 }
-
-console.log(search_match("t2"));
