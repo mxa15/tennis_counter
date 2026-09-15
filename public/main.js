@@ -826,6 +826,15 @@ async function search_match(search) {
     const output = document.getElementById("matchSearchResults");
     output.innerHTML = "";
     data.matches.forEach((match) => {
+      let game = ["", ""];
+      if (match.points.tiebrake[0] > 0 || match.points.tiebrake[1] > 0) {
+        game = [match.points.tiebrake[0], match.points.tiebrake[1]];
+      } else {
+        game = [match.points.points[0], match.points.points[1]];
+      }
+      if (match.status == "finished" || match.status == "created") {
+        game = ["", ""];
+      }
       output.innerHTML += `
         <div class="big-matches">
           <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</p>
