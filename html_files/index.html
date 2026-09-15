@@ -242,7 +242,12 @@
     </section>
     <section id="partien" class="sections" style="display: none">
       <h1>Partien</h1>
-      <form onsubmit="">
+      <form
+        onsubmit="
+          search_match();
+          return false;
+        "
+      >
         <input type="text" />
         <button>start</button>
       </form>
