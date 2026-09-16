@@ -820,7 +820,6 @@ async function search_match(search) {
   const output = document.getElementById("matchSearchResults");
   output.innerHTML = `
   <div
-          id="loading_newfrienddiv"
           class="loader"
           style="display: none; background: transparent"
         >
