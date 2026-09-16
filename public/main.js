@@ -947,5 +947,7 @@ async function writeMyMatches() {
           </div>
         </div>`;
     });
+  } else {
+    output.innerHTML = "du hast keine partien";
   }
 }
