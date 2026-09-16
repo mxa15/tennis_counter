@@ -817,6 +817,10 @@ function loadTheme() {
 loadTheme();
 
 async function search_match(search) {
+  if (search == "/mymatches") {
+    writeMyMatches();
+    return;
+  }
   const response = await fetch("/api/searchMatch", {
     method: "POST",
     body: search,
@@ -876,5 +880,72 @@ async function search_match(search) {
     });
   } else {
     output.innerHTML = `<p class="smal-text">keine übereinstimung mit "${search}"`;
+  }
+}
+
+async function writeMyMatches() {
+  const response = await fetch("/api/getmatches", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user_ids: ["my_id"],
+      status: "all",
+    }),
+  });
+  const data = await response.json();
+  const output = document.getElementById("matchSearchResults");
+  if (data.status == "ok") {
+    output.innerHTML = "meine partien";
+    data.matches.forEach((match) => {
+      let url = match.my
+        ? "/match/" + match.code
+        : "/view_match?code=" + match.code;
+      let game = [0, 0];
+      if (match.points.tiebrake[0] > 0 || match.points.tiebrake[1] > 0) {
+        game = [match.points.tiebrake[0], match.points.tiebrake[1]];
+      } else {
+        game = [match.points.points[0], match.points.points[1]];
+      }
+      if (match.status == "finished" || match.status == "created") {
+        game = ["", ""];
+      } else {
+        game = [pointsystem[game[0]], pointsystem[game[1]]];
+      }
+      const server = ["", ""];
+      if (match.points.server == "player1") {
+        server[0] = "🟡";
+      } else if (match.points.server == "player2") {
+        server[1] = "🟡";
+      }
+      let sets = [
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+        ["", ""],
+      ];
+      let i = 0;
+      match.points.sets.forEach((set) => {
+        sets[i] = set;
+        i++;
+      });
+      const tournament = match.data.tournament ? match.data.tournament : "";
+      output.innerHTML += `
+        <div class="big-matches" onclick="location.href = '${url}'">
+          <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} ${tournament} | ${match.username}</p>
+          <div class="big-matches-points">
+            <span>${server[0]}</span><span>${server[1]}</span> 
+            <span>${match.data.player1}</span><span>${match.data.player2}</span>
+            <span>${sets[0][0]}</span><span>${sets[0][1]}</span> 
+            <span>${sets[1][0]}</span><span>${sets[1][1]}</span>
+            <span>${sets[2][0]}</span><span>${sets[2][1]}</span> 
+            <span>${sets[3][0]}</span><span>${sets[3][1]}</span>
+            <span>${sets[4][0]}</span><span>${sets[4][1]}</span> 
+            <span>${game[0]}</span> <span>${game[1]}</span>
+          </div>
+        </div>`;
+    });
   }
 }
