@@ -824,7 +824,7 @@ async function search_match(search) {
   const data = await response.json();
   if (data.status == "ok") {
     const output = document.getElementById("matchSearchResults");
-    output.innerHTML = "";
+    output.innerHTML = `<p class="big-text">suchergebnisse für "${search}"`;
     data.matches.forEach((match) => {
       let url = match.my
         ? "/match/" + match.code
