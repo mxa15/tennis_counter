@@ -826,7 +826,9 @@ async function search_match(search) {
     const output = document.getElementById("matchSearchResults");
     output.innerHTML = "";
     data.matches.forEach((match) => {
-      console.log(match.my);
+      let url = match.my
+        ? "/match/" + match.code
+        : "/view_match?code=" + match.code;
       let game = [0, 0];
       if (match.points.tiebrake[0] > 0 || match.points.tiebrake[1] > 0) {
         game = [match.points.tiebrake[0], match.points.tiebrake[1]];
