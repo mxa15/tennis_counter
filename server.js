@@ -866,6 +866,13 @@ app.post("/api/searchMatch", async (req, res) => {
       status: "no match",
     });
   }
+  matches.rows.forEach((match) => {
+    if (match.owner_id == userid) {
+      match.my = true;
+    } else {
+      match.my = false;
+    }
+  });
   res.json({
     status: "ok",
     matches: matches.rows,
