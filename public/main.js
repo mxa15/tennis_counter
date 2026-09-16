@@ -817,7 +817,7 @@ function loadTheme() {
 loadTheme();
 
 async function search_match(search) {
-  const response = await fetch("/api/searchmatch", {
+  const response = await fetch("/api/searchMatch", {
     method: "POST",
     body: search,
   });
