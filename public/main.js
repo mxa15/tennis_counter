@@ -951,3 +951,5 @@ async function writeMyMatches() {
     output.innerHTML = "du hast keine partien";
   }
 }
+
+writeMyMatches();
