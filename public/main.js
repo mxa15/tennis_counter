@@ -875,6 +875,6 @@ async function search_match(search) {
         </div>`;
     });
   } else {
-    output.innerHTML = `<p class="big-text">es wurde keine übereinstimung mit "${search}" gefunden`;
+    output.innerHTML = `<p class="big-text">keine übereinstimung mit ${search}`;
   }
 }
