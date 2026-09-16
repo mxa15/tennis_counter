@@ -821,7 +821,7 @@ async function search_match(search) {
   output.innerHTML = `
   <div
           class="loader"
-          style="display: none; background: transparent"
+          style="background: transparent"
         >
           <div class="loadingcircle">
             <div id="c1" class="c"></div>
