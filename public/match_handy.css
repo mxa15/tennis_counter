@@ -203,7 +203,7 @@ img {
 .c {
   position: absolute;
   width: 12px;
-  height: 12px;
+  height: 20px;
   border-radius: 6px;
   background: var(--text);
   opacity: 0;
