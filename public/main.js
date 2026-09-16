@@ -824,7 +824,7 @@ async function search_match(search) {
   const data = await response.json();
   const output = document.getElementById("matchSearchResults");
   if (data.status == "ok") {
-    output.innerHTML = `<p class="big-text">suchergebnisse für "${search}"`;
+    output.innerHTML = `<p class="smal-text">suchergebnisse für "${search}"`;
     data.matches.forEach((match) => {
       let url = match.my
         ? "/match/" + match.code
@@ -875,6 +875,6 @@ async function search_match(search) {
         </div>`;
     });
   } else {
-    output.innerHTML = `<p class="big-text">keine übereinstimung mit "${search}"`;
+    output.innerHTML = `<p class="smal-text">keine übereinstimung mit "${search}"`;
   }
 }
