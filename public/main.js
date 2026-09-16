@@ -817,6 +817,31 @@ function loadTheme() {
 loadTheme();
 
 async function search_match(search) {
+  const output = document.getElementById("matchSearchResults");
+  output.innerHTML = `
+  <div
+          id="loading_newfrienddiv"
+          class="loader"
+          style="display: none; background: transparent"
+        >
+          <div class="loadingcircle">
+            <div id="c1" class="c"></div>
+            <div id="c2" class="c"></div>
+            <div id="c3" class="c"></div>
+            <div id="c4" class="c"></div>
+            <div id="c5" class="c"></div>
+            <div id="c6" class="c"></div>
+            <div id="c7" class="c"></div>
+            <div id="c8" class="c"></div>
+            <div id="c9" class="c"></div>
+            <div id="c10" class="c"></div>
+            <div id="c11" class="c"></div>
+            <div id="c12" class="c"></div>
+            <div id="c13" class="c"></div>
+            <div id="c14" class="c"></div>
+          </div>
+        </div>
+  `;
   if (search == "/mymatches") {
     writeMyMatches();
     return;
@@ -826,7 +851,6 @@ async function search_match(search) {
     body: search,
   });
   const data = await response.json();
-  const output = document.getElementById("matchSearchResults");
   if (data.status == "ok") {
     output.innerHTML = `<p class="smal-text">suchergebnisse für "${search}"`;
     data.matches.forEach((match) => {
