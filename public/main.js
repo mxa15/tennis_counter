@@ -860,7 +860,7 @@ async function search_match(search) {
       });
       const tournament = match.data.tournament ? match.data.tournament : "";
       output.innerHTML += `
-        <div class="big-matches">
+        <div class="big-matches" onclick="location.href = '${url}'">
           <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} ${tournament} | ${match.username}</p>
           <div class="big-matches-points">
             <span>${server[0]}</span><span>${server[1]}</span> 
