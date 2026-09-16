@@ -206,6 +206,8 @@ async function addmatches(id, tableid, status) {
     return;
   }
   matches.forEach((match) => {
+    console.log(match);
+
     const div = document.createElement("div");
     div.classList.add("matches");
     let servers = ["", ""];
