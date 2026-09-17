@@ -62,7 +62,7 @@ async function getdata() {
   const data = await response.json();
 
   loadin_screen.style.display = "none";
-  if (data.status == "no user") {
+  if (data.status == "no accound") {
     location.href = "/login";
     return;
   }

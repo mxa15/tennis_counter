@@ -185,7 +185,7 @@ async function getmatches(ids, status) {
   const data = await response.json();
 
   if (
-    data.status == "no user" ||
+    data.status == "no accound" ||
     data.status == "no match" ||
     data.status == "invalid"
   )
@@ -471,7 +471,7 @@ async function start_match() {
 
   const code = await response.json();
 
-  if (code.status == "no user") {
+  if (code.status == "no accound") {
     location.href = "/login";
     return;
   }
@@ -651,65 +651,37 @@ async function addfavoritName() {
 
   const name = document.getElementById("favoritNameInput").value;
 
-  const response = await fetch("/api/SQL", {
+  const response = await fetch("/api/favoritNames", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      sql: `
-      UPDATE users
-      SET settings = jsonb_set(
-        settings,
-        '{favoritNames}',
-        (settings->'favoritNames') || jsonb_build_array($2::text)
-      )
-      WHERE id = $1
-      AND NOT (settings->'favoritNames' @> jsonb_build_array($2::text))
-      RETURNING *`,
-      params: ["user_id", name],
+      name: name,
     }),
   });
   const result = await response.json();
 
-  console.log(result.rows);
+  console.log(result);
 
   if (result.status !== "ok") {
-    openPopUp("fehler:" + result.status, "red");
+    openPopUp("name existiert schon", "red");
     console.log(result.error);
 
     return;
-  }
-  if (result.rows.length == 0) {
-    openPopUp("name existiert schon", "red");
   }
   writefavoritNames();
   document.getElementById("favoritNameInput").value = "";
 }
 
 async function getfavoritNames() {
-  const response = await fetch("/api/SQL", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      sql: "SELECT settings->'favoritNames' AS names FROM users WHERE id = $1",
-      params: ["user_id"],
-    }),
-  });
+  const response = await fetch("/api/favoritNames");
   const data = await response.json();
   if (data.status !== "ok") {
-    openPopUp("fehler:" + data.status, "red");
     return;
   }
 
-  if (data.rows.length == 0) {
-    console.log("keine favoriten");
-    return;
-  }
-
-  return data.rows[0].names;
+  return data.names;
 }
 
 async function deletefavoritName(name) {
@@ -721,35 +693,19 @@ async function deletefavoritName(name) {
     objeckt.remove();
   }, 1000);
 
-  const response = await fetch("/api/SQL", {
-    method: "POST",
+  const response = await fetch("/api/favoritNames", {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      sql: `
-UPDATE users
-SET settings = jsonb_set(
-  settings,
-  '{favoritNames}',
-  COALESCE(
-    (
-      SELECT jsonb_agg(value)
-      FROM jsonb_array_elements_text(settings->'favoritNames') AS value
-      WHERE value <> $2
-    ),
-    '[]'::jsonb
-  )
-)
-WHERE id = $1
-RETURNING *;`,
-      params: ["user_id", name],
+      name: name,
     }),
   });
   const data = await response.json();
 
   if (data.status !== "ok") {
-    openPopUp("fehler:" + data.status, "red");
+    openPopUp("name konnte nicht gelöscht werden", "red");
     return;
   }
 

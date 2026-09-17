@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const UAParser = require("ua-parser-js");
+const { type } = require("os");
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -293,7 +294,7 @@ app.post("/api/creatematch", async (req, res) => {
   const ownerid = req.userid;
   if (!ownerid) {
     return res.json({
-      status: "no user",
+      status: "no accound",
     });
   }
 
@@ -373,7 +374,7 @@ app.post("/api/updatematch", async (req, res) => {
 
   if (!user_id) {
     return res.json({
-      status: "no user",
+      status: "no accound",
     });
   }
 
@@ -429,7 +430,7 @@ app.get("/api/match_return", async (req, res) => {
   const matchcode = pageUrl.split("/")[2];
   if (!userid) {
     return res.json({
-      status: "no user",
+      status: "no accound",
     });
   }
   const result = await db.query(
@@ -504,7 +505,7 @@ app.post("/api/getmatches", async (req, res) => {
       const userid = req.userid;
       if (!userid) {
         return res.json({
-          status: "no user",
+          status: "no accound",
         });
       }
 
@@ -573,7 +574,7 @@ app.get("/api/getUsersByName/:name", async (req, res) => {
 
   if (!userid) {
     return res.json({
-      status: "no user",
+      status: "no accound",
     });
   }
 
@@ -616,7 +617,7 @@ app.post("/api/addfriend", async (req, res) => {
 
   if (!userid) {
     return res.json({
-      status: "no user",
+      status: "no accound",
     });
   }
 
@@ -645,7 +646,7 @@ app.get("/api/getfriendreq", async (req, res) => {
 
   if (!userid) {
     return res.json({
-      status: "no user",
+      status: "no accound",
     });
   }
 
@@ -685,7 +686,7 @@ app.post("/api/confirmFriend", async (req, res) => {
 
   if (!userid)
     return res.json({
-      status: "no user",
+      status: "no accound",
     });
 
   const result = await db.query(
@@ -716,7 +717,7 @@ app.get("/api/getFriends/:type", async (req, res) => {
 
   if (!userid)
     return res.json({
-      status: "no user",
+      status: "no accound",
     });
 
   const result = await db.query(
@@ -772,7 +773,7 @@ app.delete("/api/deleteFriend/:id", async (req, res) => {
 
   if (!userid)
     return res.json({
-      status: "no user",
+      status: "no accound",
     });
 
   const result = await db.query(
@@ -785,6 +786,102 @@ app.delete("/api/deleteFriend/:id", async (req, res) => {
   );
 
   if (result.rows.length == 0)
+    return res.json({
+      status: "not found",
+    });
+
+  res.json({
+    status: "ok",
+  });
+});
+
+app.post("/api/favoritNames", async (req, res) => {
+  const user_id = req.userid;
+  if (!user_id)
+    return res.json({
+      status: "no accound",
+    });
+  const name = req.body.name;
+  if (!name)
+    return res.json({
+      status: "invalid",
+    });
+
+  const user = await db.query(
+    `
+    UPDATE users
+    SET settings = jsonb_set(
+      settings,
+      '{favoritNames}',
+      (settings->'favoritNames') || jsonb_build_array($2::text)
+    )
+    WHERE id = $1
+    AND NOT (settings->'favoritNames' @> jsonb_build_array($2::text))
+    RETURNING *`,
+    [user_id, name],
+  );
+  if (user.rows.length == 0)
+    return res.json({
+      status: "failed",
+    });
+
+  res.json({
+    status: "ok",
+  });
+});
+
+app.get("/api/favoritNames", async (req, res) => {
+  const user_id = req.userid;
+  if (!user_id)
+    return res.json({
+      status: "no accound",
+    });
+  const names = await db.query(
+    "SELECT settings->'favoritNames' AS names FROM users WHERE id = $1",
+    [user_id],
+  );
+  if (names.rows.length == 0)
+    return res.json({
+      status: "no name",
+    });
+  res.json({
+    status: "ok",
+    names: names.rows.map((row) => row.names),
+  });
+});
+
+app.delete("/api/favoritNames", async (req, res) => {
+  const user_id = req.userid;
+  if (!user_id)
+    return res.json({
+      status: "no accound",
+    });
+  const name = req.body.name;
+  if (!name)
+    return res.json({
+      status: "invalid",
+    });
+
+  const user = await db.query(
+    `
+    UPDATE users
+    SET settings = jsonb_set(
+      settings,
+      '{favoritNames}',
+      COALESCE(
+        (
+          SELECT jsonb_agg(value)
+          FROM jsonb_array_elements_text(settings->'favoritNames') AS value
+          WHERE value <> $2
+        ),
+        '[]'::jsonb
+      )
+    )
+    WHERE id = $1
+    RETURNING *;`,
+    [user_id, name],
+  );
+  if (user.rows.length == 0)
     return res.json({
       status: "not found",
     });
@@ -826,7 +923,7 @@ app.post("/api/searchMatch", async (req, res) => {
 
   if (!userid)
     return res.json({
-      status: "no user",
+      status: "no accound",
     });
 
   const friends = await db.query(
