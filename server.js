@@ -10,8 +10,6 @@ const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const UAParser = require("ua-parser-js");
 
-const hallo = "ich";
-
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
