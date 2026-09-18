@@ -70,14 +70,14 @@ async function set_newfrienddiv(search) {
           output.innerHTML += `
             <div class="friend"  id="${request.id}">
               <p class="big-text">${escapeHTML(request.username)}</p>
-              <button onclick="confirmFriend('${request.id}')"><img src="/public/accept-user.png" alt="add" /></button>
+              <button onclick="confirmFriend('${request.id}')"><img src="/public/images/accept-user.png" alt="add" /></button>
             </div>`;
         }
       } else {
         output.innerHTML += `
           <div class="friend"  id="${request.id}">
             <p class="big-text">${escapeHTML(request.username)}</p>
-            <button onclick="confirmFriend('${request.id}')" style="z-index: 50"><img src="/public/accept-user.png" alt="add" /></button>
+            <button onclick="confirmFriend('${request.id}')" style="z-index: 50"><img src="/public/images/accept-user.png" alt="add" /></button>
           </div>`;
       }
     });
@@ -94,7 +94,7 @@ async function set_newfrienddiv(search) {
         output.innerHTML += `
         <div class="friend" id="${result.id}">
           <p class="big-text">${escapeHTML(result.username)}</p>
-          <button><img src="/public/add-user.png" alt="add" onclick="addfriend('${result.id}')"/></button>
+          <button><img src="/public/images/add-user.png" alt="add" onclick="addfriend('${result.id}')"/></button>
         </div>
         `;
       }
@@ -580,7 +580,7 @@ function add_friendelement(name, userid) {
   output.innerHTML += `
         <div class="friend" id="${userid}">
           <p class="big-text">${escapeHTML(name)}</p>
-          <button onclick="delete_friend('${userid}')"><img src="/public/remove-user.png" alt="add"/></button>
+          <button onclick="delete_friend('${userid}')"><img src="/public/images/remove-user.png" alt="add"/></button>
         </div>
   `;
 }
@@ -736,7 +736,7 @@ async function writefavoritNames() {
     output.innerHTML += `
     <div class="friend" id="name-${safeName}">
       <p class="big-text">${safeName}</p>
-      <button onclick="deletefavoritName('${safeName}')"><img src="/public/close.png" alt="" /></button>
+      <button onclick="deletefavoritName('${safeName}')"><img src="/public/images/close.png" alt="" /></button>
     </div>`;
 
     list.innerHTML += "<option value='" + safeName + "'>";

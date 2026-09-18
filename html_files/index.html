@@ -8,18 +8,18 @@
     />
     <meta name="theme-color" content="rgb(153, 255, 0)" />
     <title>Punktezähler-Startseite</title>
-    <link rel="stylesheet" href="/public/loader.css" />
+    <link rel="stylesheet" href="/public/images/loader.css" />
     <link
       rel="stylesheet"
-      href="/public/index.css"
+      href="/public/images/index.css"
       media="screen and (min-width: 800px)"
     />
     <link
       rel="stylesheet"
-      href="/public/index_handy.css"
+      href="/public/images/index_handy.css"
       media="screen and (max-width: 800px)"
     />
-    <link rel="icon" href="/public/image.png" type="image/x-icon" />
+    <link rel="icon" href="/public/images/image.png" type="image/x-icon" />
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
       rel="stylesheet"
@@ -29,7 +29,7 @@
     <div id="over-header"></div>
     <header>
       <button id="open_sidebar" , class="open_close">
-        <img src="/public/sidebar.png" alt="" class="sidebarbutton" />
+        <img src="/public/images/sidebar.png" alt="" class="sidebarbutton" />
       </button>
       <div
         id="logodiv"
@@ -38,7 +38,7 @@
           history.pushState({}, '', '?page=startseite');
         "
       >
-        <img src="/public/image.png" alt="logo" id="logo" />
+        <img src="/public/images/image.png" alt="logo" id="logo" />
         <h1 id="title">Punktezähler</h1>
       </div>
       <a
@@ -46,18 +46,22 @@
         class="profilebutton"
         id="loginbutton"
         style="display: none"
-        ><img src="/public/login.png" alt="login" class="profilebutton"
+        ><img src="/public/images/login.png" alt="login" class="profilebutton"
       /></a>
       <button
         class="profilebutton"
         id="profilebutton"
         onclick="
-          changesection('profile');
-          history.pushState({}, '', '?page=profile');
+          changesection('einstellungen');
+          history.pushState({}, '', '?page=einstellungen');
         "
         style="display: none"
       >
-        <img src="/public/profile.png" alt="login" class="profilebutton" />
+        <img
+          src="/public/images/profile.png"
+          alt="login"
+          class="profilebutton"
+        />
       </button>
     </header>
     <div id="loading" class="loader">
@@ -81,7 +85,7 @@
     <div id="under_sidebar"></div>
     <div id="sidebar">
       <button id="close_sidebar" class="open_close">
-        <img src="/public/close.png" alt="" class="sidebarbutton" />
+        <img src="/public/images/close.png" alt="" class="sidebarbutton" />
       </button>
 
       <button
@@ -113,22 +117,13 @@
       ><br />
       <button
         class="sectionselection"
+        id="lastselector"
         onclick="
           changesection('partien');
           history.pushState({}, '', '?page=partien');
         "
       >
         Partien</button
-      ><br />
-      <button
-        class="sectionselection"
-        id="lastselector"
-        onclick="
-          changesection('einstellungen');
-          history.pushState({}, '', '?page=einstellungen');
-        "
-      >
-        Einstellungen</button
       ><br />
     </div>
 
@@ -266,7 +261,7 @@
       </div>
     </section>
     <section id="einstellungen" class="sections" style="display: none">
-      <h1>Einstellungen</h1>
+      <h1 id="profilename">Profile</h1>
       <h2 class="big-text">Namensfavoriten</h2>
       <h4 class="smal-text">
         die favoriten werden dir beim erstellen einer partie als
@@ -294,13 +289,14 @@
         <option value="dark">dunkel</option>
         <option value="device">gerät</option>
       </select>
-    </section>
-    <section id="profile" class="sections" style="display: none">
-      <h1 id="profilename">Profile</h1>
-      <button id="logout" class="logout_delete">Abmelden</button>
-      <button id="delete_user" class="logout_delete">Konto löschen</button>
+      <button id="logout" class="main-button" style="--button-color: gray">
+        Abmelden
+      </button>
+      <button id="delete_user" class="main-button" style="--button-color: red">
+        Konto löschen
+      </button>
     </section>
 
-    <script src="/public/main.js"></script>
+    <script src="/public/images/main.js"></script>
   </body>
 </html>

@@ -4,9 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Punktezähler-Sign up</title>
-    <link rel="icon" href="/public/image.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/public/loader.css" />
+    <link rel="icon" href="/public/images/image.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/public/images/loader.css" />
     <style>
+      :root {
+        --background-color: rgb(255, 255, 255);
+        --background2: rgba(235, 242, 232, 1);
+        --header-color: rgba(153, 255, 0, 0.621);
+        --sidebar-color: rgba(152, 254, 0, 0.658);
+        --color1: rgba(153, 255, 0, 1);
+        --color2: rgba(0, 180, 255, 1);
+        --text: rgba(25, 30, 25, 1);
+      }
       body {
         margin: 10px;
         display: grid;
@@ -101,7 +110,7 @@
     </style>
   </head>
   <body>
-    <div id="loading" class="loader">
+    <div id="loading" class="loader" style="display: none">
       <div class="loadingcircle">
         <div id="c1" class="c"></div>
         <div id="c2" class="c"></div>
@@ -136,6 +145,6 @@
       /><br />
       <button type="submit">Regristrieren</button>
     </form>
-    <script src="/public/signup.js"></script>
+    <script src="/public/images/signup.js"></script>
   </body>
 </html>
