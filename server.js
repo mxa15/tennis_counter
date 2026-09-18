@@ -8,17 +8,27 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const rateLimit = require("express-rate-limit");
 const UAParser = require("ua-parser-js");
 const { type } = require("os");
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
 });
 
 const app = express();
+
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  skipSuccessfulRequests: true,
+  message: {
+    status: "too many requests",
+  },
+  keyGenerator: (req) => req.ip || req.socket.remoteAddress || "unknown",
+});
 
 app.use(express.json());
 
@@ -110,7 +120,7 @@ app.get("/api/check_user", async (req, res) => {
   res.json(user.rows[0]);
 });
 
-app.post("/api/login", async (req, res) => {
+app.post("/api/login", loginLimiter, async (req, res) => {
   const message = req.body;
 
   const result = await db.query("SELECT * FROM users WHERE username = $1", [
@@ -139,10 +149,22 @@ app.post("/api/login", async (req, res) => {
     sessionid = crypto.randomBytes(32).toString("hex");
 
     try {
-      await db.query(
-        "UPDATE sessionIDs SET session_id = $1 WHERE user_id = $2",
-        [sessionid, user.id],
+      const existingSession = await db.query(
+        "SELECT 1 FROM sessionIDs WHERE user_id = $1",
+        [user.id],
       );
+
+      if (existingSession.rows.length > 0) {
+        await db.query(
+          "UPDATE sessionIDs SET session_id = $1 WHERE user_id = $2",
+          [sessionid, user.id],
+        );
+      } else {
+        await db.query(
+          "INSERT INTO sessionIDs (session_id, user_id) VALUES ($1, $2)",
+          [sessionid, user.id],
+        );
+      }
 
       res.cookie("sessionID", sessionid, {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
@@ -162,6 +184,7 @@ app.post("/api/login", async (req, res) => {
       }
 
       console.error(error);
+      return res.json({ status: "error" });
     }
   }
 });
@@ -219,17 +242,34 @@ app.post("/api/signup", async (req, res) => {
   });
 });
 
-app.get("/api/logout", (req, res) => {
-  if (req.cookies?.sessionID) {
-    res.clearCookie("sessionID");
-    res.json({
+app.get("/api/logout", async (req, res) => {
+  const sessionid = req.cookies?.sessionID;
+
+  if (sessionid) {
+    try {
+      await db.query("DELETE FROM sessionIDs WHERE session_id = $1", [
+        sessionid,
+      ]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  res.clearCookie("sessionID", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: true,
+  });
+
+  if (sessionid) {
+    return res.json({
       status: "ok",
     });
-  } else {
-    res.json({
-      status: "failed",
-    });
   }
+
+  res.json({
+    status: "failed",
+  });
 });
 
 app.delete("/api/delete_user", async (req, res) => {
@@ -801,7 +841,8 @@ app.post("/api/favoritNames", async (req, res) => {
     return res.json({
       status: "no accound",
     });
-  const name = req.body.name;
+
+  const name = String(req.body.name || "").trim();
   if (!name)
     return res.json({
       status: "invalid",
@@ -811,15 +852,16 @@ app.post("/api/favoritNames", async (req, res) => {
     `
     UPDATE users
     SET settings = jsonb_set(
-      settings,
+      COALESCE(settings, '{}'::jsonb),
       '{favoritNames}',
-      (settings->'favoritNames') || jsonb_build_array($2::text)
+      COALESCE((settings->'favoritNames')::jsonb, '[]'::jsonb) || jsonb_build_array($2::text)
     )
     WHERE id = $1
-    AND NOT (settings->'favoritNames' @> jsonb_build_array($2::text))
+    AND NOT (COALESCE((settings->'favoritNames')::jsonb, '[]'::jsonb) @> jsonb_build_array($2::text))
     RETURNING *`,
     [user_id, name],
   );
+
   if (user.rows.length == 0)
     return res.json({
       status: "failed",
@@ -836,17 +878,29 @@ app.get("/api/favoritNames", async (req, res) => {
     return res.json({
       status: "no accound",
     });
+
   const names = await db.query(
-    "SELECT settings->'favoritNames' AS names FROM users WHERE id = $1",
+    `
+    SELECT COALESCE(
+      (
+        SELECT jsonb_agg(value)
+        FROM jsonb_array_elements_text(COALESCE(settings->'favoritNames', '[]'::jsonb)) AS value
+      ),
+      '[]'::jsonb
+    ) AS names
+    FROM users
+    WHERE id = $1`,
     [user_id],
   );
+
   if (names.rows.length == 0)
     return res.json({
       status: "no name",
     });
+
   res.json({
     status: "ok",
-    names: names.rows.map((row) => row.names),
+    names: names.rows[0]?.names ?? [],
   });
 });
 
@@ -891,30 +945,17 @@ app.delete("/api/favoritNames", async (req, res) => {
   });
 });
 
-app.post("/api/SQL", async (req, res) => {
-  const sql = req.body.sql;
-  let params = req.body.params;
-  if (!Array.isArray(params) || !params || !sql) {
+app.get("/api/getUsernameById/:id", async (req, res) => {
+  const id = req.params.id;
+  const user = await db.query("SELECT username FROM users WHERE id = $1", [id]);
+  if (user.rows.length == 0)
     return res.json({
-      status: "invalid",
+      status: "not found",
     });
-  }
-  params.forEach((value, index) => {
-    if (value == "user_id") params[index] = req.userid;
+  res.json({
+    status: "ok",
+    username: user.rows[0].username,
   });
-
-  try {
-    const result = await db.query(sql, params);
-    res.json({
-      status: "ok",
-      rows: result.rows,
-    });
-  } catch (error) {
-    res.json({
-      status: "error",
-      error: error.message,
-    });
-  }
 });
 
 app.post("/api/searchMatch", async (req, res) => {

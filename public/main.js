@@ -647,9 +647,13 @@ async function confirmFriend(id) {
 }
 
 async function addfavoritName() {
-  console.log("hallo");
+  const input = document.getElementById("favoritNameInput");
+  const name = String(input.value || "").trim();
 
-  const name = document.getElementById("favoritNameInput").value;
+  if (!name) {
+    openPopUp("name darf nicht leer sein", "red");
+    return;
+  }
 
   const response = await fetch("/api/favoritNames", {
     method: "POST",
@@ -662,36 +666,40 @@ async function addfavoritName() {
   });
   const result = await response.json();
 
-  console.log(result);
-
   if (result.status !== "ok") {
     openPopUp("name existiert schon", "red");
-    console.log(result.error);
-
     return;
   }
+
   writefavoritNames();
-  document.getElementById("favoritNameInput").value = "";
+  input.value = "";
 }
 
 async function getfavoritNames() {
   const response = await fetch("/api/favoritNames");
   const data = await response.json();
+
   if (data.status !== "ok") {
-    return;
+    return [];
+  }
+
+  if (!Array.isArray(data.names)) {
+    return [];
   }
 
   return data.names;
 }
 
 async function deletefavoritName(name) {
-  const objeckt = document.getElementById("name-" + name);
+  const object = document.getElementById("name-" + name);
 
-  objeckt.classList.add("delete_friend");
+  if (object) {
+    object.classList.add("delete_friend");
 
-  setTimeout(() => {
-    objeckt.remove();
-  }, 1000);
+    setTimeout(() => {
+      object.remove();
+    }, 1000);
+  }
 
   const response = await fetch("/api/favoritNames", {
     method: "DELETE",
@@ -717,19 +725,21 @@ async function writefavoritNames() {
   const output = document.getElementById("favoritNameDiv");
   const list = document.getElementById("favoritNames");
 
+  if (!output || !list) return;
+
   output.innerHTML = "";
   list.innerHTML = "";
 
   names.forEach((name) => {
-    console.log(name);
+    const safeName = String(name || "").replace(/['"`]/g, "");
 
     output.innerHTML += `
-    <div class="friend" id="name-${name}">
-      <p class="big-text">${name}</p>
-      <button onclick="deletefavoritName('${name}')"><img src="/public/close.png" alt="" /></button>
+    <div class="friend" id="name-${safeName}">
+      <p class="big-text">${safeName}</p>
+      <button onclick="deletefavoritName('${safeName}')"><img src="/public/close.png" alt="" /></button>
     </div>`;
 
-    list.innerHTML += "<option value='" + name + "'>";
+    list.innerHTML += "<option value='" + safeName + "'>";
   });
 }
 

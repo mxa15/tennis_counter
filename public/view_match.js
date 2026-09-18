@@ -63,22 +63,15 @@ function connectsocket() {
       tabele.names[1].textContent = matchsettings.data.player2;
       loadin_screen.style.display = "none";
 
-      const response = await fetch("/api/SQL", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          sql: "SELECT username FROM users WHERE id = $1",
-          params: [matchsettings.owner_id],
-        }),
-      });
+      const response = await fetch(
+        "/api/getUsernameById/" + matchsettings.owner_id,
+      );
       const dataoutput = await response.json();
 
       let owner_name;
 
       if (dataoutput.status == "ok") {
-        owner_name = dataoutput.rows[0].username;
+        owner_name = dataoutput.username;
       } else {
         console.log(dataoutput.status);
         owner_name = "fehler";
