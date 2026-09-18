@@ -10,13 +10,18 @@ const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const rateLimit = require("express-rate-limit");
 const UAParser = require("ua-parser-js");
-const { type } = require("os");
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
 const app = express();
+
+const getCookieOptions = () => ({
+  httpOnly: true,
+  sameSite: "lax",
+  secure: process.env.NODE_ENV === "production",
+});
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -54,6 +59,10 @@ app.get("/login", (req, res) => {
 
 app.get("/sign_up", (req, res) => {
   res.sendFile(path.join(__dirname, "html_files", "signup.html"));
+});
+
+app.get("/passwort-aendern", (req, res) => {
+  res.sendFile(path.join(__dirname, "html_files", "change-password.html"));
 });
 
 app.get("/match/:code", async (req, res) => {
@@ -167,10 +176,8 @@ app.post("/api/login", loginLimiter, async (req, res) => {
       }
 
       res.cookie("sessionID", sessionid, {
+        ...getCookieOptions(),
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
-        httpOnly: true,
-        sameSite: "lax",
-        secure: true,
       });
 
       res.json({
@@ -231,12 +238,68 @@ app.post("/api/signup", async (req, res) => {
   }
 
   res.cookie("sessionID", sessionId, {
+    ...getCookieOptions(),
     maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
-    httpOnly: true,
-    sameSite: "lax",
-    secure: true,
   });
 
+  res.json({
+    status: "ok",
+  });
+});
+
+app.post("/api/changePassword", loginLimiter, async (req, res) => {
+  const user_id = req.userid;
+  if (!user_id)
+    return res.json({
+      status: "no accound",
+    });
+
+  const oldPassword = typeof req.body?.oldPassword === "string" ? req.body.oldPassword : "";
+  const newPassword = typeof req.body?.newPassword === "string" ? req.body.newPassword : "";
+
+  if (!oldPassword || !newPassword) {
+    return res.json({
+      status: "invalid",
+    });
+  }
+
+  const user = await db.query("SELECT password FROM users WHERE id = $1", [
+    user_id,
+  ]);
+
+  if (user.rows.length === 0) {
+    return res.json({
+      status: "no accound",
+    });
+  }
+
+  const right = await bcrypt.compare(oldPassword, user.rows[0].password);
+
+  if (!right)
+    return res.json({
+      status: "incorect password",
+    });
+
+  if (oldPassword === newPassword) {
+    return res.json({
+      status: "same password",
+    });
+  }
+
+  const newHash = await bcrypt.hash(newPassword, 10);
+
+  try {
+    await db.query("UPDATE users SET password = $1 WHERE id = $2", [
+      newHash,
+      user_id,
+    ]);
+  } catch (error) {
+    console.error(error);
+    return res.json({
+      status: "error",
+      error: error,
+    });
+  }
   res.json({
     status: "ok",
   });
@@ -255,11 +318,7 @@ app.get("/api/logout", async (req, res) => {
     }
   }
 
-  res.clearCookie("sessionID", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: true,
-  });
+  res.clearCookie("sessionID", getCookieOptions());
 
   if (sessionid) {
     return res.json({
@@ -323,7 +382,7 @@ app.delete("/api/delete_user", async (req, res) => {
     });
   }
 
-  res.clearCookie("sessionID");
+  res.clearCookie("sessionID", getCookieOptions());
 
   res.json({
     status: "ok",

@@ -8,15 +8,15 @@
     />
     <meta name="theme-color" content="rgb(153, 255, 0)" />
     <title>Punktezähler-Startseite</title>
-    <link rel="stylesheet" href="/public/images/loader.css" />
+    <link rel="stylesheet" href="/public/loader.css" />
     <link
       rel="stylesheet"
-      href="/public/images/index.css"
+      href="/public/index.css"
       media="screen and (min-width: 800px)"
     />
     <link
       rel="stylesheet"
-      href="/public/images/index_handy.css"
+      href="/public/index_handy.css"
       media="screen and (max-width: 800px)"
     />
     <link rel="icon" href="/public/images/image.png" type="image/x-icon" />
@@ -283,12 +283,20 @@
         <button type="submit" class="main-button">hinzufügen</button>
       </form>
       <div id="favoritNameDiv"></div>
+      <br />
       <label for="darkmode" class="big-text">design</label>
       <select id="darkmode" class="select">
         <option value="light">hell</option>
         <option value="dark">dunkel</option>
-        <option value="device">gerät</option>
-      </select>
+        <option value="device">gerät</option></select
+      ><br /><br />
+      <button
+        onclick="location.href = '/passwort-aendern'"
+        class="main-button"
+        style="--button-color: gray"
+      >
+        Passwort ändern
+      </button>
       <button id="logout" class="main-button" style="--button-color: gray">
         Abmelden
       </button>
@@ -297,6 +305,6 @@
       </button>
     </section>
 
-    <script src="/public/images/main.js"></script>
+    <script src="/public/main.js"></script>
   </body>
 </html>

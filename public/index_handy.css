@@ -77,7 +77,7 @@
 
 @font-face {
   font-family: "rustico";
-  src: url("/public/images/Rustico-Regular.otf") format("opentype");
+  src: url("/public/Rustico-Regular.otf") format("opentype");
 }
 
 html {
