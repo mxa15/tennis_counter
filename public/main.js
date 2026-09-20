@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     : [];
 
   tournaments.forEach((tournament) => {
-    datalist.innerHTML += `<option value="${tournament}"><option>`;
+    datalist.innerHTML += `<option value="${escapeHTML(tournament)}"><option>`;
   });
 
   const newfriend_search = document.getElementById("newfriend_search");
@@ -239,48 +239,48 @@ async function addmatches(id, tableid, status) {
     }
     if (match.username === "du") {
       div.innerHTML = `
-          <div class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</div>
+          <div class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${escapeHTML(match.username)}</div>
           <div class="matchpoints" onclick="location.href = '/match/${match.code}'">
             <div>${servers[0]}</div>
             <div>${escapeHTML(match.data.player1)}</div>
-            <div>${sets[0][0]}</div>
-            <div>${sets[1][0]}</div>
-            <div>${sets[2][0]}</div>
-            <div>${sets[3][0]}</div>
-            <div>${sets[4][0]}</div>
-            <div>${games[0]}</div>
+            <div>${escapeHTML(sets[0][0])}</div>
+            <div>${escapeHTML(sets[1][0])}</div>
+            <div>${escapeHTML(sets[2][0])}</div>
+            <div>${escapeHTML(sets[3][0])}</div>
+            <div>${escapeHTML(sets[4][0])}</div>
+            <div>${escapeHTML(games[0])}</div>
 
             <div>${servers[1]}</div>
             <div>${escapeHTML(match.data.player2)}</div>
-            <div>${sets[0][1]}</div>
-            <div>${sets[1][1]}</div>
-            <div>${sets[2][1]}</div>
-            <div>${sets[3][1]}</div>
-            <div>${sets[4][1]}</div>
-            <div>${games[1]}</div>
+            <div>${escapeHTML(sets[0][1])}</div>
+            <div>${escapeHTML(sets[1][1])}</div>
+            <div>${escapeHTML(sets[2][1])}</div>
+            <div>${escapeHTML(sets[3][1])}</div>
+            <div>${escapeHTML(sets[4][1])}</div>
+            <div>${escapeHTML(games[1])}</div>
           </div>
         `;
     } else {
       div.innerHTML = `
-          <div class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${match.username}</div>
+          <div class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} | ${escapeHTML(match.username)}</div>
           <div class="matchpoints" onclick="location.href = '/view_match?code=${match.code}'">
             <div>${servers[0]}</div>
             <div>${escapeHTML(match.data.player1)}</div>
-            <div>${sets[0][0]}</div>
-            <div>${sets[1][0]}</div>
-            <div>${sets[2][0]}</div>
-            <div>${sets[3][0]}</div>
-            <div>${sets[4][0]}</div>
-            <div>${games[0]}</div>
+            <div>${escapeHTML(sets[0][0])}</div>
+            <div>${escapeHTML(sets[1][0])}</div>
+            <div>${escapeHTML(sets[2][0])}</div>
+            <div>${escapeHTML(sets[3][0])}</div>
+            <div>${escapeHTML(sets[4][0])}</div>
+            <div>${escapeHTML(games[0])}</div>
 
             <div>${servers[1]}</div>
             <div>${escapeHTML(match.data.player2)}</div>
-            <div>${sets[0][1]}</div>
-            <div>${sets[1][1]}</div>
-            <div>${sets[2][1]}</div>
-            <div>${sets[3][1]}</div>
-            <div>${sets[4][1]}</div>
-            <div>${games[1]}</div>
+            <div>${escapeHTML(sets[0][1])}</div>
+            <div>${escapeHTML(sets[1][1])}</div>
+            <div>${escapeHTML(sets[2][1])}</div>
+            <div>${escapeHTML(sets[3][1])}</div>
+            <div>${escapeHTML(sets[4][1])}</div>
+            <div>${escapeHTML(games[1])}</div>
           </div>
         `;
     }
@@ -734,12 +734,12 @@ async function writefavoritNames() {
     const safeName = String(name || "").replace(/['"`]/g, "");
 
     output.innerHTML += `
-    <div class="friend" id="name-${safeName}">
-      <p class="big-text">${safeName}</p>
-      <button onclick="deletefavoritName('${safeName}')"><img src="/public/images/close.png" alt="" /></button>
+    <div class="friend" id="name-${escapeHTML(safeName)}">
+      <p class="big-text">${escapeHTML(safeName)}</p>
+      <button onclick="deletefavoritName('${escapeHTML(safeName)}')"><img src="/public/images/close.png" alt="" /></button>
     </div>`;
 
-    list.innerHTML += "<option value='" + safeName + "'>";
+    list.innerHTML += "<option value='" + escapeHTML(safeName) + "'>";
   });
 }
 
@@ -817,7 +817,7 @@ async function search_match(search) {
   });
   const data = await response.json();
   if (data.status == "ok") {
-    output.innerHTML = `<p class="smal-text">suchergebnisse für "${search}"`;
+    output.innerHTML = `<p class="smal-text">suchergebnisse für "${escapeHTML(search)}"`;
     data.matches.forEach((match) => {
       let url = match.my
         ? "/match/" + match.code
@@ -854,21 +854,21 @@ async function search_match(search) {
       const tournament = match.data.tournament ? match.data.tournament : "";
       output.innerHTML += `
         <div class="big-matches" onclick="location.href = '${url}'">
-          <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} ${tournament} | ${match.username}</p>
+          <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} ${escapeHTML(tournament)} | ${escapeHTML(match.username)}</p>
           <div class="big-matches-points">
             <span>${server[0]}</span><span>${server[1]}</span> 
-            <span>${match.data.player1}</span><span>${match.data.player2}</span>
-            <span>${sets[0][0]}</span><span>${sets[0][1]}</span> 
-            <span>${sets[1][0]}</span><span>${sets[1][1]}</span>
-            <span>${sets[2][0]}</span><span>${sets[2][1]}</span> 
-            <span>${sets[3][0]}</span><span>${sets[3][1]}</span>
-            <span>${sets[4][0]}</span><span>${sets[4][1]}</span> 
-            <span>${game[0]}</span> <span>${game[1]}</span>
+            <span>${escapeHTML(match.data.player1)}</span><span>${escapeHTML(match.data.player2)}</span>
+            <span>${escapeHTML(sets[0][0])}</span><span>${escapeHTML(sets[0][1])}</span> 
+            <span>${escapeHTML(sets[1][0])}</span><span>${escapeHTML(sets[1][1])}</span>
+            <span>${escapeHTML(sets[2][0])}</span><span>${escapeHTML(sets[2][1])}</span> 
+            <span>${escapeHTML(sets[3][0])}</span><span>${escapeHTML(sets[3][1])}</span>
+            <span>${escapeHTML(sets[4][0])}</span><span>${escapeHTML(sets[4][1])}</span> 
+            <span>${escapeHTML(game[0])}</span> <span>${escapeHTML(game[1])}</span>
           </div>
         </div>`;
     });
   } else {
-    output.innerHTML = `<p class="smal-text">keine übereinstimung mit "${search}"`;
+    output.innerHTML = `<p class="smal-text">keine übereinstimung mit "${escapeHTML(search)}"`;
   }
 }
 
@@ -923,16 +923,16 @@ async function writeMyMatches() {
       const tournament = match.data.tournament ? match.data.tournament : "";
       output.innerHTML += `
         <div class="big-matches" onclick="location.href = '${url}'">
-          <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} ${tournament} | ${match.username}</p>
+          <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} ${escapeHTML(tournament)} | ${escapeHTML(match.username)}</p>
           <div class="big-matches-points">
             <span>${server[0]}</span><span>${server[1]}</span> 
-            <span>${match.data.player1}</span><span>${match.data.player2}</span>
-            <span>${sets[0][0]}</span><span>${sets[0][1]}</span> 
-            <span>${sets[1][0]}</span><span>${sets[1][1]}</span>
-            <span>${sets[2][0]}</span><span>${sets[2][1]}</span> 
-            <span>${sets[3][0]}</span><span>${sets[3][1]}</span>
-            <span>${sets[4][0]}</span><span>${sets[4][1]}</span> 
-            <span>${game[0]}</span> <span>${game[1]}</span>
+            <span>${escapeHTML(match.data.player1)}</span><span>${escapeHTML(match.data.player2)}</span>
+            <span>${escapeHTML(sets[0][0])}</span><span>${escapeHTML(sets[0][1])}</span> 
+            <span>${escapeHTML(sets[1][0])}</span><span>${escapeHTML(sets[1][1])}</span>
+            <span>${escapeHTML(sets[2][0])}</span><span>${escapeHTML(sets[2][1])}</span> 
+            <span>${escapeHTML(sets[3][0])}</span><span>${escapeHTML(sets[3][1])}</span>
+            <span>${escapeHTML(sets[4][0])}</span><span>${escapeHTML(sets[4][1])}</span> 
+            <span>${escapeHTML(game[0])}</span> <span>${escapeHTML(game[1])}</span>
           </div>
         </div>`;
     });

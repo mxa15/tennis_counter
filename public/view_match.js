@@ -84,12 +84,12 @@ function connectsocket() {
           ? "normaler Satz"
           : "Tiebreak bis " + matchsettings.data.third_set;
       info.innerHTML = `
-<span>Matchcode:</span> <span>${matchsettings.code}</span>
-<span>Zähler:</span> <span>${owner_name}</span>
-<span>Satz:</span> <span>bis ${matchsettings.data.set}</span>
-<span>Gewinnsätze:</span> <span>${setToWin}</span>
-<span>Mit Vorteil:</span> <span>${withAdvantage}</span>
-<span>Letzter Satz:</span> <span>${lastSet}</span>`;
+<span>Matchcode:</span> <span>${escapeHTML(matchsettings.code)}</span>
+<span>Zähler:</span> <span>${escapeHTML(owner_name)}</span>
+<span>Satz:</span> <span>bis ${escapeHTML(matchsettings.data.set)}</span>
+<span>Gewinnsätze:</span> <span>${escapeHTML(setToWin)}</span>
+<span>Mit Vorteil:</span> <span>${escapeHTML(withAdvantage)}</span>
+<span>Letzter Satz:</span> <span>${escapeHTML(lastSet)}</span>`;
 
       const lat = Number(matchsettings.data.position.lat);
       const lon = Number(matchsettings.data.position.lon);
@@ -135,11 +135,11 @@ function update_tabelle() {
       matchsettings.data.set == "3-3") ||
     matchsettings.points.championstiebrake == true
   ) {
-    tabele.game[0].innerHTML = matchsettings.points.tiebrake[0];
-    tabele.game[1].innerHTML = matchsettings.points.tiebrake[1];
+    tabele.game[0].textContent = matchsettings.points.tiebrake[0];
+    tabele.game[1].textContent = matchsettings.points.tiebrake[1];
   } else {
-    tabele.game[0].innerHTML = games[0];
-    tabele.game[1].innerHTML = games[1];
+    tabele.game[0].textContent = games[0];
+    tabele.game[1].textContent = games[1];
   }
 
   if (matchsettings.points.server == "player1") {
@@ -193,16 +193,16 @@ function update_tabelle() {
   }
 
   function u_sets(s1, s2, s3, s4, s5) {
-    tabele.thisset[0].innerHTML = s5[0];
-    tabele.thisset[1].innerHTML = s5[1];
-    tabele.pastset[0].innerHTML = s4[0];
-    tabele.pastset[1].innerHTML = s4[1];
-    tabele.set3[0].innerHTML = s3[0];
-    tabele.set3[1].innerHTML = s3[1];
-    tabele.set2[0].innerHTML = s2[0];
-    tabele.set2[1].innerHTML = s2[1];
-    tabele.set1[0].innerHTML = s1[0];
-    tabele.set1[1].innerHTML = s1[1];
+    tabele.thisset[0].textContent = s5[0];
+    tabele.thisset[1].textContent = s5[1];
+    tabele.pastset[0].textContent = s4[0];
+    tabele.pastset[1].textContent = s4[1];
+    tabele.set3[0].textContent = s3[0];
+    tabele.set3[1].textContent = s3[1];
+    tabele.set2[0].textContent = s2[0];
+    tabele.set2[1].textContent = s2[1];
+    tabele.set1[0].textContent = s1[0];
+    tabele.set1[1].textContent = s1[1];
   }
   update_course();
 }
@@ -264,38 +264,38 @@ function update_course() {
     }
     let games =
       "&nbsp;&nbsp;&nbsp;" +
-      cg[0].sets[cg[0].sets.length - 1][0] +
+      escapeHTML(cg[0].sets[cg[0].sets.length - 1][0]) +
       " : " +
-      cg[0].sets[cg[0].sets.length - 1][1];
+      escapeHTML(cg[0].sets[cg[0].sets.length - 1][1]);
     if (games == "0 : 0" && cg[0].sets.length > 1) {
       games =
-        cg[0].sets[cg[0].sets.length - 2][0] +
+        escapeHTML(cg[0].sets[cg[0].sets.length - 2][0]) +
         " : " +
-        cg[0].sets[cg[0].sets.length - 2][1];
+        escapeHTML(cg[0].sets[cg[0].sets.length - 2][1]);
     }
     cg.forEach((c) => {
       if (c.tiebrake[0] > 0 || c.tiebrake[1] > 0) {
         if (String(c.tiebrake[0]).length <= 1) {
-          c1 += c.tiebrake[0] + "&nbsp;&nbsp;|&nbsp;";
+          c1 += escapeHTML(c.tiebrake[0]) + "&nbsp;&nbsp;|&nbsp;";
         } else {
-          c1 += c.tiebrake[0] + "&nbsp;|&nbsp;";
+          c1 += escapeHTML(c.tiebrake[0]) + "&nbsp;|&nbsp;";
         }
         if (String(c.tiebrake[1]).length <= 1) {
-          c2 += c.tiebrake[1] + "&nbsp;&nbsp;|&nbsp;";
+          c2 += escapeHTML(c.tiebrake[1]) + "&nbsp;&nbsp;|&nbsp;";
         } else {
-          c2 += c.tiebrake[1] + "&nbsp;|&nbsp;";
+          c2 += escapeHTML(c.tiebrake[1]) + "&nbsp;|&nbsp;";
         }
         return;
       }
       if (c.points[0] == 0) {
-        c1 += pointsystem[c.points[0]] + "&nbsp;|";
+        c1 += escapeHTML(pointsystem[c.points[0]]) + "&nbsp;|";
       } else {
-        c1 += pointsystem[c.points[0]] + "|";
+        c1 += escapeHTML(pointsystem[c.points[0]]) + "|";
       }
       if (c.points[1] == 0) {
-        c2 += pointsystem[c.points[1]] + "&nbsp;|";
+        c2 += escapeHTML(pointsystem[c.points[1]]) + "&nbsp;|";
       } else {
-        c2 += pointsystem[c.points[1]] + "|";
+        c2 += escapeHTML(pointsystem[c.points[1]]) + "|";
       }
     });
     output += `<br>
@@ -357,3 +357,16 @@ function loadTheme() {
 }
 
 loadTheme();
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>'"]/g, (character) => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "'": "&#39;",
+      '"': "&quot;",
+    };
+    return entities[character];
+  });
+}
