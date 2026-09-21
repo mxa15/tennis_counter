@@ -182,7 +182,7 @@ header {
   color: var(--text);
 }
 #nav button.selected {
-  background-color: rgba(0, 0, 0, 0.3)
+  background-color: rgba(0, 0, 0, 0.3);
   width: 104px;
   img {
     height: 60%;
