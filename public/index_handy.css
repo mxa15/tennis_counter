@@ -275,7 +275,7 @@ section h1 {
 .newfriend_div {
   position: fixed;
   left: 50%;
-  top: 95%;
+  top: 90%;
   transform: translate(-50%, -100%);
   background: var(--header-color);
   backdrop-filter: blur(10px);
