@@ -141,8 +141,55 @@ header {
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+#nav {
+  width: 90%;
+  height: 60px;
+  border-radius: 30px;
+  position: fixed;
+  bottom: 10px;
+  left: 5%;
+  background-color: var(--header-color);
+  backdrop-filter: blur(10px);
+  display: flex;
   justify-content: space-between;
   z-index: 99;
+}
+#nav button {
+  width: 50px;
+  margin: 5px;
+  height: 50px;
+  border-radius: 25px;
+  border: 0;
+  background-color: transparent;
+  transition: all 0.4s ease;
+  position: relative;
+}
+#nav img {
+  height: 90%;
+  margin-top: 5%;
+  transition: all 0.4s ease;
+}
+#nav p {
+  position: absolute;
+  bottom: -20%;
+  opacity: 0;
+  transition: all 0.4s ease;
+  transform: translateX(-50%);
+  left: 50%;
+}
+#nav button.selected {
+  background-color: rgba(0, 0, 0, 0.315);
+  width: 104px;
+  img {
+    height: 60%;
+    margin-top: -20%;
+  }
+  p {
+    opacity: 1;
+  }
 }
 #logodiv {
   display: flex;
@@ -155,66 +202,10 @@ header {
 #logo {
   height: 50px;
 }
-#sidebar {
-  position: fixed;
-  height: 100%;
-  width: 70%;
-  background: var(--sidebar-color);
-  backdrop-filter: blur(10px);
-  border-bottom-right-radius: 35px;
-  border-top-right-radius: 35px;
-  z-index: 101;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-}
-
-#sidebar.open {
-  transform: translateX(0);
-}
-.open_close {
-  height: 50px;
-  width: 50px;
-  background-color: transparent;
-  border: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
-}
-.sidebarbutton {
-  height: 40px;
-  width: 40px;
-}
-#close_sidebar {
-  margin-top: 15px;
-}
 section {
   padding: 20px;
   padding-top: 80px;
-}
-.sectionselection {
-  width: 100%;
-  height: 40px;
-  border: 0px;
-  border-top: 3px solid black;
-  background-color: transparent;
-  font-size: 20px;
-  color: black;
-}
-#lastselector {
-  border-bottom: 3px solid black;
-}
-#under_sidebar {
-  position: fixed;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 100;
-}
-#under_sidebar.sidebar_open {
-  opacity: 1;
+  padding-bottom: 70px;
 }
 .profilebutton {
   width: 40px;

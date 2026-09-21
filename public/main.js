@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "profile",
     ].includes(page)
   ) {
-    changesection(page);
+    changesection(page, true);
   } else {
     history.pushState({}, "", "?page=startseite");
     changesection("startseite");
@@ -138,12 +138,7 @@ async function get_friends() {
 
 get_friends();
 
-const open_sidebarbutton = document.getElementById("open_sidebar");
-const close_sidebarbutton = document.getElementById("close_sidebar");
-const sidebar = document.getElementById("sidebar");
-const under_sidebar = document.getElementById("under_sidebar");
-const loginbutton = document.getElementById("loginbutton");
-const profilebutton = document.getElementById("profilebutton");
+const settings_img = document.getElementById("settings_img");
 const profilename = document.getElementById("profilename");
 const logoutbtn = document.getElementById("logout");
 const deletebtn = document.getElementById("delete_user");
@@ -160,7 +155,7 @@ function check_user() {
     .then((response) => response.json())
     .then((data) => {
       if (data.failed) {
-        loginbutton.style.display = "block";
+        settings_img.src = "/public/images/login.png";
         loadin_screen.style.display = "none";
         return;
       }
@@ -318,44 +313,27 @@ function login_user(userdata) {
   if (user) return;
 
   user = userdata;
-  profilebutton.style.display = "block";
 
   profilename.textContent = user.username;
 }
 
-open_sidebarbutton.addEventListener("click", () => {
-  opensidebar();
-});
+function changesection(id, first) {
+  if (id == "einstellungen" && !user && !first) {
+    location.href = "/login";
+  }
+  history.pushState({}, "", "?page=" + id);
+  const buttons = document.querySelectorAll("#nav button");
+  buttons.forEach((btn) => {
+    btn.classList.remove("selected");
+  });
+  const button = document.getElementById("change_" + id);
+  button.classList.add("selected");
 
-close_sidebarbutton.addEventListener("click", () => {
-  closesidebar();
-});
-
-under_sidebar.addEventListener("click", () => {
-  closesidebar();
-});
-
-function opensidebar() {
-  sidebar.classList.add("open");
-  under_sidebar.style.visibility = "visible";
-  under_sidebar.classList.add("sidebar_open");
-}
-
-function closesidebar() {
-  sidebar.classList.remove("open");
-  under_sidebar.classList.remove("sidebar_open");
-  setTimeout(() => {
-    under_sidebar.style.visibility = "hidden";
-  }, 300);
-}
-
-function changesection(id) {
   document.querySelectorAll("section").forEach((section) => {
     section.style.display = "none";
   });
 
   document.getElementById(id).style.display = "block";
-  closesidebar();
 }
 
 logoutbtn.addEventListener("click", () => {

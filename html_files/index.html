@@ -28,9 +28,6 @@
   <body>
     <div id="over-header"></div>
     <header>
-      <button id="open_sidebar" , class="open_close">
-        <img src="/public/images/sidebar.png" alt="" class="sidebarbutton" />
-      </button>
       <div
         id="logodiv"
         onclick="
@@ -41,28 +38,6 @@
         <img src="/public/images/image.png" alt="logo" id="logo" />
         <h1 id="title">Punktezähler</h1>
       </div>
-      <a
-        href="/login"
-        class="profilebutton"
-        id="loginbutton"
-        style="display: none"
-        ><img src="/public/images/login.png" alt="login" class="profilebutton"
-      /></a>
-      <button
-        class="profilebutton"
-        id="profilebutton"
-        onclick="
-          changesection('einstellungen');
-          history.pushState({}, '', '?page=einstellungen');
-        "
-        style="display: none"
-      >
-        <img
-          src="/public/images/profile.png"
-          alt="login"
-          class="profilebutton"
-        />
-      </button>
     </header>
     <div id="loading" class="loader">
       <div class="loadingcircle">
@@ -82,49 +57,39 @@
         <div id="c14" class="c"></div>
       </div>
     </div>
-    <div id="under_sidebar"></div>
-    <div id="sidebar">
-      <button id="close_sidebar" class="open_close">
-        <img src="/public/images/close.png" alt="" class="sidebarbutton" />
-      </button>
 
+    <div id="nav">
       <button
-        class="sectionselection"
-        onclick="
-          changesection('startseite');
-          history.pushState({}, '', '?page=startseite');
-        "
+        onclick="changesection('startseite')"
+        id="change_startseite"
+        class="selected"
       >
-        Startseite</button
-      ><br />
+        <img src="/public/images/nav/home.png" alt="" />
+        <p>startseite</p>
+      </button>
+      <button onclick="changesection('partien')" id="change_partien">
+        <img src="/public/images/nav/tennis.png" alt="" />
+        <p>partien</p>
+      </button>
+      <button onclick="changesection('neue_partie')" id="change_neue_partie">
+        <img src="/public/images/nav/plus.png" alt="" />
+        <p>neu</p>
+      </button>
+      <button onclick="changesection('freunde')" id="change_freunde">
+        <img src="/public/images/nav/users-avatar.png" alt="" />
+        <p>freunde</p>
+      </button>
       <button
-        class="sectionselection"
-        onclick="
-          changesection('neue_partie');
-          history.pushState({}, '', '?page=neue_partie');
-        "
+        onclick="changesection('einstellungen')"
+        id="change_einstellungen"
       >
-        Neue Partie</button
-      ><br />
-      <button
-        class="sectionselection"
-        onclick="
-          changesection('freunde');
-          history.pushState({}, '', '?page=freunde');
-        "
-      >
-        Freunde</button
-      ><br />
-      <button
-        class="sectionselection"
-        id="lastselector"
-        onclick="
-          changesection('partien');
-          history.pushState({}, '', '?page=partien');
-        "
-      >
-        Partien</button
-      ><br />
+        <img
+          src="/public/images/nav/user-avatar.png"
+          alt=""
+          id="settings_img"
+        />
+        <p>einstellungen</p>
+      </button>
     </div>
 
     <section id="startseite" class="sections">
@@ -252,10 +217,10 @@
         <div class="big-matches">
           <p class="smal-text">live | 28.08. 19:22 | sabine</p>
           <div class="big-matches-points">
-            <span>🟡</span><span></span> <span>max</span><span>paul</span>
             <span></span><span></span> <span></span><span></span> <span></span
             ><span></span> <span></span><span></span> <span></span><span></span>
-            <span></span> <span></span>
+            <span></span><span></span> <span></span><span></span> <span></span>
+            <span></span>
           </div>
         </div>
       </div>
