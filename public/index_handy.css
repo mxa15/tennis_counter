@@ -166,7 +166,6 @@ header {
   background-color: transparent;
   transition: all 0.4s ease;
   position: relative;
-  opacity: 0.3;
 }
 #nav img {
   height: 90%;
@@ -183,7 +182,7 @@ header {
   color: var(--text);
 }
 #nav button.selected {
-  background-color: var(--background-color);
+  background-color: rgba(0, 0, 0, 0.3)
   width: 104px;
   img {
     height: 60%;
