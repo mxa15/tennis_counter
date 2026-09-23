@@ -254,8 +254,10 @@ app.post("/api/changePassword", loginLimiter, async (req, res) => {
       status: "no accound",
     });
 
-  const oldPassword = typeof req.body?.oldPassword === "string" ? req.body.oldPassword : "";
-  const newPassword = typeof req.body?.newPassword === "string" ? req.body.newPassword : "";
+  const oldPassword =
+    typeof req.body?.oldPassword === "string" ? req.body.oldPassword : "";
+  const newPassword =
+    typeof req.body?.newPassword === "string" ? req.body.newPassword : "";
 
   if (!oldPassword || !newPassword) {
     return res.json({
@@ -864,6 +866,29 @@ app.get("/api/getFriends/:type", async (req, res) => {
       status: "invalid",
     });
   }
+});
+
+app.get("/api/getMyFriendreq", async (req, res) => {
+  const user_id = req.userid;
+  if (!user_id)
+    return res.json({
+      status: "no accound",
+    });
+
+  const friendreq = await db.query(
+    `SELECT users.id, users.username
+    FROM users
+    JOIN friends
+    ON users.id = friends.friend_id
+    WHERE friends.user_id = $1
+    AND friends.status = 'pending'`,
+    [user_id],
+  );
+
+  res.json({
+    status: "ok",
+    req: friendreq.rows,
+  });
 });
 
 app.delete("/api/deleteFriend/:id", async (req, res) => {
