@@ -62,39 +62,37 @@ async function get_friendrequests() {
 async function set_newfrienddiv(search) {
   const output = document.getElementById("newfriend_searchoutput");
   output.innerHTML = "";
-  output.innerHTML += "<h3>anfragen</h3>";
-  if (friendrequests.length > 0) {
-    friendrequests.forEach((request) => {
-      if (search) {
-        if (request.username.toLowerCase().startsWith(search.toLowerCase())) {
-          output.innerHTML += `
-            <div class="friend"  id="${request.id}">
-              <p class="big-text">${escapeHTML(request.username)}</p>
-              <button onclick="confirmFriend('${request.id}')"><img src="/public/images/accept-user.png" alt="add" /></button>
-            </div>`;
-        }
-      } else {
-        output.innerHTML += `
-          <div class="friend"  id="${request.id}">
-            <p class="big-text">${escapeHTML(request.username)}</p>
-            <button onclick="confirmFriend('${request.id}')" style="z-index: 50"><img src="/public/images/accept-user.png" alt="add" /></button>
-          </div>`;
-      }
-    });
-  }
   if (search) {
-    output.innerHTML += "<h3>andere</h3>";
     const user_results = await getUsersByName(search);
     console.log(user_results);
 
     if (typeof user_results == "string") return console.log(user_results);
 
     user_results.forEach((result) => {
+      let img;
+      let onclick;
+      if (result.friendstatus == "friend") {
+        img = "/public/images/remove-user.png";
+        onclick = `delete_friend(${result.id}, 'von freunden entfernen?')`;
+        console.log("1");
+      } else if (result.friendstatus == "my request") {
+        img = "/public/images/close.png";
+        onclick = `delete_friend(${result.id}, 'anfrage abbrechen?')`;
+        console.log("2");
+      } else if (result.friendstatus == "his request") {
+        img = "/public/images/accept-user.png";
+        onclick = `confirmFriend(${result.id})`;
+        console.log("3");
+      } else {
+        img = "/public/images/add-user.png";
+        onclick = `addfriend(${result.id})`;
+        console.log("4");
+      }
       if (!friendrequests.some((f) => f.username == result.username)) {
         output.innerHTML += `
         <div class="friend" id="${result.id}">
           <p class="big-text">${escapeHTML(result.username)}</p>
-          <button><img src="/public/images/add-user.png" alt="add" onclick="addfriend('${result.id}')"/></button>
+          <button><img src="${img}" alt="add" onclick="${onclick}"/></button>
         </div>
         `;
       }
@@ -137,6 +135,17 @@ async function get_friends() {
     );
     friendids.push(friend.id);
   });
+  await get_friendrequests();
+  if (friendrequests.length > 0) {
+    output.innerHTML += "freundesanfragen";
+    friendrequests.forEach((request) => {
+      output.innerHTML += `
+        <div class="friend"  id="${request.id}">
+          <p class="big-text">${escapeHTML(request.username)}</p>
+          <button onclick="confirmFriend('${request.id}')"><img src="/public/images/accept-user.png" alt="add" /></button>
+        </div>`;
+    });
+  }
   const r2 = await fetch("/api/getMyFriendreq");
   const d2 = await r2.json();
   if (d2.req.length > 0) {
@@ -568,10 +577,11 @@ async function delete_friend(id, messsage) {
   friend.classList.add("delete_friend");
   setTimeout(() => {
     friend.remove();
+    get_friends();
   }, 1000);
 }
 
-function add_friendelement(name, userid, img, message) {
+function add_friendelement(name, userid, img, message, onclick) {
   const output = document.getElementById("friendoutput");
   output.innerHTML += `
         <div class="friend" id="${userid}">
@@ -640,6 +650,7 @@ async function confirmFriend(id) {
 
   if (data.status == "ok") {
     get_friends();
+    friendrequests = [];
   }
 }
 

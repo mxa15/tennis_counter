@@ -684,12 +684,6 @@ app.get("/api/getUsersByName/:name", async (req, res) => {
     SELECT id, username FROM users
     WHERE username ILIKE $1
     AND id != $2
-    AND NOT EXISTS (
-      SELECT 1 
-      FROM friends
-      WHERE (user_id = $2 AND friend_id = users.id)
-      OR (user_id = users.id AND friend_id = $2)
-    )
     `,
     [name + "%", userid],
   );
@@ -700,10 +694,41 @@ app.get("/api/getUsersByName/:name", async (req, res) => {
     });
   }
 
+  await Promise.all(
+    users.rows.map(async (user) => {
+      user.friendstatus = await getFriendStatus(user.id);
+    }),
+  );
+
   res.json({
     status: "ok",
     users: users.rows,
   });
+
+  async function getFriendStatus(id) {
+    const result = await db.query(
+      `
+      SELECT * 
+      FROM friends
+      WHERE (user_id = $1 AND friend_id = $2)
+      OR (friend_id = $1 AND user_id = $2)`,
+      [id, userid],
+    );
+
+    if (result.rows.length == 0) return "no friend";
+
+    const friend = result.rows[0];
+
+    if (friend.status == "pending") {
+      if (friend.user_id == id) {
+        return "his request";
+      } else {
+        return "my request";
+      }
+    } else {
+      return "friend";
+    }
+  }
 });
 
 app.post("/api/addfriend", async (req, res) => {
