@@ -88,14 +88,12 @@ async function set_newfrienddiv(search) {
         onclick = `addfriend(${result.id})`;
         console.log("4");
       }
-      if (!friendrequests.some((f) => f.username == result.username)) {
-        output.innerHTML += `
+      output.innerHTML += `
         <div class="friend" id="newFr-${result.id}">
           <p class="big-text">${escapeHTML(result.username)}</p>
           <button><img src="${img}" alt="add" onclick="${onclick}"/></button>
         </div>
         `;
-      }
     });
   }
 }
