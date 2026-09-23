@@ -73,15 +73,15 @@ async function set_newfrienddiv(search) {
       let onclick;
       if (result.friendstatus == "friend") {
         img = "/public/images/remove-user.png";
-        onclick = `delete_friend(${result.id}, 'von freunden entfernen?')`;
+        onclick = `delete_friend(${result.id}, 'von freunden entfernen?', true)`;
         console.log("1");
       } else if (result.friendstatus == "my request") {
         img = "/public/images/close.png";
-        onclick = `delete_friend(${result.id}, 'anfrage abbrechen?')`;
+        onclick = `delete_friend(${result.id}, 'anfrage abbrechen?', true)`;
         console.log("2");
       } else if (result.friendstatus == "his request") {
         img = "/public/images/accept-user.png";
-        onclick = `confirmFriend(${result.id})`;
+        onclick = `confirmFriend(${result.id}, true)`;
         console.log("3");
       } else {
         img = "/public/images/add-user.png";
@@ -90,7 +90,7 @@ async function set_newfrienddiv(search) {
       }
       if (!friendrequests.some((f) => f.username == result.username)) {
         output.innerHTML += `
-        <div class="friend" id="${result.id}">
+        <div class="friend" id="newFr-${result.id}">
           <p class="big-text">${escapeHTML(result.username)}</p>
           <button><img src="${img}" alt="add" onclick="${onclick}"/></button>
         </div>
@@ -120,21 +120,22 @@ async function uptdate_newfrienddiv(search) {
 async function get_friends() {
   const response = await fetch("/api/getFriends/name");
   const data = await response.json();
-
-  if (data.status !== "ok") return console.log(data.status);
   const output = document.getElementById("friendoutput");
 
   output.innerHTML = "";
-
-  data.friends.forEach((friend) => {
-    add_friendelement(
-      friend.username,
-      friend.id,
-      "/public/images/remove-user.png",
-      "von freunden entfernen?",
-    );
-    friendids.push(friend.id);
-  });
+  if (data.status == "ok") {
+    data.friends.forEach((friend) => {
+      add_friendelement(
+        friend.username,
+        friend.id,
+        "/public/images/remove-user.png",
+        "von freunden entfernen?",
+      );
+      friendids.push(friend.id);
+    });
+  } else {
+    output.innerHTML += "keine freunde<br/><br/>";
+  }
   await get_friendrequests();
   if (friendrequests.length > 0) {
     output.innerHTML += "freundesanfragen";
@@ -560,7 +561,7 @@ document.addEventListener(
   true,
 );
 
-async function delete_friend(id, messsage) {
+async function delete_friend(id, messsage, newFr) {
   if (!confirm(messsage)) {
     return;
   }
@@ -572,7 +573,13 @@ async function delete_friend(id, messsage) {
 
   if (data.status !== "ok") return;
 
-  const friend = document.getElementById(id);
+  let friend;
+
+  if (newFr) {
+    friend = document.getElementById("newFr-" + id);
+  } else {
+    friend = document.getElementById(id);
+  }
 
   friend.classList.add("delete_friend");
   setTimeout(() => {
@@ -620,7 +627,7 @@ async function server_addfriend(id) {
 }
 
 async function addfriend(id) {
-  const friendelement = document.getElementById(id);
+  const friendelement = document.getElementById("newFr-" + id);
   setTimeout(() => {
     friendelement.remove();
   }, 1000);
@@ -630,12 +637,17 @@ async function addfriend(id) {
   get_friends();
 }
 
-async function confirmFriend(id) {
-  const friendelement = document.getElementById(id);
+async function confirmFriend(id, newFr) {
+  let friendelement;
+  if (newFr) {
+    friendelement = document.getElementById("newFr-" + id);
+  } else {
+    friendelement = document.getElementById(id);
+  }
   setTimeout(() => {
     friendelement.remove();
   }, 1000);
-  friendelement.classList.add("delete_friend");
+  friendelement.closest(".friend").classList.add("delete_friend");
   const response = await fetch("/api/confirmFriend", {
     method: "POST",
     headers: {
