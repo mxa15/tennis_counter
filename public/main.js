@@ -18,12 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "freunde",
       "partien",
       "einstellungen",
-      "profile",
+      "user",
     ].includes(page)
   ) {
     changesection(page, true);
   } else {
-    history.pushState({}, "", "?page=startseite");
     changesection("startseite");
   }
 
@@ -88,8 +87,10 @@ async function set_newfrienddiv(search) {
         onclick = `addfriend(${result.id})`;
         console.log("4");
       }
+      const url = new URL(window.location.href);
+      url.searchParams.set("id", result.id);
       output.innerHTML += `
-        <div class="friend" id="newFr-${result.id}">
+        <div class="friend" id="newFr-${result.id}" onclick="changesection('user'); close_newfrienddiv(); history.pushState({}, '', '${url}');">
           <p class="big-text">${escapeHTML(result.username)}</p>
           <button><img src="${img}" alt="add" onclick="${onclick}"/></button>
         </div>
@@ -344,16 +345,25 @@ function login_user(userdata) {
 }
 
 function changesection(id, first) {
+  console.log(1);
+
   if (id == "einstellungen" && !user && !first) {
     location.href = "/login";
   }
   history.pushState({}, "", "?page=" + id);
   const buttons = document.querySelectorAll("#nav button");
-  buttons.forEach((btn) => {
-    btn.classList.remove("selected");
-  });
-  const button = document.getElementById("change_" + id);
-  button.classList.add("selected");
+  if (id !== "user") {
+    buttons.forEach((btn) => {
+      btn.classList.remove("selected");
+    });
+    const button = document.getElementById("change_" + id);
+    button.classList.add("selected");
+  } else {
+    buttons.forEach((btn) => {
+      btn.classList.remove("selected");
+    });
+    console.log("succes");
+  }
 
   document.querySelectorAll("section").forEach((section) => {
     section.style.display = "none";
@@ -517,7 +527,8 @@ const newfriend_div = document.querySelector(".newfriend_div");
 
 function open_newfrienddiv() {
   if (newfriend_div.classList.contains("newfriend_div_open")) return;
-  uptdate_newfrienddiv();
+  document.getElementById("newfriend_searchoutput").innerHTML = "";
+  document.getElementById("newfriend_search").value = "";
   newfriend_div.classList.add("newfriend_div_open");
   document.getElementById("newfriend_open_div").style.display = "block";
 }

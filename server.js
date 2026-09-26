@@ -1126,6 +1126,54 @@ app.post("/api/searchMatch", async (req, res) => {
   });
 });
 
+app.get("/api/fullUserInfo/:id", async (req, res) => {
+  const id = req.params.id;
+
+  const u = await db.query(
+    `
+    SELECT id, username
+    FROM users
+    WHERE id = $1`,
+    [id],
+  );
+
+  if (u.rows.length == 0)
+    return res.json({
+      status: "not found",
+    });
+
+  const user = u.rows[0];
+
+  const m = await db.query(
+    `
+    SELECT *
+    FROM matches
+    WHERE owner_id = $1`,
+    [id],
+  );
+
+  user.matches = m.rows;
+
+  const f = await db.query(
+    `
+    SELECT
+    CASE
+    WHEN user_id = $1 THEN friend_id
+    ELSE user_id
+    END AS friend_id, status
+    FROM friends
+    WHERE (user_id = $1 OR friend_id = $1)`,
+    [id],
+  );
+
+  user.friends = f.rows;
+
+  res.json({
+    status: "ok",
+    user: user,
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
