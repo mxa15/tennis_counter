@@ -413,6 +413,33 @@ section h1 {
   overflow: auto;
 }
 
+#userInfos {
+  width: 100vw;
+  margin-left: -20px;
+  margin-top: -20px;
+  height: 100px;
+  background-color: var(--background2);
+  display: flex;
+  padding: 20px;
+  padding-top: 30px;
+}
+
+#userInfos img {
+  height: 100%;
+  margin-right: 20px;
+}
+
+#userInfos h2 {
+  font-size: 50px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+#userInfos button {
+  height: fit-content;
+  width: max-content;
+}
+
 .check {
   appearance: none;
   float: right;

@@ -1,7 +1,3 @@
-const params = new URLSearchParams(window.location.search);
-
-const page = params.get("page");
-
 const friendids = [];
 
 const matchstatus = new Map([
@@ -11,6 +7,10 @@ const matchstatus = new Map([
 ]);
 
 document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+
+  const page = params.get("page");
+
   if (
     [
       "startseite",
@@ -90,7 +90,7 @@ async function set_newfrienddiv(search) {
       const url = new URL(window.location.href);
       url.searchParams.set("id", result.id);
       output.innerHTML += `
-        <div class="friend" id="newFr-${result.id}" onclick="changesection('user'); close_newfrienddiv(); history.pushState({}, '', '${url}');">
+        <div class="friend" id="newFr-${result.id}" onclick="history.pushState({}, '', '?page=user&id=${result.id}'); changesection('user'); close_newfrienddiv();">
           <p class="big-text">${escapeHTML(result.username)}</p>
           <button><img src="${img}" alt="add" onclick="${onclick}"/></button>
         </div>
@@ -350,9 +350,9 @@ function changesection(id, first) {
   if (id == "einstellungen" && !user && !first) {
     location.href = "/login";
   }
-  history.pushState({}, "", "?page=" + id);
   const buttons = document.querySelectorAll("#nav button");
   if (id !== "user") {
+    history.pushState({}, "", "?page=" + id);
     buttons.forEach((btn) => {
       btn.classList.remove("selected");
     });
@@ -362,7 +362,24 @@ function changesection(id, first) {
     buttons.forEach((btn) => {
       btn.classList.remove("selected");
     });
-    console.log("succes");
+
+    const params = new URLSearchParams(window.location.search);
+
+    console.log(params);
+
+    const user_id = params.get("id");
+
+    console.log(user_id);
+
+    if (!user_id) return changesection("startseite");
+
+    writeUserPage(user_id).then((data) => {
+      if (data.status == "ok") {
+        console.log(data.user);
+      } else {
+        console.log(data.status);
+      }
+    });
   }
 
   document.querySelectorAll("section").forEach((section) => {
@@ -370,6 +387,13 @@ function changesection(id, first) {
   });
 
   document.getElementById(id).style.display = "block";
+}
+
+async function writeUserPage(id) {
+  const response = await fetch("/api/fullUserInfo/" + id);
+  const data = await response.json();
+
+  return data;
 }
 
 logoutbtn.addEventListener("click", () => {
