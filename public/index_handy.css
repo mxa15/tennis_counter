@@ -415,13 +415,13 @@ section h1 {
 
 #userInfos {
   width: 100vw;
-  margin-left: -20px;
-  margin-top: -20px;
-  height: 100px;
+  height: 110px;
   background-color: var(--background2);
   display: flex;
-  padding: 20px;
-  padding-top: 30px;
+  position: fixed;
+  top: 80px;
+  left: 0px;
+  padding: 10px;
 }
 
 #userInfos img {
@@ -430,14 +430,56 @@ section h1 {
 }
 
 #userInfos h2 {
-  font-size: 50px;
+  font-size: 40px;
+  height: 100%;
   margin-top: 0px;
   margin-bottom: 0px;
+  display: flex;
+  align-items: center;
 }
 
 #userInfos button {
-  height: fit-content;
-  width: max-content;
+  height: 40px;
+  background: transparent;
+  border: 0;
+  width: 100%;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+}
+
+#uSelector {
+  margin-top: 130px;
+  position: sticky;
+  top: 155px;
+}
+
+#uSelector button {
+  position: relative;
+  margin: 0;
+  width: 49.3%;
+  border: 0;
+  background-color: transparent;
+  height: 30px;
+  font-size: 20px;
+  z-index: 5;
+}
+
+#uSelector div {
+  position: absolute;
+  width: 50%;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0%;
+  top: 0px;
+  z-index: 4;
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+  transition: left 0.3s ease-in-out;
+}
+
+#uSelected._2 {
+  left: 50%;
 }
 
 .check {

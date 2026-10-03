@@ -7,6 +7,19 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <meta name="theme-color" content="rgb(153, 255, 0)" />
+    <link rel="manifest" href="/public/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Tennis Counter" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Tennis Counter" />
     <title>Punktezähler-Startseite</title>
     <link rel="stylesheet" href="/public/loader.css" />
     <link
@@ -266,13 +279,17 @@
     <section id="user" class="sections" style="display: none">
       <div id="userInfos">
         <img src="/public/images/user-image.png" alt="benutzer" />
-        <div>
-          <h2>Max</h2>
-          <button class="smal-text">freunde: 5</button>
-        </div>
+        <h2 id="uPageUsername">Max</h2>
+      </div>
+      <div id="uSelector">
+        <button id="uChangematches" onclick="uChangeSection(1)">Matches</button>
+        <button id="uChangeFriends" onclick="uChangeSection(2)">Freunde</button>
+        <div id="uSelected"></div>
       </div>
     </section>
 
     <script src="/public/main.js"></script>
+
+    <script src="/public/service-worker-register.js"></script>
   </body>
 </html>

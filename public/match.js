@@ -1,3 +1,5 @@
+const { useCallback } = require("react");
+
 const url = window.location.pathname.split("/");
 const code = url[2];
 const loadin_screen = document.getElementById("loading");
@@ -30,7 +32,6 @@ const info = document.getElementById("info");
 
 const observer = new ResizeObserver(() => {
   info.style.marginTop = header.offsetHeight + 30 + "px";
-  console.log(header.offsetHeight);
 });
 
 observer.observe(header);

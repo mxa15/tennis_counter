@@ -53,7 +53,7 @@ async function get_friendrequests() {
   const response = await fetch("/api/getfriendreq");
   const data = await response.json();
 
-  if (data.status !== "ok") return console.log(data.status);
+  if (data.status !== "ok") return;
 
   friendrequests = data.requests;
 }
@@ -63,9 +63,8 @@ async function set_newfrienddiv(search) {
   output.innerHTML = "";
   if (search) {
     const user_results = await getUsersByName(search);
-    console.log(user_results);
 
-    if (typeof user_results == "string") return console.log(user_results);
+    if (typeof user_results == "string") return;
 
     user_results.forEach((result) => {
       let img;
@@ -73,19 +72,15 @@ async function set_newfrienddiv(search) {
       if (result.friendstatus == "friend") {
         img = "/public/images/remove-user.png";
         onclick = `delete_friend(${result.id}, 'von freunden entfernen?', true)`;
-        console.log("1");
       } else if (result.friendstatus == "my request") {
         img = "/public/images/close.png";
         onclick = `delete_friend(${result.id}, 'anfrage abbrechen?', true)`;
-        console.log("2");
       } else if (result.friendstatus == "his request") {
         img = "/public/images/accept-user.png";
         onclick = `confirmFriend(${result.id}, true)`;
-        console.log("3");
       } else {
         img = "/public/images/add-user.png";
         onclick = `addfriend(${result.id})`;
-        console.log("4");
       }
       const url = new URL(window.location.href);
       url.searchParams.set("id", result.id);
@@ -102,7 +97,6 @@ async function set_newfrienddiv(search) {
 async function getUsersByName(name) {
   const response = await fetch("/api/getUsersByName/" + name);
   const data = await response.json();
-  console.log(data);
 
   if (data.status !== "ok") return data.status;
 
@@ -345,8 +339,6 @@ function login_user(userdata) {
 }
 
 function changesection(id, first) {
-  console.log(1);
-
   if (id == "einstellungen" && !user && !first) {
     location.href = "/login";
   }
@@ -365,19 +357,17 @@ function changesection(id, first) {
 
     const params = new URLSearchParams(window.location.search);
 
-    console.log(params);
-
     const user_id = params.get("id");
-
-    console.log(user_id);
 
     if (!user_id) return changesection("startseite");
 
+    loadin_screen.style.display = "flex";
     writeUserPage(user_id).then((data) => {
+      loadin_screen.style.display = "none";
       if (data.status == "ok") {
-        console.log(data.user);
-      } else {
-        console.log(data.status);
+        const nameelement = document.getElementById("uPageUsername");
+
+        nameelement.textContent = data.user.username;
       }
     });
   }
@@ -474,7 +464,6 @@ async function start_match() {
         lon: position.coords.longitude,
       };
     } catch (error) {
-      console.log(error);
       posdata = {
         allowed: false,
         error: error.message,
@@ -602,8 +591,6 @@ async function delete_friend(id, messsage, newFr) {
   const response = await fetch("/api/deleteFriend/" + id, { method: "DELETE" });
   const data = await response.json();
 
-  console.log(data.status);
-
   if (data.status !== "ok") return;
 
   let friend;
@@ -666,7 +653,6 @@ async function addfriend(id) {
   }, 1000);
   friendelement.classList.add("delete_friend");
   const status = await server_addfriend(id);
-  console.log(status);
   get_friends();
 }
 
@@ -691,7 +677,6 @@ async function confirmFriend(id, newFr) {
     }),
   });
   const data = await response.json();
-  console.log(data.status);
 
   if (data.status == "ok") {
     get_friends();
@@ -995,3 +980,33 @@ async function writeMyMatches() {
 }
 
 writeMyMatches();
+
+window.addEventListener("scroll", (e) => {
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get("page") == "user") {
+    const userInfo = document.getElementById("userInfos");
+    const usertext = userInfo.querySelector("h2");
+
+    if (window.scrollY < 60) {
+      userInfo.style.height = 110 - window.scrollY + "px";
+      userInfo.style.borderRadius = window.scrollY / 3 + "px";
+      userInfo.style.top = window.scrollY / 12 + 80 + "px";
+      usertext.style.fontSize = 40 - window.scrollY / 6 + "px";
+    } else if (userInfo.style.height !== "50px") {
+      userInfo.style.height = "50px";
+    }
+  }
+});
+
+function uChangeSection(section) {
+  const uSelected = document.getElementById("uSelected");
+
+  console.log("hhhhh");
+
+  if (section == 1) {
+    uSelected.classList.remove("_2");
+  } else if (section == 2) {
+    uSelected.classList.add("_2");
+  }
+}
