@@ -453,6 +453,7 @@ section h1 {
   margin-top: 130px;
   position: fixed;
   width: 100%;
+  left: 0;
 }
 
 #uSelector button {
