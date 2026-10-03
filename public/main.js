@@ -981,6 +981,15 @@ async function writeMyMatches() {
 
 writeMyMatches();
 
+const el = document.createElement("div");
+
+el.style.paddingTop = "env(safe-area-inset-top)";
+document.body.appendChild(el);
+
+const safeAreaTop = parseFloat(getComputedStyle(el).paddingTop);
+
+el.remove();
+
 window.addEventListener("scroll", (e) => {
   const params = new URLSearchParams(window.location.search);
 
@@ -991,7 +1000,7 @@ window.addEventListener("scroll", (e) => {
     if (window.scrollY < 60) {
       userInfo.style.height = 110 - window.scrollY + "px";
       userInfo.style.borderRadius = window.scrollY / 3 + "px";
-      userInfo.style.top = window.scrollY / 12 + 80 + "px";
+      userInfo.style.top = window.scrollY / 12 + 80 + safeAreaTop + "px";
       usertext.style.fontSize = 40 - window.scrollY / 6 + "px";
     } else if (userInfo.style.height !== "50px") {
       userInfo.style.height = "50px";
@@ -1001,8 +1010,6 @@ window.addEventListener("scroll", (e) => {
 
 function uChangeSection(section) {
   const uSelected = document.getElementById("uSelected");
-
-  console.log("hhhhh");
 
   if (section == 1) {
     uSelected.classList.remove("_2");
