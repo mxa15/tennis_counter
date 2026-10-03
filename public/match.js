@@ -1,5 +1,3 @@
-const { useCallback } = require("react");
-
 const url = window.location.pathname.split("/");
 const code = url[2];
 const loadin_screen = document.getElementById("loading");
