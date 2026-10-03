@@ -420,7 +420,7 @@ section h1 {
   background-color: var(--background2);
   display: flex;
   position: fixed;
-  top: 80px;
+  top: calc(80px + env(safe-area-inset-top));
   left: 0px;
   padding: 10px;
 }
