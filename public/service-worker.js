@@ -1,4 +1,4 @@
-const CACHE_NAME = "tennis-counter-v1";
+const CACHE_NAME = "tennis-counter-v2";
 
 self.addEventListener("fetch", (event) => {
   event.respondWith(
