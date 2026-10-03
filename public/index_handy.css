@@ -133,6 +133,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  padding-top: env(safe-area-inset-top);
   border-bottom-left-radius: 17px;
   border-bottom-right-radius: 17px;
   background: var(--header-color);
