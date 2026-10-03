@@ -35,6 +35,7 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 28px 40px 56px 300px;
+  padding-top: env(safe-area-inset-top);
   color: var(--ink);
   font-family: "Manrope", sans-serif;
   background:
