@@ -150,7 +150,7 @@ header {
   height: 60px;
   border-radius: 30px;
   position: fixed;
-  bottom: 10px;
+  bottom: 30px;
   left: 5%;
   background-color: var(--header-color);
   backdrop-filter: blur(10px);
