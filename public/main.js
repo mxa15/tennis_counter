@@ -990,24 +990,6 @@ const safeAreaTop = parseFloat(getComputedStyle(el).paddingTop);
 
 el.remove();
 
-window.addEventListener("scroll", (e) => {
-  const params = new URLSearchParams(window.location.search);
-
-  if (params.get("page") == "user") {
-    const userInfo = document.getElementById("userInfos");
-    const usertext = userInfo.querySelector("h2");
-
-    if (window.scrollY < 60) {
-      userInfo.style.height = 110 - window.scrollY + "px";
-      userInfo.style.borderRadius = window.scrollY / 3 + "px";
-      userInfo.style.top = window.scrollY / 12 + 80 + safeAreaTop + "px";
-      usertext.style.fontSize = 40 - window.scrollY / 6 + "px";
-    } else if (userInfo.style.height !== "50px") {
-      userInfo.style.height = "50px";
-    }
-  }
-});
-
 function uChangeSection(section) {
   const uSelected = document.getElementById("uSelected");
 
