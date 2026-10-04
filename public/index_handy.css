@@ -314,6 +314,8 @@ section h1 {
 
 #newfriend_searchoutput {
   margin-top: 20px;
+  overflow-y: auto;
+  height: 250px;
 }
 
 .friend {
@@ -423,6 +425,7 @@ section h1 {
   top: calc(80px + env(safe-area-inset-top));
   left: 0px;
   padding: 10px;
+  z-index: 50;
 }
 
 #userInfos img {
@@ -454,6 +457,7 @@ section h1 {
   position: fixed;
   width: 100%;
   left: 0;
+  z-index: 50;
 }
 
 #uSelector button {
