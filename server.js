@@ -1166,6 +1166,16 @@ app.get("/api/fullUserInfo/:id", async (req, res) => {
 
   user.friends = f.rows;
 
+  await Promise.all(
+    user.friends.map(async (f) => {
+      f.name = (
+        await db.query("SELECT username FROM users WHERE id = $1", [
+          f.friend_id,
+        ])
+      ).rows[0].username;
+    }),
+  );
+
   res.json({
     status: "ok",
     user: user,

@@ -220,17 +220,7 @@
         <input type="text" class="inputs" required placeholder="suchen" />
         <button class="main-button">suchen</button>
       </form>
-      <div id="matchSearchResults">
-        <div class="big-matches">
-          <p class="smal-text">live | 28.08. 19:22 | sabine</p>
-          <div class="big-matches-points">
-            <span></span><span></span> <span></span><span></span> <span></span
-            ><span></span> <span></span><span></span> <span></span><span></span>
-            <span></span><span></span> <span></span><span></span> <span></span>
-            <span></span>
-          </div>
-        </div>
-      </div>
+      <div id="matchSearchResults"></div>
     </section>
     <section id="einstellungen" class="sections" style="display: none">
       <h1 id="profilename">Profile</h1>
@@ -286,6 +276,8 @@
         <button id="uChangeFriends" onclick="uChangeSection(2)">Freunde</button>
         <div id="uSelected"></div>
       </div>
+      <div id="uMatches" style="margin-top: 180px"></div>
+      <div id="uFriends" style="display: none; margin-top: 180px"></div>
     </section>
 
     <script src="/public/main.js"></script>

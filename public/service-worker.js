@@ -1,4 +1,4 @@
-const CACHE_NAME = "tennis-counter-v3";
+const CACHE_NAME = "tennis-counter-vt1";
 const APP_SHELL = ["/", "/public/manifest.json"];
 
 self.addEventListener("install", (event) => {
@@ -17,7 +17,9 @@ self.addEventListener("activate", (event) => {
       .keys()
       .then((keys) =>
         Promise.all(
-          keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)),
+          keys
+            .filter((key) => key !== CACHE_NAME)
+            .map((key) => caches.delete(key)),
         ),
       )
       .then(() => self.clients.claim()),
@@ -41,7 +43,9 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match("/"))),
+        .catch(() =>
+          caches.match(request).then((cached) => cached || caches.match("/")),
+        ),
     );
     return;
   }
@@ -54,7 +58,11 @@ self.addEventListener("fetch", (event) => {
 
       return fetch(request)
         .then((response) => {
-          if (!response || response.type === "opaque" || response.status !== 200) {
+          if (
+            !response ||
+            response.type === "opaque" ||
+            response.status !== 200
+          ) {
             return response;
           }
 

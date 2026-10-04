@@ -366,8 +366,82 @@ function changesection(id, first) {
       loadin_screen.style.display = "none";
       if (data.status == "ok") {
         const nameelement = document.getElementById("uPageUsername");
+        const changeToFriends = document.getElementById("uChangeFriends");
 
         nameelement.textContent = data.user.username;
+        changeToFriends.textContent = "freunde: " + data.user.friends.length;
+
+        const matchOutput = document.getElementById("uMatches");
+
+        matchOutput.innerHTML = "";
+
+        if (data.user.matches.length == 0)
+          matchOutput.innerHTML = "<p class='smal-text'>keine Matches</p>";
+
+        data.user.matches.forEach((match) => {
+          let url = match.my
+            ? "/match/" + match.code
+            : "/view_match?code=" + match.code;
+          let game = [0, 0];
+          if (match.points.tiebrake[0] > 0 || match.points.tiebrake[1] > 0) {
+            game = [match.points.tiebrake[0], match.points.tiebrake[1]];
+          } else {
+            game = [match.points.points[0], match.points.points[1]];
+          }
+          if (match.status == "finished" || match.status == "created") {
+            game = ["", ""];
+          } else {
+            game = [pointsystem[game[0]], pointsystem[game[1]]];
+          }
+          const server = ["", ""];
+          if (match.points.server == "player1") {
+            server[0] = "🟡";
+          } else if (match.points.server == "player2") {
+            server[1] = "🟡";
+          }
+          let sets = [
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+            ["", ""],
+          ];
+          let i = 0;
+          match.points.sets.forEach((set) => {
+            sets[i] = set;
+            i++;
+          });
+          const tournament = match.data.tournament ? match.data.tournament : "";
+
+          matchOutput.innerHTML += `
+            <div class="big-matches" onclick="location.href = '${url}'">
+              <p class="smal-text">${escapeHTML(matchstatus.get(match.status))} | ${getDate(match.created_at)} ${new Date(match.created_at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} ${escapeHTML(tournament)}</p>
+              <div class="big-matches-points">
+                <span>${server[0]}</span><span>${server[1]}</span> 
+                <span>${escapeHTML(match.data.player1)}</span><span>${escapeHTML(match.data.player2)}</span>
+                <span>${escapeHTML(sets[0][0])}</span><span>${escapeHTML(sets[0][1])}</span> 
+                <span>${escapeHTML(sets[1][0])}</span><span>${escapeHTML(sets[1][1])}</span>
+                <span>${escapeHTML(sets[2][0])}</span><span>${escapeHTML(sets[2][1])}</span> 
+                <span>${escapeHTML(sets[3][0])}</span><span>${escapeHTML(sets[3][1])}</span>
+                <span>${escapeHTML(sets[4][0])}</span><span>${escapeHTML(sets[4][1])}</span> 
+                <span>${escapeHTML(game[0])}</span> <span>${escapeHTML(game[1])}</span>
+              </div>
+            </div>`;
+        });
+
+        const friendOutput = document.getElementById("uFriends");
+
+        friendOutput.innerHTML = "";
+
+        if (data.user.friends.length == 0)
+          friendOutput.innerHTML = "<p class='smal-text'>keine freunde</p>";
+
+        data.user.friends.forEach((friend) => {
+          friendOutput.innerHTML += `
+          <div class="friend" onclick="history.pushState({}, '', '?page=user&id=${friend.friend_id}'); changesection('user');">
+            <p class="big-text">${escapeHTML(friend.name)}</p>
+          </div>`;
+        });
       }
     });
   }
@@ -608,7 +682,7 @@ async function delete_friend(id, messsage, newFr) {
   }, 1000);
 }
 
-function add_friendelement(name, userid, img, message, onclick) {
+function add_friendelement(name, userid, img, message) {
   const output = document.getElementById("friendoutput");
   output.innerHTML += `
         <div class="friend" id="${userid}">
@@ -981,21 +1055,18 @@ async function writeMyMatches() {
 
 writeMyMatches();
 
-const el = document.createElement("div");
-
-el.style.paddingTop = "env(safe-area-inset-top)";
-document.body.appendChild(el);
-
-const safeAreaTop = parseFloat(getComputedStyle(el).paddingTop);
-
-el.remove();
-
 function uChangeSection(section) {
   const uSelected = document.getElementById("uSelected");
+  const fPage = document.getElementById("uFriends");
+  const mPage = document.getElementById("uMatches");
 
   if (section == 1) {
     uSelected.classList.remove("_2");
+    fPage.style.display = "none";
+    mPage.style.display = "block";
   } else if (section == 2) {
     uSelected.classList.add("_2");
+    mPage.style.display = "none";
+    fPage.style.display = "block";
   }
 }
