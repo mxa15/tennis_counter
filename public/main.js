@@ -134,7 +134,7 @@ async function get_friends() {
     output.innerHTML += "freundesanfragen";
     friendrequests.forEach((request) => {
       output.innerHTML += `
-        <div class="friend"  id="${request.id}">
+        <div class="friend"  id="${request.id}" onclick="history.pushState({}, '', '?page=user&id=${request.id}'); changesection('user');">
           <p class="big-text">${escapeHTML(request.username)}</p>
           <button onclick="confirmFriend('${request.id}')"><img src="/public/images/accept-user.png" alt="add" /></button>
         </div>`;
@@ -685,7 +685,7 @@ async function delete_friend(id, messsage, newFr) {
 function add_friendelement(name, userid, img, message) {
   const output = document.getElementById("friendoutput");
   output.innerHTML += `
-        <div class="friend" id="${userid}">
+        <div class="friend" id="${userid}" onclick="history.pushState({}, '', '?page=user&id=${userid}'); changesection('user'); close_newfrienddiv();">
           <p class="big-text">${escapeHTML(name)}</p>
           <button onclick="delete_friend('${userid}', '${message}')"><img src="${img}" alt="add"/></button>
         </div>
