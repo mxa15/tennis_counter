@@ -1160,7 +1160,8 @@ app.get("/api/fullUserInfo/:id", async (req, res) => {
     ELSE user_id
     END AS friend_id, status
     FROM friends
-    WHERE (user_id = $1 OR friend_id = $1)`,
+    WHERE (user_id = $1 OR friend_id = $1)
+    AND status = 'accepted'`,
     [id],
   );
 
