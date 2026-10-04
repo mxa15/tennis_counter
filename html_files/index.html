@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <meta name="theme-color" content="rgb(153, 255, 0)" />
-    <link rel="manifest" href="/public/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta
       name="apple-mobile-web-app-status-bar-style"
@@ -21,18 +21,18 @@
     />
     <meta name="apple-mobile-web-app-title" content="Tennis Counter" />
     <title>Punktezähler-Startseite</title>
-    <link rel="stylesheet" href="/public/loader.css" />
+    <link rel="stylesheet" href="/loader.css" />
     <link
       rel="stylesheet"
-      href="/public/index.css"
+      href="/index.css"
       media="screen and (min-width: 800px)"
     />
     <link
       rel="stylesheet"
-      href="/public/index_handy.css"
+      href="/index_handy.css"
       media="screen and (max-width: 800px)"
     />
-    <link rel="icon" href="/public/images/image.png" type="image/x-icon" />
+    <link rel="icon" href="/images/image.png" type="image/x-icon" />
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
       rel="stylesheet"
@@ -42,7 +42,7 @@
     <div id="over-header"></div>
     <header>
       <div id="logodiv" onclick="changesection('startseite')">
-        <img src="/public/images/image.png" alt="logo" id="logo" />
+        <img src="/images/image.png" alt="logo" id="logo" />
         <h1 id="title">Punktezähler</h1>
       </div>
     </header>
@@ -71,30 +71,26 @@
         id="change_startseite"
         class="selected"
       >
-        <img src="/public/images/nav/home.png" alt="" />
+        <img src="/images/nav/home.png" alt="" />
         <p>startseite</p>
       </button>
       <button onclick="changesection('partien')" id="change_partien">
-        <img src="/public/images/nav/tennis.png" alt="" />
+        <img src="/images/nav/tennis.png" alt="" />
         <p>partien</p>
       </button>
       <button onclick="changesection('neue_partie')" id="change_neue_partie">
-        <img src="/public/images/nav/plus.png" alt="" />
+        <img src="/images/nav/plus.png" alt="" />
         <p>neu</p>
       </button>
       <button onclick="changesection('freunde')" id="change_freunde">
-        <img src="/public/images/nav/users-avatar.png" alt="" />
+        <img src="/images/nav/users-avatar.png" alt="" />
         <p>freunde</p>
       </button>
       <button
         onclick="changesection('einstellungen')"
         id="change_einstellungen"
       >
-        <img
-          src="/public/images/nav/user-avatar.png"
-          alt=""
-          id="settings_img"
-        />
+        <img src="/images/nav/user-avatar.png" alt="" id="settings_img" />
         <p>einstellungen</p>
       </button>
     </div>
@@ -268,7 +264,7 @@
     </section>
     <section id="user" class="sections" style="display: none">
       <div id="userInfos">
-        <img src="/public/images/user-image.png" alt="benutzer" />
+        <img src="/images/user-image.png" alt="benutzer" />
         <h2 id="uPageUsername">Max</h2>
       </div>
       <div id="uSelector">
@@ -280,8 +276,8 @@
       <div id="uFriends" style="display: none; margin-top: 180px"></div>
     </section>
 
-    <script src="/public/main.js"></script>
+    <script src="/main.js"></script>
 
-    <script src="/public/service-worker-register.js"></script>
+    <script src="/service-worker-register.js"></script>
   </body>
 </html>

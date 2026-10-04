@@ -1,7 +1,7 @@
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("/public/service-worker.js")
+      .register("/service-worker.js")
       .then((registration) => {
         console.log("Service Worker registriert:", registration);
       })
@@ -10,3 +10,15 @@ if ("serviceWorker" in navigator) {
       });
   });
 }
+
+async function deleteAllCaches() {
+  const cacheNames = await caches.keys();
+
+  for (const cacheName of cacheNames) {
+    await caches.delete(cacheName);
+  }
+
+  console.log("Alle Caches gelöscht");
+}
+
+deleteAllCaches();

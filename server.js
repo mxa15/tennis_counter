@@ -41,7 +41,7 @@ app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/public", express.static("public"));
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
   res.redirect("/startseite?page=startseite");

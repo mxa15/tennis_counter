@@ -70,16 +70,16 @@ async function set_newfrienddiv(search) {
       let img;
       let onclick;
       if (result.friendstatus == "friend") {
-        img = "/public/images/remove-user.png";
+        img = "/images/remove-user.png";
         onclick = `delete_friend(${result.id}, 'von freunden entfernen?', true)`;
       } else if (result.friendstatus == "my request") {
-        img = "/public/images/close.png";
+        img = "/images/close.png";
         onclick = `delete_friend(${result.id}, 'anfrage abbrechen?', true)`;
       } else if (result.friendstatus == "his request") {
-        img = "/public/images/accept-user.png";
+        img = "/images/accept-user.png";
         onclick = `confirmFriend(${result.id}, true)`;
       } else {
-        img = "/public/images/add-user.png";
+        img = "/images/add-user.png";
         onclick = `addfriend(${result.id})`;
       }
       const url = new URL(window.location.href);
@@ -121,7 +121,7 @@ async function get_friends() {
       add_friendelement(
         friend.username,
         friend.id,
-        "/public/images/remove-user.png",
+        "/images/remove-user.png",
         "von freunden entfernen?",
       );
       friendids.push(friend.id);
@@ -136,7 +136,7 @@ async function get_friends() {
       output.innerHTML += `
         <div class="friend"  id="${request.id}" onclick="history.pushState({}, '', '?page=user&id=${request.id}'); changesection('user');">
           <p class="big-text">${escapeHTML(request.username)}</p>
-          <button onclick="confirmFriend('${request.id}')"><img src="/public/images/accept-user.png" alt="add" /></button>
+          <button onclick="confirmFriend('${request.id}')"><img src="/images/accept-user.png" alt="add" /></button>
         </div>`;
     });
   }
@@ -148,7 +148,7 @@ async function get_friends() {
       add_friendelement(
         req.username,
         req.id,
-        "/public/images/close.png",
+        "/images/close.png",
         "anfrage abbrechen?",
       );
     });
@@ -176,7 +176,7 @@ function check_user() {
     .then((response) => response.json())
     .then((data) => {
       if (data.failed) {
-        settings_img.src = "/public/images/login.png";
+        settings_img.src = "/images/login.png";
         loadin_screen.style.display = "none";
         return;
       }
@@ -848,7 +848,7 @@ async function writefavoritNames() {
     output.innerHTML += `
     <div class="friend" id="name-${escapeHTML(safeName)}">
       <p class="big-text">${escapeHTML(safeName)}</p>
-      <button onclick="deletefavoritName('${escapeHTML(safeName)}')"><img src="/public/images/close.png" alt="" /></button>
+      <button onclick="deletefavoritName('${escapeHTML(safeName)}')"><img src="/images/close.png" alt="" /></button>
     </div>`;
 
     list.innerHTML += "<option value='" + escapeHTML(safeName) + "'>";
