@@ -1,6 +1,7 @@
-const CACHE_NAME = "Offline-test-v1.0.0";
+const CACHE_NAME = "Offline-test-v1.0.1";
 
 const CACHE_FILES = [
+  "/images/image.png",
   "/offline-startpage.html",
   "/offlineMatch",
   "/match.js",
