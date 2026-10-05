@@ -1,4 +1,4 @@
-const CACHE_NAME = "Offline-test-v1.0.1";
+const CACHE_NAME = "Offline-test-v0.0.1";
 
 const CACHE_FILES = [
   "/images/image.png",
