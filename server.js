@@ -84,6 +84,10 @@ app.get("/match/:code", async (req, res) => {
   res.sendFile(path.join(__dirname, "html_files", "match.html"));
 });
 
+app.get("/offlineMatch", (req, res) => {
+  res.sendFile(path.join(__dirname, "html_files", "match.html"));
+});
+
 app.get("/view_match", (req, res) => {
   res.sendFile(path.join(__dirname, "html_files", "view_match.html"));
 });

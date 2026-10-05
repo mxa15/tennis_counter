@@ -10,15 +10,3 @@ if ("serviceWorker" in navigator) {
       });
   });
 }
-
-async function deleteAllCaches() {
-  const cacheNames = await caches.keys();
-
-  for (const cacheName of cacheNames) {
-    await caches.delete(cacheName);
-  }
-
-  console.log("Alle Caches gelöscht");
-}
-
-deleteAllCaches();
