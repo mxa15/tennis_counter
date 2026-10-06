@@ -1,4 +1,4 @@
-const CACHE_NAME = "Offline-test-v0.0.1";
+const CACHE_NAME = "Offline-test-v1.0.0";
 
 const CACHE_FILES = [
   "/images/image.png",
@@ -19,6 +19,8 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("activate", (event) => {
+  console.log("hallo");
+
   event.waitUntil(
     (async () => {
       const exists = await caches.has(CACHE_NAME);
