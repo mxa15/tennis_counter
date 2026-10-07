@@ -3,7 +3,7 @@ const CACHE_NAME = "Offline-test-v1.0.0";
 const CACHE_FILES = [
   "/images/image.png",
   "/offline-startpage.html",
-  "/index.css",
+  "/index_handy.css",
   "/offlineMatch",
   "/match.js",
   "/match_handy.css",
@@ -49,10 +49,10 @@ self.addEventListener("fetch", (event) => {
       }),
     );
   }
-  if (url.pathname == "/index.css") {
+  if (url.pathname == "/index_handy.css") {
     event.respondWith(
       fetch(event.request).catch(() => {
-        return caches.match("/index.css");
+        return caches.match("/index_handy.css");
       }),
     );
   }
