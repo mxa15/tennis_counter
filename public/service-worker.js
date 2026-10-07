@@ -1,4 +1,4 @@
-const CACHE_NAME = "Offline-test-v1.0.0";
+const CACHE_NAME = "Offline-test-v1.0.1";
 
 const CACHE_FILES = [
   "/images/image.png",
@@ -8,6 +8,7 @@ const CACHE_FILES = [
   "/match.js",
   "/match_handy.css",
   "/match.css",
+  "/service-worker-register.js",
 ];
 
 self.addEventListener("install", (event) => {
@@ -55,5 +56,11 @@ self.addEventListener("fetch", (event) => {
         return caches.match("/index_handy.css");
       }),
     );
+  }
+  if (url.pathname == "/images/image.png") {
+    event.respondWith(caches.match("/images/image.png"));
+  }
+  if (url.pathname == "/service-worker-register.js") {
+    event.respondWith(caches.match("/service-worker-register.js"));
   }
 });
