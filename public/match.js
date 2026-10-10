@@ -427,16 +427,14 @@ async function update_server() {
 }
 
 async function server_return() {
-  const response = await fetch("/api/match_return", {
-    headers: {
-      "X-page-URL": window.location.pathname,
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-  if (data.failed) return;
+  if (matchsettings.course.length == 0) return console.log("hallo");
+  matchsettings.points =
+    matchsettings.course[matchsettings.course.length - 1].points;
+  matchsettings.status =
+    matchsettings.course[matchsettings.course.length - 1].status;
 
-  matchsettings = data;
+  matchsettings.course.pop();
+
   if (
     matchsettings.status == "live" &&
     pointbtn1.style.visibility == "hidden"
@@ -447,6 +445,16 @@ async function server_return() {
     tabele.game[1].style.visibility = "visible";
   }
   update_tabelle(false);
+  const response = await fetch("/api/updatematch", {
+    method: "POST",
+    headers: {
+      "X-page-URL": window.location.pathname,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(matchsettings),
+  });
+  const data = await response.json();
+  if (data.status !== "ok") return;
 }
 
 async function shareMatch() {

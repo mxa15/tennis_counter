@@ -63,4 +63,22 @@ self.addEventListener("fetch", (event) => {
   if (url.pathname == "/service-worker-register.js") {
     event.respondWith(caches.match("/service-worker-register.js"));
   }
+  if (url.pathname == "/api/updatematch") {
+    event.respondWith(
+      fetch(event.request).catch(async () => {
+        console.log("offfff");
+
+        const cache = await caches.open(CACHE_NAME);
+        const body = await event.request.clone().text();
+        cache.put(
+          "/matchsettings.json",
+          new Response(body, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }),
+        );
+      }),
+    );
+  }
 });
