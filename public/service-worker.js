@@ -63,23 +63,35 @@ self.addEventListener("fetch", (event) => {
   if (url.pathname == "/service-worker-register.js") {
     event.respondWith(caches.match("/service-worker-register.js"));
   }
-  /*if (url.pathname == "/api/updatematch") {
-    
+  if (url.pathname == "/api/updatematch") {
     event.respondWith(
-      fetch(event.request).catch(async () => {
-        console.log("offfff");
+      (async () => {
+        const requestCopy = event.request.clone();
 
-        const cache = await caches.open(CACHE_NAME);
-        const body = await event.request.text();
-        cache.put(
-          "/matchsettings.json",
-          new Response(body, {
+        try {
+          return await fetch(event.request);
+        } catch {
+          console.log("offfff");
+
+          const cache = await caches.open(CACHE_NAME);
+          const body = await requestCopy.text();
+
+          await cache.put(
+            "/matchsettings.json",
+            new Response(body, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }),
+          );
+
+          return new Response(JSON.stringify({ offline: true, saved: true }), {
             headers: {
               "Content-Type": "application/json",
             },
-          }),
-        );
-      }),
+          });
+        }
+      })(),
     );
-  }*/
+  }
 });
