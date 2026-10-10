@@ -69,7 +69,7 @@ self.addEventListener("fetch", (event) => {
         console.log("offfff");
 
         const cache = await caches.open(CACHE_NAME);
-        const body = await event.request.clone().text();
+        const body = await event.request.text();
         cache.put(
           "/matchsettings.json",
           new Response(body, {
