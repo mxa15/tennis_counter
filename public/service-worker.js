@@ -63,8 +63,8 @@ self.addEventListener("fetch", (event) => {
   if (url.pathname == "/service-worker-register.js") {
     event.respondWith(caches.match("/service-worker-register.js"));
   }
-  if (url.pathname == "/api/updatematch") {
-    /*
+  /*if (url.pathname == "/api/updatematch") {
+    
     event.respondWith(
       fetch(event.request).catch(async () => {
         console.log("offfff");
@@ -80,6 +80,6 @@ self.addEventListener("fetch", (event) => {
           }),
         );
       }),
-    );*/
-  }
+    );
+  }*/
 });
